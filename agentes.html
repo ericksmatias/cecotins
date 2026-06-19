@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal do Agente — CECOTINS</title>
+  <meta name="description" content="Carreira, formação, requisitos e remuneração dos agentes penitenciários do CECOTINS.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script>(function(){var t=localStorage.getItem('cecotins-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');else document.documentElement.removeAttribute('data-theme');})();</script>
+  <link rel="stylesheet" href="assets/cecotins-shared.css">
+  <style>
+    .rdm-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 40px;
+      transition: border-color .3s, transform .3s;
+    }
+    .rdm-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+    .rdm-card.red { background: var(--red); border-color: transparent; }
+    .rdm-card.red p { color: rgba(255,255,255,.75); }
+    .rdm-card.large { grid-column: span 2; }
+    .rdm-card .tag {
+      font-family: var(--mono); font-size: 0.68rem; color: var(--red);
+      letter-spacing: .12em; text-transform: uppercase; margin-bottom: 16px; display: block;
+    }
+    .rdm-card.red .tag { color: rgba(255,255,255,.6); }
+    .rdm-card h3 { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 14px; }
+    .rdm-card p { font-size: 1rem; color: var(--txt2); line-height: 1.75; }
+    .rdm-card.red h3, .rdm-card.red h4 { color: #fff; }
+    .comparison-table {
+      width: 100%; border-collapse: collapse; margin-top: 48px;
+    }
+    .comparison-table th {
+      padding: 14px 20px; text-align: left;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: .08em;
+      color: var(--txt3); text-transform: uppercase;
+      border-bottom: 1px solid var(--border2); background: var(--surface);
+    }
+    .comparison-table td {
+      padding: 18px 20px; font-size: 0.95rem;
+      border-bottom: 1px solid var(--border); line-height: 1.5; color: var(--txt2);
+    }
+    .comparison-table tr:last-child td { border-bottom: none; }
+    .comparison-table td:first-child { color: var(--txt1); font-weight: 600; }
+    .comparison-table tbody tr:hover td { background: var(--bg2); }
+    .daily-schedule {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+    }
+    .schedule-header {
+      padding: 28px 40px; border-bottom: 1px solid var(--border);
+      font-size: 0.72rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--txt3); font-family: var(--mono);
+    }
+    .schedule-row {
+      display: flex; align-items: center;
+      padding: 20px 40px; border-bottom: 1px solid var(--border); gap: 32px;
+    }
+    .schedule-row:last-child { border-bottom: none; }
+    .schedule-row:hover { background: var(--bg2); }
+    .sched-time { font-family: var(--mono); font-size: 0.85rem; font-weight: 700; color: var(--red); width: 80px; flex-shrink: 0; }
+    .sched-event { font-size: 0.95rem; font-weight: 600; color: var(--txt1); flex: 1; }
+    .sched-desc { font-size: 0.85rem; color: var(--txt3); text-align: right; max-width: 280px; }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">CECOT<span>INS</span></a>
+  <ul class="nav-links">
+    <li><a href="estrutura.html">Estrutura</a></li>
+    <li><a href="regime.html">Regime</a></li>
+    <li><a href="operacoes.html">Operações</a></li>
+    <li><a href="leis.html">Legislação</a></li>
+    <li><a href="agentes.html" class="active">Agentes</a></li>
+    <li><a href="propostas.html">Propostas</a></li>
+    <li><a href="https://prendeumatou.com.br/" target="_blank" rel="noopener" class="external">prendeumatou.com.br</a></li>
+    <li>
+      <div class="toggle-wrap">
+        <span class="toggle-label">Modo</span>
+        <label class="switch"><input type="checkbox" id="theme-toggle"><span class="slider"></span></label>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="ph-inner">
+    <span class="section-label opacity-0 anim-el">05 — Portal do Agente</span>
+    <h1 class="page-title opacity-0 anim-el">Servir ao Estado.<br>Proteger a sociedade.</h1>
+    <p class="page-lead opacity-0 anim-el">O agente do CECOTINS é o pilar humano de toda a operação. A proposta do Partido Missão prevê um corpo de 1.900 profissionais altamente selecionados, com remuneração acima da média da categoria e formação especializada no modelo CECOT — para garantir que a corrupção jamais comprometa a missão.</p>
+  </div>
+</section>
+
+<div class="stats-bar stagger-group">
+  <div class="stat-item stagger-item">
+    <span class="stat-number">1.900</span>
+    <span class="stat-label">Agentes no quadro<br>funcional total</span>
+  </div>
+  <div class="stat-item stagger-item">
+    <span class="stat-number">R$ 12k</span>
+    <span class="stat-label">Salário inicial de<br>agente de patrulha</span>
+  </div>
+  <div class="stat-item stagger-item">
+    <span class="stat-number">18 meses</span>
+    <span class="stat-label">Formação específica<br>obrigatória</span>
+  </div>
+  <div class="stat-item stagger-item">
+    <span class="stat-number">0</span>
+    <span class="stat-label">Tolerância à corrupção<br>(demissão imediata)</span>
+  </div>
+
+</div>
+
+
+<div class="section">
+  <span class="section-label">Por Que o Agente Importa</span>
+  <h2 class="section-title fade-up">O elo mais forte<br>ou o mais fraco.</h2>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; margin-top:48px;">
+    <div class="body-text fade-up">
+      <p>O maior ponto de vulnerabilidade de qualquer prisão de segurança máxima não é a tecnologia — é o ser humano. Em presídios brasileiros, a corrupção de agentes é a principal rota de entrada de celulares, drogas e mensagens de lideranças de facções.</p>
+      <p>O Partido Missão resolve este problema em três frentes: <strong>seleção rigorosa</strong> (eliminando candidatos com vínculos e vulnerabilidades financeiras), <strong>remuneração competitiva</strong> (reduzindo o atrativo econômico da corrupção) e <strong>monitoramento contínuo</strong> (tornar a corrupção de alto risco e baixo retorno).</p>
+      <p>O CECOT de El Salvador tem um dos corpos de agentes mais bem remunerados da América Central. O resultado é que, em mais de 2 anos de operação, não houve nenhum caso público de corrupção interna documentado.</p>
+    </div>
+    <div>
+      <div class="rdm-card fade-up">
+        <span class="tag">Seleção</span>
+        <h3>O processo mais rigoroso do Brasil</h3>
+        <p>Concurso público federal com prova objetiva, física, psicológica, investigação social (incluindo cônjuge e familiares de 1º grau), polígrafo e entrevista com banca especializada. Taxa de aprovação projetada: 1 em 200 candidatos.</p>
+      </div>
+      <div class="rdm-card fade-up" style="margin-top:16px;">
+        <span class="tag">Monitoramento</span>
+        <h3>Polígrafo semestral obrigatório</h3>
+        <p>Todo agente ativo passa por avaliação com polígrafo a cada 6 meses. Auditoria financeira anual de toda a família. Câmeras dentro das dependências de trabalho. Qualquer enriquecimento incompatível com o salário inicia processo automático de demissão e investigação.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="section">
+    <span class="section-label">Carreira e Remuneração</span>
+    <h2 class="section-title fade-up">A carreira do agente<br>CECOTINS.</h2>
+    <table class="comparison-table fade-up" style="margin-top:40px;">
+      <thead><tr><th>Cargo</th><th>Requisito</th><th>Remuneração Inicial</th><th>Progressão</th></tr></thead>
+      <tbody>
+        <tr><td>Agente de Patrulha Júnior</td><td>Ensino Médio + APCF + 18 meses de formação CECOTINS</td><td>R$ 12.000/mês</td><td>Anual por mérito</td></tr>
+        <tr><td>Agente de Patrulha Sênior</td><td>5 anos sem ocorrências + avaliação 360°</td><td>R$ 16.000/mês</td><td>A cada 3 anos</td></tr>
+        <tr><td>Analista de Inteligência</td><td>Superior em Segurança, TI ou Análise Criminal</td><td>R$ 18.000/mês</td><td>Por certificação</td></tr>
+        <tr><td>Força de Resposta Rápida</td><td>Experiência militar + treinamento BOPE/GATE</td><td>R$ 20.000/mês</td><td>Semestral</td></tr>
+        <tr><td>Comandante de Turno</td><td>10 anos de carreira + formação em gestão</td><td>R$ 28.000/mês</td><td>Por concurso interno</td></tr>
+        <tr><td>Diretor-Geral</td><td>Nomeação pelo Presidente da República</td><td>R$ 40.000/mês</td><td>Mandato de 4 anos</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <span class="section-label">Formação</span>
+  <h2 class="section-title fade-up">18 meses de preparo<br>para uma missão permanente.</h2>
+  <p class="section-lead fade-up" style="margin-bottom:48px;">A Academia de Formação do CECOTINS (AFCE) funciona em Palmas-TO, com 18 meses de formação obrigatória. Módulos principais:</p>
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px;">
+    <div class="rdm-card fade-up"><span class="tag">Módulo 1 — 3 meses</span><h3>Fundamentos Legais e Éticos</h3><p>Constituição Federal, LEP, RDM, jurisprudência de direitos humanos e ética profissional. O agente deve saber o que pode e não pode fazer — e por quê.</p></div>
+    <div class="rdm-card fade-up"><span class="tag">Módulo 2 — 4 meses</span><h3>Operações de Alta Segurança</h3><p>Técnicas de patrulha em passarela, uso da força proporcional, protocolos de contenção sem letais, e resposta a amotinamentos. Treinamento com simulações em instalação réplica do CECOTINS.</p></div>
+    <div class="rdm-card fade-up"><span class="tag">Módulo 3 — 3 meses</span><h3>Tecnologia e Sistemas</h3><p>Operação do CMO, câmeras de vigilância, biometria, bloqueadores eletromagnéticos, sistemas de escotilha e protocolos de falha. Todo agente deve operar qualquer sistema do complexo.</p></div>
+    <div class="rdm-card fade-up"><span class="tag">Módulo 4 — 2 meses</span><h3>Inteligência Penitenciária</h3><p>Reconhecimento de padrões de comunicação não verbal entre detentos, mapeamento de hierarquias criminosas, análise de comportamento e integração com ABIN e PF.</p></div>
+    <div class="rdm-card fade-up"><span class="tag">Módulo 5 — 3 meses</span><h3>Preparo Físico e Psicológico</h3><p>Condicionamento físico, combate corpo-a-corpo, técnicas de resistência a manipulação psicológica (detentos tentarão extrair informações) e gestão de estresse em ambientes de confinamento extremo.</p></div>
+    <div class="rdm-card red fade-up"><span class="tag">Módulo 6 — 3 meses</span><h3>Estágio Supervisionado</h3><p>Atuação real sob supervisão no CECOTINS, nos três turnos, em todas as funções. Avaliação final por banca. Reprovação resulta em desligamento e impedimento de novo ingresso por 5 anos.</p></div>
+  </div>
+</div>
+
+
+<div class="cta-section">
+  <h2 class="fade-up">O projeto é sério.<br>A missão é real.</h2>
+  <p class="fade-up">Conheça todas as propostas do Partido Missão para 2026 e apoie a candidatura presidencial de Renan Santos.</p>
+  <a href="https://prendeumatou.com.br/" target="_blank" rel="noopener" class="btn-white">prendeumatou.com.br →</a>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">CECOT<span>INS</span></div>
+      <p>Proposta do Partido Missão para criação do Centro de Confinamento do Terrorismo no Tocantins. Site propositivo, não governamental.</p>
+    </div>
+    <div class="footer-col">
+      <h5>O Projeto</h5>
+      <a href="index.html">Início</a>
+      <a href="estrutura.html">Estrutura Física</a>
+      <a href="regime.html">Regime de Penas</a>
+      <a href="operacoes.html">Operações</a>
+      <a href="tecnologia.html">Tecnologia</a>
+    </div>
+    <div class="footer-col">
+      <h5>Referências</h5>
+      <a href="leis.html">Base Legislativa</a>
+      <a href="propostas.html">Propostas do Partido</a>
+      <a href="agentes.html">Portal do Agente</a>
+      <a href="arquitetura.html">Arquitetura</a>
+      <a href="logistica.html">Logística</a>
+    </div>
+    <div class="footer-col">
+      <h5>Partido Missão</h5>
+      <a href="https://prendeumatou.com.br/" target="_blank">prendeumatou.com.br</a>
+      <a href="https://missao.org.br/" target="_blank">missao.org.br</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 CECOTINS — Proposta do <a href="https://prendeumatou.com.br/" target="_blank">Partido Missão</a>, liderado por Renan Santos. Site não governamental.</p>
+    <p style="font-family:var(--mono); font-size:0.68rem; color:var(--txt3);">v2.6.0 // BUILD MISSÃO</p>
+  </div>
+</footer>
+
+<script src="assets/cecotins-core.js"></script>
+<script>
+  gsap.timeline({ delay: 0.15 })
+    .fromTo('.anim-el', { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: 'power3.out' });
+</script>
+</body>
+</html>

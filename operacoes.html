@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operações e Segurança — CECOTINS</title>
+  <meta name="description" content="Protocolos operacionais, escalas de agentes, resposta a incidentes e inteligência no CECOTINS.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script>(function(){var t=localStorage.getItem('cecotins-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');else document.documentElement.removeAttribute('data-theme');})();</script>
+  <link rel="stylesheet" href="assets/cecotins-shared.css">
+  <style>
+    .rdm-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 40px;
+      transition: border-color .3s, transform .3s;
+    }
+    .rdm-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+    .rdm-card.red { background: var(--red); border-color: transparent; }
+    .rdm-card.red p { color: rgba(255,255,255,.75); }
+    .rdm-card.large { grid-column: span 2; }
+    .rdm-card .tag {
+      font-family: var(--mono); font-size: 0.68rem; color: var(--red);
+      letter-spacing: .12em; text-transform: uppercase; margin-bottom: 16px; display: block;
+    }
+    .rdm-card.red .tag { color: rgba(255,255,255,.6); }
+    .rdm-card h3 { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 14px; }
+    .rdm-card p { font-size: 1rem; color: var(--txt2); line-height: 1.75; }
+    .rdm-card.red h3, .rdm-card.red h4 { color: #fff; }
+    .comparison-table {
+      width: 100%; border-collapse: collapse; margin-top: 48px;
+    }
+    .comparison-table th {
+      padding: 14px 20px; text-align: left;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: .08em;
+      color: var(--txt3); text-transform: uppercase;
+      border-bottom: 1px solid var(--border2); background: var(--surface);
+    }
+    .comparison-table td {
+      padding: 18px 20px; font-size: 0.95rem;
+      border-bottom: 1px solid var(--border); line-height: 1.5; color: var(--txt2);
+    }
+    .comparison-table tr:last-child td { border-bottom: none; }
+    .comparison-table td:first-child { color: var(--txt1); font-weight: 600; }
+    .comparison-table tbody tr:hover td { background: var(--bg2); }
+    .daily-schedule {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+    }
+    .schedule-header {
+      padding: 28px 40px; border-bottom: 1px solid var(--border);
+      font-size: 0.72rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--txt3); font-family: var(--mono);
+    }
+    .schedule-row {
+      display: flex; align-items: center;
+      padding: 20px 40px; border-bottom: 1px solid var(--border); gap: 32px;
+    }
+    .schedule-row:last-child { border-bottom: none; }
+    .schedule-row:hover { background: var(--bg2); }
+    .sched-time { font-family: var(--mono); font-size: 0.85rem; font-weight: 700; color: var(--red); width: 80px; flex-shrink: 0; }
+    .sched-event { font-size: 0.95rem; font-weight: 600; color: var(--txt1); flex: 1; }
+    .sched-desc { font-size: 0.85rem; color: var(--txt3); text-align: right; max-width: 280px; }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">CECOT<span>INS</span></a>
+  <ul class="nav-links">
+    <li><a href="estrutura.html">Estrutura</a></li>
+    <li><a href="regime.html">Regime</a></li>
+    <li><a href="operacoes.html" class="active">Operações</a></li>
+    <li><a href="leis.html">Legislação</a></li>
+    <li><a href="agentes.html">Agentes</a></li>
+    <li><a href="propostas.html">Propostas</a></li>
+    <li><a href="https://prendeumatou.com.br/" target="_blank" rel="noopener" class="external">prendeumatou.com.br</a></li>
+    <li>
+      <div class="toggle-wrap">
+        <span class="toggle-label">Modo</span>
+        <label class="switch"><input type="checkbox" id="theme-toggle"><span class="slider"></span></label>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="ph-inner">
+    <span class="section-label opacity-0 anim-el">03 — Operações & Segurança</span>
+    <h1 class="page-title opacity-0 anim-el">Operações de<br>máxima segurança.</h1>
+    <p class="page-lead opacity-0 anim-el">O CECOTINS opera com protocolos derivados dos sistemas militar e carcerário de El Salvador, adaptados ao contexto brasileiro. Cada procedimento é projetado para eliminar vulnerabilidades — desde a entrada de um novo detento até a resposta a uma tentativa de evasão.</p>
+  </div>
+</section>
+
+<div class="stats-bar stagger-group">
+  <div class="stat-item stagger-item">
+    <span class="stat-number">1:25</span>
+    <span class="stat-label">Relação agente/detento<br>(patrulha ativa)</span>
+  </div>
+  <div class="stat-item stagger-item">
+    <span class="stat-number">72h</span>
+    <span class="stat-label">Protocolo de quarentena<br>para novos ingressantes</span>
+  </div>
+  <div class="stat-item stagger-item">
+    <span class="stat-number">3</span>
+    <span class="stat-label">Turnos operacionais<br>diários (24h contínuo)</span>
+  </div>
+  <div class="stat-item stagger-item">
+    <span class="stat-number">0</span>
+    <span class="stat-label">Incidentes de evasão<br>no CECOT (2023–2024)</span>
+  </div>
+
+</div>
+
+
+<div class="section">
+  <span class="section-label">Estrutura Operacional</span>
+  <h2 class="section-title fade-up">Uma operação militar<br>dentro de uma prisão.</h2>
+  <p class="section-lead fade-up">O CECOT de El Salvador opera sem nenhuma evasão desde sua inauguração em janeiro de 2023. O segredo: protocolos militares, não carcerários. O CECOTINS adota o mesmo princípio.</p>
+
+  <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:48px;">
+    <div class="rdm-card fade-up">
+      <span class="tag">Patrulha</span>
+      <h3>Rota de patrulha aérea</h3>
+      <p>Agentes patrulham exclusivamente pelas passarelas elevadas sobre as celas — nunca no nível do solo. Cada turno inclui 2 passagens por corredor a cada hora. Qualquer anomalia comportamental é reportada ao CMO em tempo real via rádio criptografado.</p>
+    </div>
+    <div class="rdm-card fade-up">
+      <span class="tag">Armamento</span>
+      <h3>Protocolo de resposta</h3>
+      <p>Agentes internos não portam armas letais dentro dos galpões. A resposta a amotinamentos usa gás lacrimogêneo, borracha e contenção química. Armas letais ficam em armórios externos e só são liberadas por autorização do Comandante de Turno com aprovação dupla.</p>
+    </div>
+    <div class="rdm-card fade-up">
+      <span class="tag">Ingresso</span>
+      <h3>Protocolo de entrada de detento</h3>
+      <p>Todo ingresso segue o protocolo de 72 horas: quarentena médica completa, biometria de 7 pontos, entrevista de triagem de saúde mental, atribuição de cela por algoritmo (sem critério geográfico ou de facção para evitar agrupamentos), e briefing do regime ao detento com testemunha.</p>
+    </div>
+    <div class="rdm-card red fade-up">
+      <span class="tag">Incidente</span>
+      <h3>Resposta a tentativa de evasão</h3>
+      <p>Protocolo ALERTA-1: bloqueio imediato de todas as escotilhas e portões magnéticos em 8 segundos. Ativação da força de resposta rápida (FRR) — 40 agentes armados em standby 24/7. Isolamento do módulo afetado dos demais galpões. Registro automático e envio para o DEPEN em 15 minutos.</p>
+    </div>
+  </div>
+</div>
+
+<div style="background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="section">
+    <span class="section-label">Inteligência Penitenciária</span>
+    <h2 class="section-title fade-up">Dentro do CECOTINS,<br>tudo é dado.</h2>
+    <p class="section-lead fade-up">A unidade de inteligência penitenciária (UIP) opera integrada com a ABIN, PF e COAF. O objetivo é transformar o próprio confinamento em fonte de inteligência sobre o crime organizado.</p>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:40px;">
+      <div class="rdm-card fade-up">
+        <span class="tag">Análise Comportamental</span>
+        <h3>IA de padrão suspeito</h3>
+        <p>Sistema de visão computacional analisa os feeds das 15.000 câmeras em busca de padrões de comunicação não verbal, mapeamento de alianças e comportamentos de organização coletiva — tudo sem contato humano.</p>
+      </div>
+      <div class="rdm-card fade-up">
+        <span class="tag">Contrainteligência</span>
+        <h3>Corrupção zero: protocolo</h3>
+        <p>Todos os agentes passam por polígrafo semestral e auditoria financeira contínua. O regime de salários acima da média (proposta: 3× o salário-médio da categoria) reduz a vulnerabilidade à corrupção. Qualquer agente flagrado é detido imediatamente.</p>
+      </div>
+      <div class="rdm-card fade-up">
+        <span class="tag">Compartilhamento</span>
+        <h3>Integração com ABIN e PF</h3>
+        <p>Dados de comportamento, relações entre detentos e informações coletadas durante os protocolos de ingresso são compartilhados em tempo real com a ABIN e Polícia Federal via plataforma criptografada de nível 5.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <span class="section-label">Quadro de Pessoal</span>
+  <h2 class="section-title fade-up">Quem opera o<br>CECOTINS.</h2>
+  <p class="section-lead fade-up" style="margin-bottom:48px;">Estimativa de quadro funcional baseada na proporção do CECOT (1 agente para cada 25 detentos) e nas especificidades do modelo CECOTINS.</p>
+  <table class="comparison-table fade-up">
+    <thead><tr><th>Função</th><th>Quantitativo</th><th>Requisito</th><th>Salário Estimado</th></tr></thead>
+    <tbody>
+      <tr><td>Agente de Patrulha (passarela)</td><td>1.200</td><td>Militar / APCF formado</td><td>R$ 12.000/mês</td></tr>
+      <tr><td>Analista de Inteligência (CMO)</td><td>180</td><td>Superior em Segurança / TI</td><td>R$ 18.000/mês</td></tr>
+      <tr><td>Força de Resposta Rápida (FRR)</td><td>120</td><td>Militar com experiência em operações táticas</td><td>R$ 20.000/mês</td></tr>
+      <tr><td>Pessoal Médico / Enfermagem</td><td>80</td><td>Formação em medicina / enfermagem</td><td>R$ 15.000/mês</td></tr>
+      <tr><td>Administração e Triagem</td><td>200</td><td>Superior em Direito / Administração</td><td>R$ 10.000/mês</td></tr>
+      <tr><td>Manutenção e Infraestrutura</td><td>120</td><td>Técnico em elétrica / mecânica</td><td>R$ 8.000/mês</td></tr>
+      <tr><td><strong>Total estimado</strong></td><td><strong>1.900</strong></td><td>—</td><td><strong>Folha: ~R$ 280M/ano</strong></td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="cta-section">
+  <h2 class="fade-up">O projeto é sério.<br>A missão é real.</h2>
+  <p class="fade-up">Conheça todas as propostas do Partido Missão para 2026 e apoie a candidatura presidencial de Renan Santos.</p>
+  <a href="https://prendeumatou.com.br/" target="_blank" rel="noopener" class="btn-white">prendeumatou.com.br →</a>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">CECOT<span>INS</span></div>
+      <p>Proposta do Partido Missão para criação do Centro de Confinamento do Terrorismo no Tocantins. Site propositivo, não governamental.</p>
+    </div>
+    <div class="footer-col">
+      <h5>O Projeto</h5>
+      <a href="index.html">Início</a>
+      <a href="estrutura.html">Estrutura Física</a>
+      <a href="regime.html">Regime de Penas</a>
+      <a href="operacoes.html">Operações</a>
+      <a href="tecnologia.html">Tecnologia</a>
+    </div>
+    <div class="footer-col">
+      <h5>Referências</h5>
+      <a href="leis.html">Base Legislativa</a>
+      <a href="propostas.html">Propostas do Partido</a>
+      <a href="agentes.html">Portal do Agente</a>
+      <a href="arquitetura.html">Arquitetura</a>
+      <a href="logistica.html">Logística</a>
+    </div>
+    <div class="footer-col">
+      <h5>Partido Missão</h5>
+      <a href="https://prendeumatou.com.br/" target="_blank">prendeumatou.com.br</a>
+      <a href="https://missao.org.br/" target="_blank">missao.org.br</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 CECOTINS — Proposta do <a href="https://prendeumatou.com.br/" target="_blank">Partido Missão</a>, liderado por Renan Santos. Site não governamental.</p>
+    <p style="font-family:var(--mono); font-size:0.68rem; color:var(--txt3);">v2.6.0 // BUILD MISSÃO</p>
+  </div>
+</footer>
+
+<script src="assets/cecotins-core.js"></script>
+<script>
+  gsap.timeline({ delay: 0.15 })
+    .fromTo('.anim-el', { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: 'power3.out' });
+</script>
+</body>
+</html>

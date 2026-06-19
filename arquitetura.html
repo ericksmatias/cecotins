@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arquitetura — CECOTINS</title>
+  <meta name="description" content="Projeto arquitetônico do CECOTINS — inspirado no design do CECOT de El Salvador, adaptado ao clima do Tocantins.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script>(function(){var t=localStorage.getItem('cecotins-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');else document.documentElement.removeAttribute('data-theme');})();</script>
+  <link rel="stylesheet" href="assets/cecotins-shared.css">
+  <style>
+    .rdm-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 40px;
+      transition: border-color .3s, transform .3s;
+    }
+    .rdm-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+    .rdm-card.red { background: var(--red); border-color: transparent; }
+    .rdm-card.red p { color: rgba(255,255,255,.75); }
+    .rdm-card.large { grid-column: span 2; }
+    .rdm-card .tag {
+      font-family: var(--mono); font-size: 0.68rem; color: var(--red);
+      letter-spacing: .12em; text-transform: uppercase; margin-bottom: 16px; display: block;
+    }
+    .rdm-card.red .tag { color: rgba(255,255,255,.6); }
+    .rdm-card h3 { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 14px; }
+    .rdm-card p { font-size: 1rem; color: var(--txt2); line-height: 1.75; }
+    .rdm-card.red h3, .rdm-card.red h4 { color: #fff; }
+    .comparison-table {
+      width: 100%; border-collapse: collapse; margin-top: 48px;
+    }
+    .comparison-table th {
+      padding: 14px 20px; text-align: left;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: .08em;
+      color: var(--txt3); text-transform: uppercase;
+      border-bottom: 1px solid var(--border2); background: var(--surface);
+    }
+    .comparison-table td {
+      padding: 18px 20px; font-size: 0.95rem;
+      border-bottom: 1px solid var(--border); line-height: 1.5; color: var(--txt2);
+    }
+    .comparison-table tr:last-child td { border-bottom: none; }
+    .comparison-table td:first-child { color: var(--txt1); font-weight: 600; }
+    .comparison-table tbody tr:hover td { background: var(--bg2); }
+    .daily-schedule {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+    }
+    .schedule-header {
+      padding: 28px 40px; border-bottom: 1px solid var(--border);
+      font-size: 0.72rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--txt3); font-family: var(--mono);
+    }
+    .schedule-row {
+      display: flex; align-items: center;
+      padding: 20px 40px; border-bottom: 1px solid var(--border); gap: 32px;
+    }
+    .schedule-row:last-child { border-bottom: none; }
+    .schedule-row:hover { background: var(--bg2); }
+    .sched-time { font-family: var(--mono); font-size: 0.85rem; font-weight: 700; color: var(--red); width: 80px; flex-shrink: 0; }
+    .sched-event { font-size: 0.95rem; font-weight: 600; color: var(--txt1); flex: 1; }
+    .sched-desc { font-size: 0.85rem; color: var(--txt3); text-align: right; max-width: 280px; }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">CECOT<span>INS</span></a>
+  <ul class="nav-links">
+    <li><a href="estrutura.html">Estrutura</a></li>
+    <li><a href="regime.html">Regime</a></li>
+    <li><a href="operacoes.html">Operações</a></li>
+    <li><a href="leis.html">Legislação</a></li>
+    <li><a href="agentes.html">Agentes</a></li>
+    <li><a href="propostas.html">Propostas</a></li>
+    <li><a href="https://prendeumatou.com.br/" target="_blank" rel="noopener" class="external">prendeumatou.com.br</a></li>
+    <li>
+      <div class="toggle-wrap">
+        <span class="toggle-label">Modo</span>
+        <label class="switch"><input type="checkbox" id="theme-toggle"><span class="slider"></span></label>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="ph-inner">
+    <span class="section-label opacity-0 anim-el">06 — Arquitetura</span>
+    <h1 class="page-title opacity-0 anim-el">Arquitetura que<br>condena pelo espaço.</h1>
+    <p class="page-lead opacity-0 anim-el">O design arquitetônico do CECOTINS não é estético — é instrumental. Cada decisão espacial tem uma função de controle: passarelas elevadas eliminam reféns, corredores radiais eliminam pontos cegos, ausência de pátios coletivos elimina lideranças. É a arquitetura como política penal.</p>
+  </div>
+</section>
+
+<div class="stats-bar stagger-group">
+  <div class="stat-item stagger-item">
+    <span class="stat-number">12m</span>
+    <span class="stat-label">Altura dos muros<br>perimetrais</span>
+  </div>
+  <div class="stat-item stagger-item">
+    <span class="stat-number">400×200m</span>
+    <span class="stat-label">Dimensão de cada<br>galpão de confinamento</span>
+  </div>
+  <div class="stat-item stagger-item">
+    <span class="stat-number">8m</span>
+    <span class="stat-label">Faixa no-man's-land<br>entre cercas elétricas</span>
+  </div>
+  <div class="stat-item stagger-item">
+    <span class="stat-number">0</span>
+    <span class="stat-label">Janelas externas<br>nas celas (vedado)</span>
+  </div>
+
+</div>
+
+
+<div class="section">
+  <span class="section-label">Princípios de Design</span>
+  <h2 class="section-title fade-up">Quatro princípios que<br>guiam cada metro.</h2>
+  <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:48px;">
+    <div class="rdm-card large fade-up" style="grid-column:span 2;">
+      <span class="tag">Princípio 1</span>
+      <h3>Separação Total Agente-Detento</h3>
+      <p>No CECOT e no CECOTINS, agentes e detentos nunca dividem o mesmo nível. As passarelas de patrulha ficam 4 metros acima do corredor das celas. Isso elimina a possibilidade de tomada de reféns — o principal instrumento de barganha de facções em presídios comuns brasileiros. Uma grade de aço fechada separa o espaço aéreo da passarela do corredor inferior.</p>
+    </div>
+    <div class="rdm-card fade-up">
+      <span class="tag">Princípio 2</span>
+      <h3>Ausência de Espaços Coletivos</h3>
+      <p>Não há pátio, quadra, refeitório ou sala de convivência. A ausência desses espaços é proposital: é neles que as hierarquias criminosas se estabelecem, as lideranças se reúnem e os planos são elaborados. A cela é o único espaço do detento.</p>
+    </div>
+    <div class="rdm-card fade-up">
+      <span class="tag">Princípio 3</span>
+      <h3>Visibilidade Total Interior</h3>
+      <p>O design de corredor com câmeras a cada 3 metros garante que não existe nenhum ponto cego dentro dos galpões. A iluminação é uniforme, sem sombras. As celas têm frente de grade, não de porta sólida — visibilidade total do interior 24/7.</p>
+    </div>
+    <div class="rdm-card fade-up">
+      <span class="tag">Princípio 4</span>
+      <h3>Opacidade Total ao Exterior</h3>
+      <p>O inverso se aplica ao exterior: o CECOTINS não deve ser visível nem monitorável de fora. Não há janelas nas celas, as câmeras externas são embaixo do parapeito dos muros, e nenhum detalhe interno pode ser observado por drones ou satélites comerciais.</p>
+    </div>
+  </div>
+</div>
+
+<div style="background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="section">
+    <span class="section-label">Materiais e Construção</span>
+    <h2 class="section-title fade-up">Concreto armado.<br>Aço. Sem compromisso.</h2>
+    <p class="section-lead fade-up">Especificações de materiais derivadas do CECOT salvadorenho, com ajustes para o clima do Tocantins (calor extremo) e para a escala 2,5× maior do CECOTINS.</p>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:48px; border:1px solid var(--border); border-radius:20px; overflow:hidden;">
+      <div style="background:var(--surface); padding:36px 28px; border-right:1px solid var(--border);">
+        <h4 style="font-size:0.72rem; font-weight:700; color:var(--txt3); letter-spacing:.08em; text-transform:uppercase; margin-bottom:14px;">Muros Perimetrais</h4>
+        <p style="font-size:0.95rem; color:var(--txt2); line-height:1.65;">Concreto armado de 60cm de espessura com armadura dupla, resistência C40. Estrutura anti-perfuração: resistente a veículo de 20 toneladas em colisão direta sem abertura. Embutidos: sensores sísmicos, câmeras e cabos de cerca elétrica.</p>
+      </div>
+      <div style="background:var(--surface); padding:36px 28px; border-right:1px solid var(--border);">
+        <h4 style="font-size:0.72rem; font-weight:700; color:var(--txt3); letter-spacing:.08em; text-transform:uppercase; margin-bottom:14px;">Celas</h4>
+        <p style="font-size:0.95rem; color:var(--txt2); line-height:1.65;">Bloco de concreto pré-moldado C30 com parede de 20cm. Porta de aço maciço de 6mm com fechadura eletromagnética de 3 pontos de travamento. Ventilação forçada com filtro anti-odor — sem abertura para o corredor exceto a grade frontal.</p>
+      </div>
+      <div style="background:var(--surface); padding:36px 28px;">
+        <h4 style="font-size:0.72rem; font-weight:700; color:var(--txt3); letter-spacing:.08em; text-transform:uppercase; margin-bottom:14px;">Cobertura dos Galpões</h4>
+        <p style="font-size:0.95rem; color:var(--txt2); line-height:1.65;">Estrutura metálica com cobertura de telha sanduíche com isolamento térmico — necessário pelo calor extremo do Tocantins. Ventilação centralizada com pressão positiva mantém temperatura máxima de 26°C mesmo em dias de 40°C externos.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="cta-section">
+  <h2 class="fade-up">O projeto é sério.<br>A missão é real.</h2>
+  <p class="fade-up">Conheça todas as propostas do Partido Missão para 2026 e apoie a candidatura presidencial de Renan Santos.</p>
+  <a href="https://prendeumatou.com.br/" target="_blank" rel="noopener" class="btn-white">prendeumatou.com.br →</a>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">CECOT<span>INS</span></div>
+      <p>Proposta do Partido Missão para criação do Centro de Confinamento do Terrorismo no Tocantins. Site propositivo, não governamental.</p>
+    </div>
+    <div class="footer-col">
+      <h5>O Projeto</h5>
+      <a href="index.html">Início</a>
+      <a href="estrutura.html">Estrutura Física</a>
+      <a href="regime.html">Regime de Penas</a>
+      <a href="operacoes.html">Operações</a>
+      <a href="tecnologia.html">Tecnologia</a>
+    </div>
+    <div class="footer-col">
+      <h5>Referências</h5>
+      <a href="leis.html">Base Legislativa</a>
+      <a href="propostas.html">Propostas do Partido</a>
+      <a href="agentes.html">Portal do Agente</a>
+      <a href="arquitetura.html">Arquitetura</a>
+      <a href="logistica.html">Logística</a>
+    </div>
+    <div class="footer-col">
+      <h5>Partido Missão</h5>
+      <a href="https://prendeumatou.com.br/" target="_blank">prendeumatou.com.br</a>
+      <a href="https://missao.org.br/" target="_blank">missao.org.br</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 CECOTINS — Proposta do <a href="https://prendeumatou.com.br/" target="_blank">Partido Missão</a>, liderado por Renan Santos. Site não governamental.</p>
+    <p style="font-family:var(--mono); font-size:0.68rem; color:var(--txt3);">v2.6.0 // BUILD MISSÃO</p>
+  </div>
+</footer>
+
+<script src="assets/cecotins-core.js"></script>
+<script>
+  gsap.timeline({ delay: 0.15 })
+    .fromTo('.anim-el', { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: 'power3.out' });
+</script>
+</body>
+</html>

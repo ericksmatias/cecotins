@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logística — CECOTINS</title>
+  <meta name="description" content="Protocolos de transporte, abastecimento, transferência de detentos e cadeia de custódia do CECOTINS.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script>(function(){var t=localStorage.getItem('cecotins-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');else document.documentElement.removeAttribute('data-theme');})();</script>
+  <link rel="stylesheet" href="assets/cecotins-shared.css">
+  <style>
+    .rdm-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 40px;
+      transition: border-color .3s, transform .3s;
+    }
+    .rdm-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+    .rdm-card.red { background: var(--red); border-color: transparent; }
+    .rdm-card.red p { color: rgba(255,255,255,.75); }
+    .rdm-card.large { grid-column: span 2; }
+    .rdm-card .tag {
+      font-family: var(--mono); font-size: 0.68rem; color: var(--red);
+      letter-spacing: .12em; text-transform: uppercase; margin-bottom: 16px; display: block;
+    }
+    .rdm-card.red .tag { color: rgba(255,255,255,.6); }
+    .rdm-card h3 { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 14px; }
+    .rdm-card p { font-size: 1rem; color: var(--txt2); line-height: 1.75; }
+    .rdm-card.red h3, .rdm-card.red h4 { color: #fff; }
+    .comparison-table {
+      width: 100%; border-collapse: collapse; margin-top: 48px;
+    }
+    .comparison-table th {
+      padding: 14px 20px; text-align: left;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: .08em;
+      color: var(--txt3); text-transform: uppercase;
+      border-bottom: 1px solid var(--border2); background: var(--surface);
+    }
+    .comparison-table td {
+      padding: 18px 20px; font-size: 0.95rem;
+      border-bottom: 1px solid var(--border); line-height: 1.5; color: var(--txt2);
+    }
+    .comparison-table tr:last-child td { border-bottom: none; }
+    .comparison-table td:first-child { color: var(--txt1); font-weight: 600; }
+    .comparison-table tbody tr:hover td { background: var(--bg2); }
+    .daily-schedule {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+    }
+    .schedule-header {
+      padding: 28px 40px; border-bottom: 1px solid var(--border);
+      font-size: 0.72rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--txt3); font-family: var(--mono);
+    }
+    .schedule-row {
+      display: flex; align-items: center;
+      padding: 20px 40px; border-bottom: 1px solid var(--border); gap: 32px;
+    }
+    .schedule-row:last-child { border-bottom: none; }
+    .schedule-row:hover { background: var(--bg2); }
+    .sched-time { font-family: var(--mono); font-size: 0.85rem; font-weight: 700; color: var(--red); width: 80px; flex-shrink: 0; }
+    .sched-event { font-size: 0.95rem; font-weight: 600; color: var(--txt1); flex: 1; }
+    .sched-desc { font-size: 0.85rem; color: var(--txt3); text-align: right; max-width: 280px; }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">CECOT<span>INS</span></a>
+  <ul class="nav-links">
+    <li><a href="estrutura.html">Estrutura</a></li>
+    <li><a href="regime.html">Regime</a></li>
+    <li><a href="operacoes.html">Operações</a></li>
+    <li><a href="leis.html">Legislação</a></li>
+    <li><a href="agentes.html">Agentes</a></li>
+    <li><a href="propostas.html">Propostas</a></li>
+    <li><a href="https://prendeumatou.com.br/" target="_blank" rel="noopener" class="external">prendeumatou.com.br</a></li>
+    <li>
+      <div class="toggle-wrap">
+        <span class="toggle-label">Modo</span>
+        <label class="switch"><input type="checkbox" id="theme-toggle"><span class="slider"></span></label>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="ph-inner">
+    <span class="section-label opacity-0 anim-el">08 — Logística</span>
+    <h1 class="page-title opacity-0 anim-el">Logística de<br>nível militar.</h1>
+    <p class="page-lead opacity-0 anim-el">Transportar, abastecer e operar um complexo para 100.000 detentos no interior do Tocantins exige uma cadeia logística autossuficiente. O CECOTINS propõe infraestrutura independente de rodovias civis para ingresso de detentos, abastecimento por helicóptero e trem exclusivo — eliminando pontos de vulnerabilidade externos.</p>
+  </div>
+</section>
+
+<div class="stats-bar stagger-group">
+  <div class="stat-item stagger-item">
+    <span class="stat-number">500</span>
+    <span class="stat-label">Transferências de<br>detentos por dia</span>
+  </div>
+  <div class="stat-item stagger-item">
+    <span class="stat-number">90 dias</span>
+    <span class="stat-label">Estoque mínimo de<br>alimentos on-site</span>
+  </div>
+  <div class="stat-item stagger-item">
+    <span class="stat-number">3</span>
+    <span class="stat-label">Helipads internos<br>para transporte médico</span>
+  </div>
+  <div class="stat-item stagger-item">
+    <span class="stat-number">340 km</span>
+    <span class="stat-label">Distância de Palmas<br>(isolamento geográfico)</span>
+  </div>
+
+</div>
+
+
+<div class="section">
+  <span class="section-label">Cadeia de Abastecimento</span>
+  <h2 class="section-title fade-up">90 dias de autonomia.<br>Sempre.</h2>
+  <p class="section-lead fade-up">O CECOTINS opera com estoque mínimo de 90 dias para todos os insumos essenciais. Isso elimina a dependência de cadeias de abastecimento externas — e o risco de que facções usem fornecedores como vetores de contraband.</p>
+  <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:48px;">
+    <div class="rdm-card fade-up">
+      <span class="tag">Alimentação</span>
+      <h3>2.400 kcal por detento, 365 dias</h3>
+      <p>Para 100.000 detentos: 240 milhões de kcal por dia. Armazéns climatizados on-site com estoque rotativo de grãos, proteínas enlatadas e suplementos. Sistema de nutrição centralizado define o cardápio diário com aprovação médica. Custo projetado: R$ 8,50/detento/dia.</p>
+    </div>
+    <div class="rdm-card fade-up">
+      <span class="tag">Energia</span>
+      <h3>15 MW contínuos — usina própria</h3>
+      <p>Três geradores diesel de 5MW, com tanque de 6 milhões de litros de diesel (autonomia de 90 dias em carga total). Complemento solar de 4MW (painéis no teto dos galpões) reduz consumo de diesel em ~27%. Contratos de fornecimento com refinaria a 180km.</p>
+    </div>
+    <div class="rdm-card fade-up">
+      <span class="tag">Transporte de Detentos</span>
+      <h3>Corredor exclusivo</h3>
+      <p>Proposta inclui pista exclusiva de 340km conectando o CECOTINS à BR-153, sem cruzamentos urbanos. Comboios blindados de 50 detentos por veículo, escoltados por viatura da Força Nacional. Rota alternativa por helicóptero para transferências de alta periculosidade.</p>
+    </div>
+    <div class="rdm-card red fade-up">
+      <span class="tag">Risco Zero</span>
+      <h3>Fornecedores auditados</h3>
+      <p>Todo fornecedor do CECOTINS passa por: verificação CNPJ sem vínculos com organização criminosa, rastreio de sócios e funcionários, auditoria financeira trimestral, e câmeras dentro dos depósitos de entrega. Qualquer desvio cancela o contrato imediatamente.</p>
+    </div>
+  </div>
+</div>
+
+<div style="background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="section">
+    <span class="section-label">Transferências</span>
+    <h2 class="section-title fade-up">Nenhum detentoé movido<br>sem protocolo.</h2>
+    <p class="section-lead fade-up">Cada transferência de detento para o CECOTINS segue um roteiro de 14 etapas — da ordem judicial ao ingresso na cela. Nenhuma etapa pode ser pulada ou comprimida.</p>
+    <div class="daily-schedule fade-up" style="margin-top:40px;">
+      <div class="schedule-header">// Protocolo de Transferência — 14 Etapas Obrigatórias</div>
+      <div class="schedule-row"><span class="sched-time">01</span><span class="sched-event">Ordem judicial de transferência emitida</span><span class="sched-desc">Juiz Federal / DEPEN</span></div>
+      <div class="schedule-row"><span class="sched-time">02</span><span class="sched-event">Notificação ao CECOTINS (48h de antecedência)</span><span class="sched-desc">Protocolo eletrônico</span></div>
+      <div class="schedule-row"><span class="sched-time">03</span><span class="sched-event">Avaliação médica no presídio de origem</span><span class="sched-desc">Apto ao transporte</span></div>
+      <div class="schedule-row"><span class="sched-time">04</span><span class="sched-event">Escolha aleatória de rota e veículo</span><span class="sched-desc">Anti-emboscada</span></div>
+      <div class="schedule-row"><span class="sched-time">05</span><span class="sched-event">Comboio blindado com escolta armada</span><span class="sched-desc">Força Nacional + PF</span></div>
+      <div class="schedule-row"><span class="sched-time">06</span><span class="sched-event">Entrada pela eclusa de segurança externa</span><span class="sched-desc">1 veículo por vez</span></div>
+      <div class="schedule-row"><span class="sched-time">07</span><span class="sched-event">Revista completa e scanner corporal</span><span class="sched-desc">Zona de triagem</span></div>
+      <div class="schedule-row"><span class="sched-time">08</span><span class="sched-event">Coleta biométrica completa (7 pontos)</span><span class="sched-desc">Identificação forense</span></div>
+      <div class="schedule-row"><span class="sched-time">09</span><span class="sched-event">Quarentena médica — 72 horas</span><span class="sched-desc">Módulo de isolamento</span></div>
+      <div class="schedule-row"><span class="sched-time">10</span><span class="sched-event">Atribuição de cela por algoritmo</span><span class="sched-desc">Sem critério de facção</span></div>
+      <div class="schedule-row"><span class="sched-time">11</span><span class="sched-event">Briefing do RDM com testemunha</span><span class="sched-desc">Escrito e gravado</span></div>
+      <div class="schedule-row"><span class="sched-time">12</span><span class="sched-event">Ingresso na cela definitiva</span><span class="sched-desc">Registro fotográfico</span></div>
+      <div class="schedule-row"><span class="sched-time">13</span><span class="sched-event">Notificação ao advogado</span><span class="sched-desc">Garantia legal</span></div>
+      <div class="schedule-row"><span class="sched-time">14</span><span class="sched-event">Registro no DEPEN em 24 horas</span><span class="sched-desc">Transparência institucional</span></div>
+    </div>
+  </div>
+</div>
+
+
+<div class="cta-section">
+  <h2 class="fade-up">O projeto é sério.<br>A missão é real.</h2>
+  <p class="fade-up">Conheça todas as propostas do Partido Missão para 2026 e apoie a candidatura presidencial de Renan Santos.</p>
+  <a href="https://prendeumatou.com.br/" target="_blank" rel="noopener" class="btn-white">prendeumatou.com.br →</a>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">CECOT<span>INS</span></div>
+      <p>Proposta do Partido Missão para criação do Centro de Confinamento do Terrorismo no Tocantins. Site propositivo, não governamental.</p>
+    </div>
+    <div class="footer-col">
+      <h5>O Projeto</h5>
+      <a href="index.html">Início</a>
+      <a href="estrutura.html">Estrutura Física</a>
+      <a href="regime.html">Regime de Penas</a>
+      <a href="operacoes.html">Operações</a>
+      <a href="tecnologia.html">Tecnologia</a>
+    </div>
+    <div class="footer-col">
+      <h5>Referências</h5>
+      <a href="leis.html">Base Legislativa</a>
+      <a href="propostas.html">Propostas do Partido</a>
+      <a href="agentes.html">Portal do Agente</a>
+      <a href="arquitetura.html">Arquitetura</a>
+      <a href="logistica.html">Logística</a>
+    </div>
+    <div class="footer-col">
+      <h5>Partido Missão</h5>
+      <a href="https://prendeumatou.com.br/" target="_blank">prendeumatou.com.br</a>
+      <a href="https://missao.org.br/" target="_blank">missao.org.br</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 CECOTINS — Proposta do <a href="https://prendeumatou.com.br/" target="_blank">Partido Missão</a>, liderado por Renan Santos. Site não governamental.</p>
+    <p style="font-family:var(--mono); font-size:0.68rem; color:var(--txt3);">v2.6.0 // BUILD MISSÃO</p>
+  </div>
+</footer>
+
+<script src="assets/cecotins-core.js"></script>
+<script>
+  gsap.timeline({ delay: 0.15 })
+    .fromTo('.anim-el', { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: 'power3.out' });
+</script>
+</body>
+</html>

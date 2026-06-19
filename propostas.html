@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>As Principais Propostas — Partido Missão</title>
+  <meta name="description" content="A plataforma política completa de Renan Santos e do Partido Missão para o Brasil.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script>(function(){var t=localStorage.getItem('cecotins-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');else document.documentElement.removeAttribute('data-theme');})();</script>
+  <link rel="stylesheet" href="assets/cecotins-shared.css">
+  <style>
+    /* Estilos base mantidos e aprimorados para garantir textos grandes e legíveis */
+    .rdm-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 24px; padding: 40px;
+      transition: border-color .4s ease, transform .4s ease, box-shadow .4s ease;
+      display: flex; flex-direction: column; justify-content: flex-start;
+    }
+    .rdm-card:hover { 
+      border-color: var(--border2); 
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    }
+    .rdm-card.red { background: var(--red); border-color: transparent; }
+    .rdm-card.red p { color: rgba(255,255,255,.85); }
+    .rdm-card.large { grid-column: 1 / -1; }
+    
+    .rdm-card .tag {
+      font-family: var(--mono); font-size: 0.8rem; font-weight: 700; color: var(--red);
+      letter-spacing: .12em; text-transform: uppercase; margin-bottom: 20px; display: inline-block;
+      padding: 6px 12px; background: var(--red-dim); border-radius: 8px;
+    }
+    .rdm-card.red .tag { color: var(--surface); background: rgba(255,255,255,0.2); }
+    
+    .rdm-card h3 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; line-height: 1.2; }
+    .rdm-card p { font-size: 1.1rem; color: var(--txt2); line-height: 1.6; margin-bottom: 0; }
+    .rdm-card.red h3 { color: #fff; }
+
+    /* Estado inicial para a animação da cobra para evitar flashes */
+    .snake-anim { opacity: 0; visibility: hidden; }
+
+    /* Gráficos Visuais (Barras de progresso e métricas) */
+    .metric-bar-container { margin-top: 24px; width: 100%; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; height: 12px; overflow: hidden; position: relative; }
+    .metric-bar-fill { height: 100%; background: var(--red); width: 0; border-radius: 12px; transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1); }
+    .metric-labels { display: flex; justify-content: space-between; margin-top: 8px; font-family: var(--mono); font-size: 0.8rem; color: var(--txt3); }
+
+    .comparison-table { width: 100%; border-collapse: collapse; margin-top: 24px; background: var(--surface); border-radius: 24px; overflow: hidden; border: 1px solid var(--border); }
+    .comparison-table th { padding: 20px 24px; text-align: left; font-size: 0.85rem; font-weight: 700; letter-spacing: .08em; color: var(--txt3); text-transform: uppercase; border-bottom: 1px solid var(--border2); background: var(--bg2); }
+    .comparison-table td { padding: 24px; font-size: 1.1rem; border-bottom: 1px solid var(--border); line-height: 1.5; color: var(--txt2); vertical-align: top; }
+    .comparison-table tr:last-child td { border-bottom: none; }
+    .comparison-table td:first-child { color: var(--txt1); font-weight: 600; width: 35%; border-right: 1px solid var(--border); }
+    .comparison-table tbody tr:hover td { background: var(--bg2); }
+
+    .daily-schedule { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; overflow: hidden; }
+    .schedule-header { padding: 28px 40px; border-bottom: 1px solid var(--border); font-size: 0.85rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--txt3); font-family: var(--mono); background: var(--bg2); }
+    .schedule-row { display: flex; align-items: flex-start; padding: 32px 40px; border-bottom: 1px solid var(--border); gap: 32px; transition: background .3s; }
+    .schedule-row:last-child { border-bottom: none; }
+    .schedule-row:hover { background: var(--bg2); }
+    .sched-time { font-family: var(--mono); font-size: 1rem; font-weight: 700; color: var(--red); width: 100px; flex-shrink: 0; padding-top: 4px; }
+    .sched-event { font-size: 1.25rem; font-weight: 700; color: var(--txt1); flex: 1; margin-bottom: 8px; }
+    .sched-desc { font-size: 1.1rem; color: var(--txt2); line-height: 1.6; }
+
+    /* Grid System Personalizado */
+    .apple-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; margin-top: 40px; }
+    .apple-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
+    @media (max-width: 768px) { .apple-grid-2 { grid-template-columns: 1fr; } .schedule-row { flex-direction: column; gap: 16px; padding: 24px; } }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">CECOT<span>INS</span></a>
+  <ul class="nav-links">
+    <li><a href="estrutura.html">Estrutura</a></li>
+    <li><a href="regime.html">Regime</a></li>
+    <li><a href="operacoes.html">Operações</a></li>
+    <li><a href="leis.html">Legislação</a></li>
+    <li><a href="agentes.html">Agentes</a></li>
+    <li><a href="propostas.html" class="active">Propostas</a></li>
+    <li><a href="https://prendeumatou.com.br/" target="_blank" rel="noopener" class="external">prendeumatou.com.br</a></li>
+    <li>
+      <div class="toggle-wrap">
+        <span class="toggle-label">Modo</span>
+        <label class="switch"><input type="checkbox" id="theme-toggle"><span class="slider"></span></label>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="ph-inner" style="max-width: 1000px;">
+    <span class="section-label opacity-0 anim-el">09 — O Livro Amarelo</span>
+    <h1 class="page-title opacity-0 anim-el">As Principais Propostas<br>do Partido Missão.</h1>
+    <p class="page-lead opacity-0 anim-el">Liderado por <strong>Renan Santos</strong>, o Partido Missão (nascido das bases do MBL) apresenta sua plataforma de "direita altamente pragmática" para o Brasil. Do combate bélico às facções criminosas (Bukelismo) à revolução do tecnocapitalismo, conheça os 5 eixos monumentais que formam a base do plano de governo para 2026.</p>
+  </div>
+</section>
+
+<div class="stats-bar stagger-group" style="margin-bottom: 80px;">
+  <div class="stat-item stagger-item">
+    <span class="stat-number" style="font-size: 2.2rem; letter-spacing: -0.02em;">Principais</span>
+    <span class="stat-label">Propostas Estruturais<br>no Livro Amarelo</span>
+  </div>
+  <div class="stat-item stagger-item">
+    <span class="stat-number">5</span>
+    <span class="stat-label">Eixos de atuação<br>divididos por nicho</span>
+  </div>
+  <div class="stat-item stagger-item">
+    <span class="stat-number">2026</span>
+    <span class="stat-label">Ano de registro no TSE<br>e eleição presidencial</span>
+  </div>
+  <div class="stat-item stagger-item">
+    <span class="stat-number">Renan Santos</span>
+    <span class="stat-label">Candidatura Oficial<br>à Presidência da República</span>
+  </div>
+</div>
+
+<div class="section">
+  <span class="section-label">Eixo I</span>
+  <h2 class="section-title fade-up">Segurança Pública e Justiça<br>(Lei e Ordem).</h2>
+  <p class="body-text fade-up" style="max-width: 800px; font-size: 1.2rem; margin-top: 24px;">O pilar mais severo do plano. O Partido Missão trata as facções não como um problema de segurança comum, mas como forças invasoras. A inspiração é o modelo de El Salvador.</p>
+  
+  <div class="apple-grid">
+    <div class="rdm-card red snake-anim">
+      <span class="tag">01. Direito Penal do Inimigo</span>
+      <h3>Guerra Jurídica</h3>
+      <p>Tratamento jurídico diferenciado e implacável para membros de facções criminosas e do crime organizado, removendo brechas legais e direitos garantistas convencionais.</p>
+    </div>
+    <div class="rdm-card red snake-anim">
+      <span class="tag">02. Regra de Engajamento</span>
+      <h3>Abate de Faccionados</h3>
+      <p>Visão de que membros do crime organizado são "inimigos". Defesa irrestrita da eliminação física em situações de confronto direto com as forças táticas do Estado.</p>
+    </div>
+    <div class="rdm-card red snake-anim">
+      <span class="tag">03. Doutrina Bukele</span>
+      <h3>Guerra Aberta ao Crime</h3>
+      <p>Inspiração declarada nas políticas de tolerância zero de Nayib Bukele (El Salvador) para sufocar, desarticular e neutralizar o crime organizado no território nacional.</p>
+    </div>
+    <div class="rdm-card snake-anim">
+      <span class="tag">04. Sistema Penal</span>
+      <h3>Fim da Impunidade</h3>
+      <p>Foco na garantia da "certeza da prisão" imediata, eliminando infinitos recursos judiciais que postergam o cumprimento de penas para dissuadir práticas delitivas.</p>
+    </div>
+    <div class="rdm-card snake-anim">
+      <span class="tag">05. Reforma Constitucional</span>
+      <h3>Prisão Perpétua</h3>
+      <p>Debate legislativo e defesa enfática da implementação de prisão perpétua no sistema penal brasileiro para crimes hediondos e terrorismo de facção.</p>
+    </div>
+    <div class="rdm-card snake-anim">
+      <span class="tag">06. Punição Máxima</span>
+      <h3>Pena de Morte Civil</h3>
+      <p>Abertura do debate nacional para o retorno da pena de morte no Brasil, focada exclusivamente em crimes civis de altíssima gravidade e terrorismo interno.</p>
+    </div>
+    <div class="rdm-card large snake-anim" style="display: flex; flex-direction: row; align-items: center; gap: 40px; padding: 48px;">
+      <div style="flex: 1;">
+        <span class="tag">07. Dosimetria</span>
+        <h3 style="font-size: 2rem;">Endurecimento Radical de Penas</h3>
+        <p>Aumento substancial, sem teto de 40 anos, do tempo de reclusão ininterrupta para crimes violentos e megaesquemas de corrupção. O sistema deve garantir que criminosos perigosos não retornem ao convívio social.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding-top: 80px; padding-bottom: 80px;">
+  <div class="section">
+    <span class="section-label">Eixo II</span>
+    <h2 class="section-title fade-up">Reorganização Urbana<br>e Infraestrutura.</h2>
+    
+    <div class="apple-grid-2">
+      <div class="rdm-card snake-anim">
+        <span class="tag">08. Meta Nacional a Longo Prazo</span>
+        <h3>Projeto de Desfavelização (30 Anos)</h3>
+        <p>Meta monumental de erradicar as favelas no Brasil em até 30 anos, substituindo aglomerados irregulares por blocos de habitação de alta densidade e infraestrutura estatal pesada.</p>
+        <div class="metric-bar-container">
+          <div class="metric-bar-fill anim-bar" style="width: 0;" data-target="100%"></div>
+        </div>
+        <div class="metric-labels"><span>Início (Governo 1)</span><span>Conclusão (Ano 30)</span></div>
+      </div>
+      
+      <div class="rdm-card snake-anim">
+        <span class="tag">11. Presença Estatal Pesada</span>
+        <h3>Retomada de Território</h3>
+        <p>Reconstrução de áreas antes marginalizadas, garantindo que o Estado, e não o poder paralelo, forneça infraestrutura completa, saúde, saneamento e policiamento tático onipresente.</p>
+      </div>
+    </div>
+
+    <table class="comparison-table fade-up">
+      <thead>
+        <tr>
+          <th>Proposta Estrutural</th>
+          <th>Visão do Partido Missão</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>09. Urbanização Tradicional</strong></td>
+          <td>Transformação definitiva de comunidades precárias em bairros tradicionais com planejamento urbano rigoroso, malha viária e saneamento padronizado.</td>
+        </tr>
+        <tr>
+          <td><strong>10. Fim da "Romantização"</strong></td>
+          <td>Oposição agressiva à visão cultural que exalta as favelas. O Missão classifica essas áreas como insalubres, inseguras e que funcionam fisicamente como QGs de facções.</td>
+        </tr>
+        <tr>
+          <td><strong>12. Fusão de Municípios</strong></td>
+          <td>Aglutinação de cidades pequenas, ineficientes e que não arrecadam o suficiente para se sustentar. Objetivo de enxugar prefeituras e reduzir gastos administrativos.</td>
+        </tr>
+        <tr>
+          <td><strong>13. Fusão de Estados</strong></td>
+          <td>Debate sobre a reestruturação radical do pacto federativo, unindo estados menores do Norte/Nordeste para otimizar a máquina pública e ganho de escala.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section" style="padding-top: 120px; padding-bottom: 120px;">
+  <span class="section-label">Eixo III</span>
+  <h2 class="section-title fade-up">Economia e<br>Visão de Estado.</h2>
+  
+  <div class="apple-grid">
+    <div class="rdm-card snake-anim">
+      <span class="tag">14. Ideologia Econômica</span>
+      <h3>Nacional-Liberalismo Pragmático</h3>
+      <p>Abandono do "liberalismo de cartilha" em favor de um modelo onde o Estado atua de forma inteligente e incisiva para alavancar a infraestrutura nacional.</p>
+    </div>
+    <div class="rdm-card snake-anim">
+      <span class="tag">15. Setores Chave</span>
+      <h3>Protagonismo Estratégico</h3>
+      <p>Em áreas vitais (como matriz de energia e infraestrutura de base), o Estado deve liderar os planos, deixando a iniciativa privada como financiadora e executora complementar.</p>
+    </div>
+    <div class="rdm-card snake-anim">
+      <span class="tag">16. Matriz Produtiva</span>
+      <h3>O Tecnocapitalismo</h3>
+      <p>Estímulo maciço à inovação tecnológica. Adoção de modelos econômicos inspirados no Vale do Silício para modernizar a matriz produtiva e atrair capital de risco global.</p>
+    </div>
+    <div class="rdm-card snake-anim">
+      <span class="tag">17. Complexos Regionais</span>
+      <h3>Industrialização e Refino Local</h3>
+      <p>Criação de polos para processar commodities internamente em vez de apenas exportar matéria-prima bruta (ex: polos de biodiesel e tecnologia de ponta no Nordeste).</p>
+    </div>
+    <div class="rdm-card snake-anim">
+      <span class="tag">18. Responsabilidade</span>
+      <h3>Rigor Fiscal Absoluto</h3>
+      <p>Controle draconiano dos gastos públicos, com a meta inegociável de manter a inflação zerada e reduzir anualmente a relação dívida/PIB nacional.</p>
+    </div>
+    <div class="rdm-card snake-anim">
+      <span class="tag">19. Empreendedorismo</span>
+      <h3>Desburocracia Radical</h3>
+      <p>Facilitação extrema, via sistemas automatizados, para abertura e fechamento de empresas. O Estado sai da frente nas áreas onde sua presença não é de segurança nacional.</p>
+    </div>
+  </div>
+</div>
+
+<div style="background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding-top: 120px; padding-bottom: 120px;">
+  <div class="section">
+    <span class="section-label">Eixo IV</span>
+    <h2 class="section-title fade-up">Política, Cidadania e<br>Combate à Corrupção.</h2>
+    <p class="body-text fade-up" style="max-width: 800px; font-size: 1.2rem; margin-top: 24px;">Um choque de gestão institucional. O Missão propõe reformular as regras do jogo eleitoral e a estrutura de poder, com foco em uma governança técnica e anti-populista.</p>
+
+    <div class="daily-schedule fade-up" style="margin-top: 48px;">
+      <div class="schedule-header">Plano de Choque Institucional</div>
+      
+      <div class="schedule-row">
+        <div class="sched-time">PROP. 20</div>
+        <div style="flex: 1;">
+          <div class="sched-event">Gradação da Cidadania</div>
+          <div class="sched-desc" style="text-align: left; max-width: 100%;">Proposta controversa do partido: indivíduos que dependem *exclusivamente* de programas de transferência de renda do governo perdem direitos políticos plenos (como certas esferas de voto), mantendo apenas direitos humanos básicos, como forma de frear o populismo de compra de votos.</div>
+        </div>
+      </div>
+
+      <div class="schedule-row">
+        <div class="sched-time">PROP. 21</div>
+        <div style="flex: 1;">
+          <div class="sched-event">Tolerância Zero na Corrupção Municipal</div>
+          <div class="sched-desc" style="text-align: left; max-width: 100%;">Criação de forças-tarefas federais para fiscalização agressiva contra desvio de verbas em prefeituras. Foco especial em auditoria de contratos superestimados, como shows milionários em cidades pequenas.</div>
+        </div>
+      </div>
+
+      <div class="schedule-row">
+        <div class="sched-time">PROP. 22</div>
+        <div style="flex: 1;">
+          <div class="sched-event">Construção de Quadros Técnicos</div>
+          <div class="sched-desc" style="text-align: left; max-width: 100%;">Através da Academia MBL/Missão, o partido formará líderes enraizados na sociedade civil. O objetivo é criar uma máquina partidária técnica e autossustentável, que não dependa de messias políticos.</div>
+        </div>
+      </div>
+
+      <div class="schedule-row">
+        <div class="sched-time">PROP. 23</div>
+        <div style="flex: 1;">
+          <div class="sched-event">A Terceira Via Agressiva</div>
+          <div class="sched-desc" style="text-align: left; max-width: 100%;">Posicionamento inegociável como a alternativa real de direita. O partido atua em oposição frontal, sistemática e implacável tanto ao projeto Lulista quanto ao Bolsonarismo.</div>
+        </div>
+      </div>
+
+      <div class="schedule-row">
+        <div class="sched-time">PROP. 24</div>
+        <div style="flex: 1;">
+          <div class="sched-event">Enxugamento da Máquina Política</div>
+          <div class="sched-desc" style="text-align: left; max-width: 100%;">Redução drástica por lei de cargos comissionados em todas as esferas. Fim dos auxílios exorbitantes e privilégios históricos das castas do Judiciário e do Legislativo.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="section" style="padding-top: 120px; padding-bottom: 120px;">
+  <span class="section-label">Eixo V</span>
+  <h2 class="section-title fade-up">Sociedade, Cultura e<br>Assistência Social.</h2>
+
+  <div style="margin-top:48px;">
+    <div class="accordion-item fade-up">
+      <button class="accordion-header">
+        <h3 style="font-size: 1.25rem;">25. Combate à Guerra Cultural e ao Wokismo</h3>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          <p style="font-size: 1.1rem;">Atuação incisiva, extraparlamentar e institucional contra a hegemonia do pensamento de esquerda e da agenda "woke" no Brasil. O alvo principal são as grades curriculares em universidades públicas e escolas, exigindo neutralidade técnica e focada no mercado de trabalho.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item fade-up">
+      <button class="accordion-header">
+        <h3 style="font-size: 1.25rem;">26. Fim da Banalização de Diagnósticos</h3>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          <p style="font-size: 1.1rem;">Oposição feroz ao que Renan Santos classifica como "romantização e banalização" de diagnósticos psiquiátricos e neurológicos modernos (como espectro autista leve/TDAH). O foco é barrar a obtenção indevida de benefícios assistenciais do Estado por indivíduos plenamente funcionais.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item fade-up">
+      <button class="accordion-header">
+        <h3 style="font-size: 1.25rem;">27. Revisão Criminal de Leis de Assistência</h3>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          <p style="font-size: 1.1rem;">Revisão completa de legislações como o Estatuto da Inclusão para fechar brechas legais. Investigação e punição severa para esquemas de fraudes coordenados por "advogados e psiquiatras" que lucram com a judicialização de benefícios do INSS.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item fade-up">
+      <button class="accordion-header">
+        <h3 style="font-size: 1.25rem;">28. Condicionamento Rígido de Benefícios</h3>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          <p style="font-size: 1.1rem;">Mudança no modelo de bem-estar social: exigência de contrapartidas severas, comprovadas e auditáveis (como requalificação obrigatória) para o recebimento de qualquer auxílio estatal, com prazo de validade definido, desencorajando a dependência crônica do Estado.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item fade-up">
+      <button class="accordion-header">
+        <h3 style="font-size: 1.25rem;">29. Disputa e Linguagem da Juventude</h3>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          <p style="font-size: 1.1rem;">Estratégia de comunicação de altíssimo nível digital focada na captação do eleitorado jovem. O partido rejeita a estética do "conservadorismo antiquado" e o puritanismo religioso, mantendo um viés reacionário e incisivo empacotado em humor, memes e dinâmica das redes.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item fade-up">
+      <button class="accordion-header">
+        <h3 style="font-size: 1.25rem;">30. Rejeição Total ao Identitarismo</h3>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          <p style="font-size: 1.1rem;">Fim imediato de políticas públicas de cotas ou financiamentos baseados em recortes de raça, gênero ou orientação sexual. O Estado aplicará apenas políticas estritamente universais ou baseadas em mérito financeiro-acadêmico.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-section">
+  <h2 class="fade-up">O projeto é sério.<br>A missão é real.</h2>
+  <p class="fade-up" style="font-size: 1.25rem; margin-top: 20px;">Junte-se à mudança estrutural. Conheça as propostas do Partido Missão para 2026 e apoie a candidatura presidencial de Renan Santos.</p>
+  <a href="https://prendeumatou.com.br/" target="_blank" rel="noopener" class="btn-white">prendeumatou.com.br →</a>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">CECOT<span>INS</span></div>
+      <p>Proposta do Partido Missão para criação do Centro de Confinamento do Terrorismo no Tocantins. Site propositivo, não governamental.</p>
+    </div>
+    <div class="footer-col">
+      <h5>O Projeto</h5>
+      <a href="index.html">Início</a>
+      <a href="estrutura.html">Estrutura Física</a>
+      <a href="regime.html">Regime de Penas</a>
+      <a href="operacoes.html">Operações</a>
+      <a href="tecnologia.html">Tecnologia</a>
+    </div>
+    <div class="footer-col">
+      <h5>Referências</h5>
+      <a href="leis.html">Base Legislativa</a>
+      <a href="propostas.html">Propostas do Partido</a>
+      <a href="agentes.html">Portal do Agente</a>
+      <a href="arquitetura.html">Arquitetura</a>
+      <a href="logistica.html">Logística</a>
+    </div>
+    <div class="footer-col">
+      <h5>Partido Missão</h5>
+      <a href="https://prendeumatou.com.br/" target="_blank">prendeumatou.com.br</a>
+      <a href="https://missao.org.br/" target="_blank">missao.org.br</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 CECOTINS — Proposta do <a href="https://prendeumatou.com.br/" target="_blank">Partido Missão</a>, liderado por Renan Santos. Site não governamental.</p>
+    <p style="font-family:var(--mono); font-size:0.68rem; color:var(--txt3);">v2.6.0 // BUILD MISSÃO</p>
+  </div>
+</footer>
+
+<script src="assets/cecotins-core.js"></script>
+<script>
+  // Animação de entrada principal
+  gsap.timeline({ delay: 0.15 })
+    .fromTo('.anim-el', { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: 'power3.out' });
+  
+  // Animação da barra de progresso (Gráfico Visual)
+  gsap.registerPlugin(ScrollTrigger);
+  const bars = document.querySelectorAll('.anim-bar');
+  bars.forEach(bar => {
+    ScrollTrigger.create({
+      trigger: bar,
+      start: "top 85%",
+      onEnter: () => {
+        bar.style.width = bar.getAttribute('data-target');
+      }
+    });
+  });
+
+  // Animação "Cobra Descendo" para os cards (Escadinha: Esq -> Baixo -> Dir -> Baixo)
+  const snakeCards = document.querySelectorAll('.snake-anim');
+  snakeCards.forEach((card, index) => {
+    let startX = 0;
+    let startY = 0;
+    
+    // Alternância do padrão (módulo 4)
+    const mod = index % 4;
+    if (mod === 0) {
+      startX = -100; // Vem da Esquerda
+    } else if (mod === 1) {
+      startY = 100;  // Vem de Baixo
+    } else if (mod === 2) {
+      startX = 100;  // Vem da Direita
+    } else if (mod === 3) {
+      startY = 100;  // Vem de Baixo
+    }
+
+    gsap.fromTo(card, 
+      { x: startX, y: startY, autoAlpha: 0 }, 
+      { 
+        x: 0, y: 0, autoAlpha: 1, 
+        duration: 0.8, 
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 85%",
+        }
+      }
+    );
+  });
+
+  // Lógica dos Accordions
+  const accordions = document.querySelectorAll('.accordion-header');
+  accordions.forEach(acc => {
+    acc.addEventListener('click', function() {
+      this.classList.toggle('active');
+      const body = this.nextElementSibling;
+      const icon = this.querySelector('.accordion-icon');
+      if (body.style.maxHeight) {
+        body.style.maxHeight = null;
+        icon.textContent = "+";
+      } else {
+        body.style.maxHeight = body.scrollHeight + "px";
+        icon.textContent = "−";
+      }
+    });
+  });
+</script>
+</body>
+</html>
