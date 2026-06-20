@@ -1,5 +1,5 @@
 /* ============================================================
-   CECOTINS SHARED CSS — assets/cecotins-shared.css
+   CECOTINS SHARED CSS · assets/cecotins-shared.css
    Usado em todas as páginas internas
    ============================================================ */
 
@@ -92,6 +92,35 @@ img { display: block; max-width: 100%; }
 .nav-links a.active { color: var(--txt1); }
 .nav-links a.external { color: var(--red); }
 .nav-links a.external:hover { opacity: .8; }
+
+/* Botão hambúrguer (mobile) */
+.nav-burger {
+  display: none;
+  position: relative;
+  width: 32px; height: 32px;
+  background: none; border: none; cursor: pointer;
+  z-index: 1001;
+}
+.nav-burger span {
+  position: absolute; left: 6px; right: 6px; height: 2px;
+  background: var(--txt1); border-radius: 2px;
+  transition: transform .3s ease, opacity .3s ease, top .3s ease;
+}
+.nav-burger span:nth-child(1) { top: 10px; }
+.nav-burger span:nth-child(2) { top: 16px; }
+.nav-burger span:nth-child(3) { top: 22px; }
+.nav-burger.open span:nth-child(1) { top: 16px; transform: rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity: 0; }
+.nav-burger.open span:nth-child(3) { top: 16px; transform: rotate(-45deg); }
+
+/* Overlay do menu mobile */
+.nav-overlay {
+  position: fixed; inset: 0; z-index: 950;
+  background: rgba(0,0,0,0.5);
+  opacity: 0; visibility: hidden;
+  transition: opacity .3s ease, visibility .3s ease;
+}
+.nav-overlay.open { opacity: 1; visibility: visible; }
 
 /* Toggle */
 .toggle-wrap { display: flex; align-items: center; gap: 8px; margin-left: 12px; }
@@ -305,7 +334,28 @@ footer {
 /* ── RESPONSIVE ──────────────────────────────────────────────── */
 @media (max-width: 900px) {
   #nav { padding: 0 20px; }
-  .nav-links { display: none; }
+  .nav-burger { display: block; }
+  .nav-links {
+    position: fixed; top: 0; right: 0;
+    height: 100vh; width: min(78vw, 320px);
+    flex-direction: column; align-items: flex-start;
+    justify-content: flex-start; gap: 4px;
+    background: var(--bg2);
+    border-left: 1px solid var(--border);
+    padding: calc(var(--nav-h) + 32px) 28px 32px;
+    transform: translateX(100%);
+    transition: transform .35s cubic-bezier(.4,0,.2,1);
+    z-index: 1000;
+    overflow-y: auto;
+  }
+  .nav-links.open { transform: translateX(0); }
+  .nav-links li { width: 100%; }
+  .nav-links a {
+    display: block; width: 100%;
+    padding: 16px 0; font-size: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-links .toggle-wrap { margin: 20px 0 0; }
   .section { padding: 72px 6%; }
   .stats-bar { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
@@ -314,4 +364,13 @@ footer {
 @media (max-width: 600px) {
   .stats-bar { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  #nav { padding: 0 16px; }
+  .nav-logo { font-size: 0.85rem; }
+  .section { padding: 56px 5%; }
+  .page-hero { padding: 0 6% 40px; }
+  .cta-section { padding: 64px 6%; }
+  footer { padding: 48px 6% 28px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
 }

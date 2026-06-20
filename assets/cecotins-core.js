@@ -1,5 +1,5 @@
 /* ============================================================
-   CECOTINS CORE — assets/cecotins-core.js
+   CECOTINS CORE · assets/cecotins-core.js
    Gerencia: tema persistente (localStorage), toggle, animações
    ============================================================ */
 (function () {
@@ -57,7 +57,62 @@
     initGSAP();
     initAccordions();
     initCounters();
+    initMobileNav();
   });
+
+  /* --- Menu mobile (hambúrguer + slide-in) --- */
+  function initMobileNav() {
+    var nav = document.getElementById('nav');
+    if (!nav) return;
+    var burger = nav.querySelector('.nav-burger');
+    var links = nav.querySelector('.nav-links');
+    if (!burger || !links) return;
+
+    /* Overlay criado dinamicamente para escurecer o fundo */
+    var overlay = document.createElement('div');
+    overlay.className = 'nav-overlay';
+    /* Inserido dentro do #nav (e não no body) para respeitar o stacking
+       context do próprio #nav, que tem position:fixed + z-index próprio.
+       Caso contrário, o overlay ficaria acima do menu em alguns layouts. */
+    nav.appendChild(overlay);
+
+    function openMenu() {
+      burger.classList.add('open');
+      links.classList.add('open');
+      overlay.classList.add('open');
+      burger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      burger.classList.remove('open');
+      links.classList.remove('open');
+      overlay.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+    function toggleMenu() {
+      if (links.classList.contains('open')) closeMenu();
+      else openMenu();
+    }
+
+    burger.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', closeMenu);
+
+    /* Fecha ao navegar para outra página/âncora */
+    links.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', closeMenu);
+    });
+
+    /* Fecha com tecla ESC */
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeMenu();
+    });
+
+    /* Fecha o menu se a tela voltar ao tamanho desktop */
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 900) closeMenu();
+    });
+  }
 
   /* --- GSAP padrão compartilhado --- */
   function initGSAP() {
@@ -117,13 +172,14 @@
     document.querySelectorAll('[data-count]').forEach(function(el) {
       var target = parseFloat(el.getAttribute('data-count'));
       var suffix = el.getAttribute('data-suffix') || '';
+      var noFormat = el.hasAttribute('data-no-format');
       var obj = { val: 0 };
       gsap.to(obj, {
         val: target, duration: 2, ease: 'power2.out',
         scrollTrigger: { trigger: el, start: 'top 85%', once: true },
         onUpdate: function() {
           el.textContent = (Number.isInteger(target)
-            ? Math.round(obj.val).toLocaleString('pt-BR')
+            ? (noFormat ? Math.round(obj.val).toString() : Math.round(obj.val).toLocaleString('pt-BR'))
             : obj.val.toFixed(1)) + suffix;
         }
       });
