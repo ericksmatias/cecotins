@@ -632,21 +632,23 @@
 
     // Ajuste de cores para o modo claro
     function applyLightModeChartColors() {
-      // CORREÇÃO: Agora ele verifica o atributo 'data-theme' na raiz do documento, assim como o seu script do <head>
-      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-      
+      const isLight = document.body.classList.contains('light-mode');
+
       const gridColor = isLight ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.06)';
       const tickColor = isLight ? '#8e8e93' : '#636366';
-      
+
       const chartInstance = Chart.getChart(canvas);
       if (!chartInstance) return;
-      
+
       chartInstance.options.scales.x.grid.color = gridColor;
       chartInstance.options.scales.y.grid.color = gridColor;
       chartInstance.options.scales.x.ticks.color = tickColor;
       chartInstance.options.scales.y.ticks.color = tickColor;
       chartInstance.update();
-    })();
+    }
+    document.addEventListener('themeChange', applyLightModeChartColors);
+    applyLightModeChartColors();
+  })();
 </script>
 </body>
 </html>
