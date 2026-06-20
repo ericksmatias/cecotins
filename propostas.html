@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>(function(){var t=localStorage.getItem('cecotins-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');else document.documentElement.removeAttribute('data-theme');})();</script>
   <link rel="stylesheet" href="assets/cecotins-shared.css">
   <style>
@@ -632,20 +632,21 @@
 
     // Ajuste de cores para o modo claro
     function applyLightModeChartColors() {
-      const isLight = document.body.classList.contains('light-mode');
+      // CORREÇÃO: Agora ele verifica o atributo 'data-theme' na raiz do documento, assim como o seu script do <head>
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      
       const gridColor = isLight ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.06)';
       const tickColor = isLight ? '#8e8e93' : '#636366';
+      
       const chartInstance = Chart.getChart(canvas);
       if (!chartInstance) return;
+      
       chartInstance.options.scales.x.grid.color = gridColor;
       chartInstance.options.scales.y.grid.color = gridColor;
       chartInstance.options.scales.x.ticks.color = tickColor;
       chartInstance.options.scales.y.ticks.color = tickColor;
       chartInstance.update();
-    }
-    document.addEventListener('themeChange', applyLightModeChartColors);
-    applyLightModeChartColors();
-  })();
+    })();
 </script>
 </body>
 </html>
