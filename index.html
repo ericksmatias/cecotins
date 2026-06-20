@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CECOTINS — Centro de Confinamento do Terrorismo no Tocantins</title>
-  <meta name="description" content="Proposta do Partido Missão para criação do CECOTINS — uma prisão de segurança máxima inspirada no CECOT de El Salvador, destinada ao confinamento do crime organizado no Brasil.">
+  <title>CECOTINS: Centro de Confinamento do Terrorismo no Tocantins</title>
+  <meta name="description" content="Proposta do Partido Missão para criação do CECOTINS, uma prisão de segurança máxima inspirada no CECOT de El Salvador, destinada ao confinamento do crime organizado no Brasil.">
 
   <!-- Fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- Fonte custom CECOTINS — exclusiva para a logo no nav -->
+  <!-- Fonte custom CECOTINS, exclusiva para a logo no nav -->
   <style>
     @font-face {
       font-family: 'CECOTINSLogo';
@@ -117,6 +117,35 @@
     .nav-links a.external { color: var(--red); }
     .nav-links a.external:hover { opacity: .8; }
 
+    /* Botão hambúrguer (mobile) */
+    .nav-burger {
+      display: none;
+      position: relative;
+      width: 32px; height: 32px;
+      background: none; border: none; cursor: pointer;
+      z-index: 1001;
+    }
+    .nav-burger span {
+      position: absolute; left: 6px; right: 6px; height: 2px;
+      background: var(--txt1); border-radius: 2px;
+      transition: transform .3s ease, opacity .3s ease, top .3s ease;
+    }
+    .nav-burger span:nth-child(1) { top: 10px; }
+    .nav-burger span:nth-child(2) { top: 16px; }
+    .nav-burger span:nth-child(3) { top: 22px; }
+    .nav-burger.open span:nth-child(1) { top: 16px; transform: rotate(45deg); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { top: 16px; transform: rotate(-45deg); }
+
+    /* Overlay do menu mobile */
+    .nav-overlay {
+      position: fixed; inset: 0; z-index: 950;
+      background: rgba(0,0,0,0.5);
+      opacity: 0; visibility: hidden;
+      transition: opacity .3s ease, visibility .3s ease;
+    }
+    .nav-overlay.open { opacity: 1; visibility: visible; }
+
     /* Toggle switch */
     .toggle-wrap { display: flex; align-items: center; gap: 8px; margin-left: 12px; }
     .toggle-label { font-size: 0.7rem; color: var(--txt3); letter-spacing: .06em; text-transform: uppercase; }
@@ -203,7 +232,7 @@
       box-shadow: 0 40px 80px rgba(0,0,0,0.15);
     }
 
-    /* Placeholder visível quando não há imagem — substituir por <img> */
+    /* Placeholder visível quando não há imagem, substituir por <img> */
     .hero-img-placeholder {
       position: absolute; inset: 0;
       display: flex; flex-direction: column;
@@ -218,7 +247,7 @@
       color: var(--txt3); letter-spacing: .1em; text-transform: uppercase;
     }
 
-    /* As duas imagens — dia e noite, trocadas pelo tema */
+    /* As duas imagens (dia e noite), trocadas pelo tema */
     .hero-img-night,
     .hero-img-day {
       position: absolute; inset: 0;
@@ -665,12 +694,45 @@
     /* ── RESPONSIVE ─────────────────────────────────────────── */
     @media (max-width: 900px) {
       #nav { padding: 0 20px; }
-      .nav-links { display: none; }
+      .nav-burger { display: block; }
+      .nav-links {
+        position: fixed; top: 0; right: 0;
+        height: 100vh; width: min(78vw, 320px);
+        flex-direction: column; align-items: flex-start;
+        justify-content: flex-start; gap: 4px;
+        background: var(--bg2);
+        border-left: 1px solid var(--border);
+        padding: calc(var(--nav-h) + 32px) 28px 32px;
+        transform: translateX(100%);
+        transition: transform .35s cubic-bezier(.4,0,.2,1);
+        z-index: 1000;
+        overflow-y: auto;
+      }
+      .nav-links.open { transform: translateX(0); }
+      .nav-links li { width: 100%; }
+      .nav-links a {
+        display: block; width: 100%;
+        padding: 16px 0; font-size: 1rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-links .toggle-wrap { margin: 20px 0 0; }
       .section, .section-sm { padding: 80px 6%; }
       .what-grid, .features-bento, .stats-bar { grid-template-columns: 1fr; }
       .bento-card.large { grid-column: span 1; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .projection-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .stats-bar { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      #nav { padding: 0 16px; }
+      .nav-logo { font-size: 0.85rem; }
+      .section, .section-sm { padding: 56px 5%; }
+      .cta-section { padding: 64px 6%; }
+      footer { padding: 48px 6% 28px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
     }
   </style>
 </head>
@@ -679,6 +741,9 @@
 <!-- ── NAVBAR ─────────────────────────────────────────────── -->
 <nav id="nav">
   <div class="nav-logo">CECOT<span>INS</span></div>
+  <button class="nav-burger" aria-label="Abrir menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
   <ul class="nav-links">
     <li><a href="estrutura.html">Estrutura</a></li>
     <li><a href="regime.html">Regime</a></li>
@@ -686,7 +751,7 @@
     <li><a href="leis.html">Legislação</a></li>
     <li><a href="agentes.html">Agentes</a></li>
     <li><a href="propostas.html">Propostas</a></li>
-    <li><a href="https://prendeumatou.com.br/" target="_blank" rel="noopener" class="external">prendeumatou.com.br</a></li>
+    <li><a href="https://missao.org.br/" target="_blank" rel="noopener" class="external">missao.org.br</a></li>
     <li>
       <div class="toggle-wrap">
         <span class="toggle-label">Modo</span>
@@ -707,14 +772,14 @@
   <!-- COLUNA TEXTO -->
   <div class="hero-text-col">
     <!-- Removido opacity-0 para o conteúdo aparecer -->
-    <span class="hero-badge" id="hero-badge">Proposta do Partido Missão — 2026</span>
+    <span class="hero-badge" id="hero-badge">Proposta do Partido Missão · 2026</span>
 
     <h1 class="hero-title" id="hero-title">
       Erradicar o Crime.<br><em>Impor a Ordem.</em>
     </h1>
 
     <p class="hero-subtitle" id="hero-sub">
-      O <strong>CECOTINS</strong> é a proposta do <a href="https://prendeumatou.com.br/" target="_blank" style="color:var(--red)">Partido Missão</a> para criação de uma prisão de segurança máxima no Tocantins — inspirada no <strong>CECOT de El Salvador</strong>, a maior e mais eficaz prisão anti-crime organizado do mundo. Um projeto sem precedentes no Brasil, com capacidade para <strong>100.000 detentos</strong>.
+      O <strong>CECOTINS</strong> é a proposta do <a href="https://prendeumatou.com.br/" target="_blank" style="color:var(--red)">Partido Missão</a> para criação de uma prisão de segurança máxima no Tocantins, inspirada no <strong>CECOT de El Salvador</strong>, a maior e mais eficaz prisão anti-crime organizado do mundo. Um projeto sem precedentes no Brasil, com capacidade para <strong>100.000 detentos</strong>.
     </p>
 
     <div class="hero-ctas" id="hero-ctas">
@@ -729,8 +794,8 @@
     <div class="hero-img-frame">
 
       <!-- Imagens da Renderização -->
-      <img src="assets/cecotins-noite.png" alt="CECOTINS de noite — renderização" class="hero-img-night" onload="this.closest('.hero-img-frame').querySelector('.hero-img-placeholder').style.display='none'">
-      <img src="assets/cecotins-dia.png"   alt="CECOTINS de dia — renderização"   class="hero-img-day">
+      <img src="assets/cecotins-noite.png" alt="CECOTINS de noite, renderização" class="hero-img-night" onload="this.closest('.hero-img-frame').querySelector('.hero-img-placeholder').style.display='none'">
+      <img src="assets/cecotins-dia.png"   alt="CECOTINS de dia, renderização"   class="hero-img-day">
 
       <!-- Placeholder (Exibido apenas quando as imagens ainda não estão em assets/) -->
       <div class="hero-img-placeholder" id="hero-placeholder">
@@ -744,7 +809,7 @@
       </div>
 
       <!-- Legenda da Imagem -->
-      <div class="hero-img-caption">CECOTINS — Renderização do Complexo / Tocantins, Brasil</div>
+      <div class="hero-img-caption">CECOTINS: Renderização do Complexo / Tocantins, Brasil</div>
     </div>
   </div>
 
@@ -763,7 +828,7 @@
       </span>
       <p>
         <strong>Este é um site propositivo, não governamental.</strong>
-        O CECOTINS ainda não existe — é uma proposta formal do
+        O CECOTINS ainda não existe: é uma proposta formal do
         <a href="https://prendeumatou.com.br/" target="_blank" style="color:var(--red)">Partido Missão</a>,
         liderado por Renan Santos (fundador do MBL), para ser implantado caso cheguemos ao poder na eleição presidencial de 2026.
         Todo o conteúdo aqui apresentado é parte da plataforma eleitoral pública do partido.
@@ -787,8 +852,8 @@
     <span class="stat-label">Isolamento eletromagnético<br>projetado (Gaiola de Faraday)</span>
   </div>
   <div class="stat-item stagger-item">
-    <span class="stat-number" data-count="2026" data-suffix="">0</span>
-    <span class="stat-label">Ano eleitoral —<br>missão presidencial</span>
+    <span class="stat-number" data-count="2026" data-suffix="" data-no-format>0</span>
+    <span class="stat-label">Ano eleitoral<br>missão presidencial</span>
   </div>
 </div>
 
@@ -811,7 +876,7 @@
           habitantes em 2015 para menos de 2 por 100 mil em 2024. <strong>O modelo funciona.</strong>
         </p>
         <p>
-          O CECOTINS propõe adaptar este modelo à realidade brasileira, com foco no Tocantins —
+          O CECOTINS propõe adaptar este modelo à realidade brasileira, com foco no Tocantins,
           estado de localização estratégica, geografia árida e logisticamente ideal para o
           isolamento do crime organizado. É uma proposta inscrita no
           <a href="https://missao.org.br/" target="_blank">Livro Amarelo do Partido Missão</a>
@@ -863,7 +928,7 @@
           </svg>
         </span>
         <h3>Gaiola de Faraday Integral</h3>
-        <p>Toda a estrutura perimetral do CECOTINS será revestida com malha eletromagnética de cobre e chumbo. Nenhum sinal de 3G, 4G, 5G, Wi-Fi, Bluetooth ou rádio UHF/VHF penetra ou escapa. O fluxo de informações do crime organizado é cortado no nível físico — eliminando o comando remoto de facções a partir do interior.</p>
+        <p>Toda a estrutura perimetral do CECOTINS será revestida com malha eletromagnética de cobre e chumbo. Nenhum sinal de 3G, 4G, 5G, Wi-Fi, Bluetooth ou rádio UHF/VHF penetra ou escapa. O fluxo de informações do crime organizado é cortado no nível físico, eliminando o comando remoto de facções a partir do interior.</p>
       </div>
       <div class="bento-bg-number">01</div>
     </div>
@@ -891,7 +956,7 @@
         </svg>
       </span>
       <h3>Módulos de Contenção</h3>
-      <p>Design baseado em blocos herméticos independentes. Cada galpão é uma unidade operacional isolada — amotinamentos coordenados tornam-se logisticamente impossíveis.</p>
+      <p>Design baseado em blocos herméticos independentes. Cada galpão é uma unidade operacional isolada, e amotinamentos coordenados tornam-se logisticamente impossíveis.</p>
       <div class="bento-bg-number">03</div>
     </div>
 
@@ -918,7 +983,7 @@
         </svg>
       </span>
       <h3>Monitoramento Integral</h3>
-      <p>Câmeras térmicas e patrulhamento exclusivo pelas passarelas aéreas acima das celas. Agentes nunca dividem o nível de solo com detentos — risco de reféns eliminado.</p>
+      <p>Câmeras térmicas e patrulhamento exclusivo pelas passarelas aéreas acima das celas. Agentes nunca dividem o nível de solo com detentos, risco de reféns eliminado.</p>
       <div class="bento-bg-number">05</div>
     </div>
 
@@ -931,7 +996,7 @@
         </svg>
       </span>
       <h3>Localização Estratégica</h3>
-      <p>O interior do Tocantins oferece isolamento geográfico natural, clima árido e distância logística de centros urbanos — barreiras naturais que complementam as físicas.</p>
+      <p>O interior do Tocantins oferece isolamento geográfico natural, clima árido e distância logística de centros urbanos: barreiras naturais que complementam as físicas.</p>
       <div class="bento-bg-number">06</div>
     </div>
 
@@ -992,7 +1057,7 @@
       <span class="section-label">Cronologia</span>
       <h2 class="section-title fade-up">Do CECOT ao<br>CECOTINS.</h2>
       <p class="section-lead fade-up" style="margin-top: 16px;">
-        A trajetória do modelo de confinamento máximo — do El Salvador ao Brasil.
+        A trajetória do modelo de confinamento máximo, do El Salvador ao Brasil.
       </p>
     </div>
 
@@ -1029,7 +1094,7 @@
         <div class="timeline-dot"></div>
         <div class="timeline-date">2026 →</div>
         <div class="timeline-title">Missão Presidencial</div>
-        <p class="timeline-text">Renan Santos disputa a Presidência. Se eleito, o CECOTINS entra na agenda do primeiro ano de governo — com projeto de lei próprio e destinação de verba federal para construção no Tocantins.</p>
+        <p class="timeline-text">Renan Santos disputa a Presidência. Se eleito, o CECOTINS entra na agenda do primeiro ano de governo, com projeto de lei próprio e destinação de verba federal para construção no Tocantins.</p>
       </div>
     </div>
   </div>
@@ -1040,11 +1105,11 @@
   <blockquote class="fade-up">
     <span class="quote-mark">"</span>
     O Estado não barganha, não recua e não concede indulgências ao crime organizado.
-    <strong>O CECOTINS é a materialização dessa convicção</strong> —
+    <strong>O CECOTINS é a materialização dessa convicção.</strong>
     uma resposta estrutural, permanente e irrevogável ao terrorismo das facções.
     <span class="quote-mark">"</span>
   </blockquote>
-  <p class="quote-source fade-up">Plataforma de Segurança — Partido Missão / Renan Santos, 2026</p>
+  <p class="quote-source fade-up">Plataforma de Segurança · Partido Missão / Renan Santos, 2026</p>
 </div>
 
 <!-- ── PROJEÇÕES ──────────────────────────────────────────── -->
@@ -1059,12 +1124,12 @@
     <div class="proj-cell fade-up">
       <h4>Redução Projetada de Homicídios</h4>
       <span class="proj-num">−<span data-count="60" data-suffix="%">0%</span></span>
-      <p class="proj-desc">Projeção conservadora baseada na experiência salvadorenha. Em El Salvador, a queda foi de 98% em 9 anos — o modelo CECOTINS projeta 60% nos primeiros 5 anos de operação plena.</p>
+      <p class="proj-desc">Projeção conservadora baseada na experiência salvadorenha. Em El Salvador, a queda foi de 98% em 9 anos; o modelo CECOTINS projeta 60% nos primeiros 5 anos de operação plena.</p>
     </div>
     <div class="proj-cell fade-up">
       <h4>Capacidade Total de Detenção</h4>
       <span class="proj-num"><span data-count="100000" data-suffix="">0</span></span>
-      <p class="proj-desc">100.000 vagas na fase inicial, com expansão modular prevista. Voltadas exclusivamente para líderes e membros comprovados de organizações criminosas — PCC, CV e afiliadas.</p>
+      <p class="proj-desc">100.000 vagas na fase inicial, com expansão modular prevista. Voltadas exclusivamente para líderes e membros comprovados de organizações criminosas: PCC, CV e afiliadas.</p>
     </div>
     <div class="proj-cell fade-up">
       <h4>Estimativa de Custo (R$)</h4>
@@ -1086,7 +1151,7 @@
     <h2 class="section-title fade-up">El Salvador: O Dia em<br>que o Medo Mudou de Lado.</h2>
     <p class="section-lead fade-up" style="margin-bottom: 48px;">
       Brasil Paralelo produziu o documentário que mostra de dentro como El Salvador transformou
-      o país mais violento do mundo no mais seguro da América Latina — em menos de 3 anos.
+      o país mais violento do mundo no mais seguro da América Latina, em menos de 3 anos.
       O modelo que inspira o CECOTINS, na íntegra.
     </p>
 
@@ -1096,7 +1161,7 @@
         <!-- AQUI FOI CORRIGIDO O LINK DO YOUTUBE (O start=196 faz com que inicie nos exatos 196s pedidos!) -->
         <iframe
           src="https://www.youtube.com/embed/mcWaypzFzps?start=0&rel=0&modestbranding=1&color=white"
-          title="El Salvador: O Dia em que o Medo Mudou de Lado — Brasil Paralelo"
+          title="El Salvador: O Dia em que o Medo Mudou de Lado · Brasil Paralelo"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen
           loading="lazy"
@@ -1108,7 +1173,7 @@
       <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 20px; flex-wrap: wrap; gap: 12px;">
         <div>
           <p style="font-size: 0.78rem; color: var(--txt3); font-family: var(--mono); letter-spacing: .06em; text-transform: uppercase;">
-            Brasil Paralelo — Produção Original
+            Brasil Paralelo · Produção Original
           </p>
           <p style="font-size: 0.85rem; color: var(--txt2); margin-top: 4px;">
             Documentário completo disponível gratuitamente no YouTube.
@@ -1162,9 +1227,9 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 CECOTINS — Proposta do <a href="https://prendeumatou.com.br/" target="_blank">Partido Missão</a>, liderado por Renan Santos. Candidatura presidencial 2026.<br>
+    <p>© 2026 CECOTINS. Proposta do <a href="https://prendeumatou.com.br/" target="_blank">Partido Missão</a>, liderado por Renan Santos. Candidatura presidencial 2026.<br>
     Inspirado no CECOT de El Salvador. Site não governamental. Todos os direitos reservados.</p>
-    <p style="text-align:right; font-family:var(--mono); font-size:0.68rem; color:var(--txt3);">v2.6.0 // BUILD MISSÃO</p>
+    <p style="text-align:right; font-family:var(--mono); font-size:0.68rem; color:var(--txt3);">v2.6.0 // BUILD MISSÃO / <a href="https://ericksmatias.github.io/erickvisuals" target="_blank" rel="noopener" style="color:var(--txt3); text-decoration:underline; text-decoration-color:var(--border2); transition:color .2s;" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--txt3)'">erick matias</a></p>
   </div>
 </footer>
 

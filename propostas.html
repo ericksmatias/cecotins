@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>As Principais Propostas — Partido Missão</title>
+  <title>As Principais Propostas do Partido Missão</title>
   <meta name="description" content="A plataforma política completa de Renan Santos e do Partido Missão para o Brasil.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
   <script>(function(){var t=localStorage.getItem('cecotins-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');else document.documentElement.removeAttribute('data-theme');})();</script>
   <link rel="stylesheet" href="assets/cecotins-shared.css">
   <style>
@@ -52,6 +53,13 @@
     .comparison-table tr:last-child td { border-bottom: none; }
     .comparison-table td:first-child { color: var(--txt1); font-weight: 600; width: 35%; border-right: 1px solid var(--border); }
     .comparison-table tbody tr:hover td { background: var(--bg2); }
+    .table-scroll { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    @media (max-width: 700px) {
+      .table-scroll { margin-top: 24px; border-radius: 24px; border: 1px solid var(--border); }
+      .comparison-table { margin-top: 0; min-width: 560px; border: none; border-radius: 0; }
+      .comparison-table th, .comparison-table td { padding: 16px 18px; font-size: 0.95rem; }
+      .comparison-table td:first-child { width: auto; white-space: nowrap; }
+    }
 
     .daily-schedule { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; overflow: hidden; }
     .schedule-header { padding: 28px 40px; border-bottom: 1px solid var(--border); font-size: 0.85rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--txt3); font-family: var(--mono); background: var(--bg2); }
@@ -66,12 +74,33 @@
     .apple-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; margin-top: 40px; }
     .apple-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
     @media (max-width: 768px) { .apple-grid-2 { grid-template-columns: 1fr; } .schedule-row { flex-direction: column; gap: 16px; padding: 24px; } }
+
+    /* Gráfico de Criminalidade (Chart.js) */
+    .crime-chart-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 24px; padding: 40px; margin-top: 40px;
+    }
+    .crime-chart-head { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; margin-bottom: 32px; }
+    .crime-chart-head h3 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .crime-chart-head p { font-size: 0.95rem; color: var(--txt2); max-width: 56ch; line-height: 1.6; }
+    .crime-legend { display: flex; gap: 20px; flex-wrap: wrap; }
+    .crime-legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--txt2); font-family: var(--mono); }
+    .crime-legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .crime-chart-wrap { position: relative; height: 380px; width: 100%; }
+    .crime-chart-footnote { margin-top: 20px; font-size: 0.76rem; color: var(--txt3); line-height: 1.6; }
+    @media (max-width: 600px) {
+      .crime-chart-card { padding: 24px; }
+      .crime-chart-wrap { height: 300px; }
+    }
   </style>
 </head>
 <body>
 
 <nav id="nav">
   <a href="index.html" class="nav-logo">CECOT<span>INS</span></a>
+  <button class="nav-burger" aria-label="Abrir menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
   <ul class="nav-links">
     <li><a href="estrutura.html">Estrutura</a></li>
     <li><a href="regime.html">Regime</a></li>
@@ -79,7 +108,7 @@
     <li><a href="leis.html">Legislação</a></li>
     <li><a href="agentes.html">Agentes</a></li>
     <li><a href="propostas.html" class="active">Propostas</a></li>
-    <li><a href="https://prendeumatou.com.br/" target="_blank" rel="noopener" class="external">prendeumatou.com.br</a></li>
+    <li><a href="https://missao.org.br/" target="_blank" rel="noopener" class="external">missao.org.br</a></li>
     <li>
       <div class="toggle-wrap">
         <span class="toggle-label">Modo</span>
@@ -92,7 +121,7 @@
 <section class="page-hero">
   <div class="page-hero-bg"></div>
   <div class="ph-inner" style="max-width: 1000px;">
-    <span class="section-label opacity-0 anim-el">09 — O Livro Amarelo</span>
+    <span class="section-label opacity-0 anim-el">09 · O Livro Amarelo</span>
     <h1 class="page-title opacity-0 anim-el">As Principais Propostas<br>do Partido Missão.</h1>
     <p class="page-lead opacity-0 anim-el">Liderado por <strong>Renan Santos</strong>, o Partido Missão (nascido das bases do MBL) apresenta sua plataforma de "direita altamente pragmática" para o Brasil. Do combate bélico às facções criminosas (Bukelismo) à revolução do tecnocapitalismo, conheça os 5 eixos monumentais que formam a base do plano de governo para 2026.</p>
   </div>
@@ -104,15 +133,15 @@
     <span class="stat-label">Propostas Estruturais<br>no Livro Amarelo</span>
   </div>
   <div class="stat-item stagger-item">
-    <span class="stat-number">5</span>
+    <span class="stat-number" data-count="5" data-suffix="">0</span>
     <span class="stat-label">Eixos de atuação<br>divididos por nicho</span>
   </div>
   <div class="stat-item stagger-item">
-    <span class="stat-number">2026</span>
+    <span class="stat-number" data-count="2026" data-suffix="" data-no-format>0</span>
     <span class="stat-label">Ano de registro no TSE<br>e eleição presidencial</span>
   </div>
   <div class="stat-item stagger-item">
-    <span class="stat-number">Renan Santos</span>
+    <span class="stat-number" style="font-size: 2.2rem; letter-spacing: -0.02em;">Renan Santos</span>
     <span class="stat-label">Candidatura Oficial<br>à Presidência da República</span>
   </div>
 </div>
@@ -161,6 +190,23 @@
       </div>
     </div>
   </div>
+
+  <div class="crime-chart-card fade-up">
+    <div class="crime-chart-head">
+      <div>
+        <h3>Criminalidade no Brasil: 10 anos de dados e a projeção CECOTINS</h3>
+        <p>Taxa de homicídios por 100 mil habitantes (2015 a 2024, dados reais do Atlas da Violência/Ipea-FBSP) e a projeção de queda esperada com a implementação plena do modelo CECOTINS entre 2025 e 2034.</p>
+      </div>
+      <div class="crime-legend">
+        <div class="crime-legend-item"><span class="crime-legend-dot" style="background:#a1a1a6;"></span>Histórico real</div>
+        <div class="crime-legend-item"><span class="crime-legend-dot" style="background:#d32f2f;"></span>Projeção CECOTINS</div>
+      </div>
+    </div>
+    <div class="crime-chart-wrap">
+      <canvas id="crimeChart"></canvas>
+    </div>
+    <p class="crime-chart-footnote">Fonte dos dados históricos (2015–2024): Atlas da Violência, Ipea/Fórum Brasileiro de Segurança Pública. A projeção 2025–2034 é uma estimativa do Partido Missão baseada na curva de queda observada em El Salvador após a implementação do modelo CECOT, não constituindo dado oficial.</p>
+  </div>
 </div>
 
 <div style="background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding-top: 80px; padding-bottom: 80px;">
@@ -186,32 +232,34 @@
       </div>
     </div>
 
-    <table class="comparison-table fade-up">
-      <thead>
-        <tr>
-          <th>Proposta Estrutural</th>
-          <th>Visão do Partido Missão</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>09. Urbanização Tradicional</strong></td>
-          <td>Transformação definitiva de comunidades precárias em bairros tradicionais com planejamento urbano rigoroso, malha viária e saneamento padronizado.</td>
-        </tr>
-        <tr>
-          <td><strong>10. Fim da "Romantização"</strong></td>
-          <td>Oposição agressiva à visão cultural que exalta as favelas. O Missão classifica essas áreas como insalubres, inseguras e que funcionam fisicamente como QGs de facções.</td>
-        </tr>
-        <tr>
-          <td><strong>12. Fusão de Municípios</strong></td>
-          <td>Aglutinação de cidades pequenas, ineficientes e que não arrecadam o suficiente para se sustentar. Objetivo de enxugar prefeituras e reduzir gastos administrativos.</td>
-        </tr>
-        <tr>
-          <td><strong>13. Fusão de Estados</strong></td>
-          <td>Debate sobre a reestruturação radical do pacto federativo, unindo estados menores do Norte/Nordeste para otimizar a máquina pública e ganho de escala.</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-scroll">
+      <table class="comparison-table fade-up">
+        <thead>
+          <tr>
+            <th>Proposta Estrutural</th>
+            <th>Visão do Partido Missão</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>09. Urbanização Tradicional</strong></td>
+            <td>Transformação definitiva de comunidades precárias em bairros tradicionais com planejamento urbano rigoroso, malha viária e saneamento padronizado.</td>
+          </tr>
+          <tr>
+            <td><strong>10. Fim da "Romantização"</strong></td>
+            <td>Oposição agressiva à visão cultural que exalta as favelas. O Missão classifica essas áreas como insalubres, inseguras e que funcionam fisicamente como QGs de facções.</td>
+          </tr>
+          <tr>
+            <td><strong>12. Fusão de Municípios</strong></td>
+            <td>Aglutinação de cidades pequenas, ineficientes e que não arrecadam o suficiente para se sustentar. Objetivo de enxugar prefeituras e reduzir gastos administrativos.</td>
+          </tr>
+          <tr>
+            <td><strong>13. Fusão de Estados</strong></td>
+            <td>Debate sobre a reestruturação radical do pacto federativo, unindo estados menores do Norte/Nordeste para otimizar a máquina pública e ganho de escala.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 
@@ -420,8 +468,8 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 CECOTINS — Proposta do <a href="https://prendeumatou.com.br/" target="_blank">Partido Missão</a>, liderado por Renan Santos. Site não governamental.</p>
-    <p style="font-family:var(--mono); font-size:0.68rem; color:var(--txt3);">v2.6.0 // BUILD MISSÃO</p>
+    <p>© 2026 CECOTINS. Proposta do <a href="https://prendeumatou.com.br/" target="_blank">Partido Missão</a>, liderado por Renan Santos. Site não governamental.</p>
+    <p style="font-family:var(--mono); font-size:0.68rem; color:var(--txt3);">v2.6.0 // BUILD MISSÃO / <a href="https://ericksmatias.github.io/erickvisuals" target="_blank" rel="noopener" style="color:var(--txt3); text-decoration:underline; text-decoration-color:var(--border2); transition:color .2s;" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--txt3)'">erick matias</a></p>
   </div>
 </footer>
 
@@ -492,6 +540,111 @@
       }
     });
   });
+
+  // Gráfico de Criminalidade: histórico real (Atlas da Violência / Ipea-FBSP) + projeção CECOTINS
+  (function() {
+    const canvas = document.getElementById('crimeChart');
+    if (!canvas || typeof Chart === 'undefined') return;
+
+    // Taxa de homicídios por 100 mil habitantes no Brasil (dados reais, Atlas da Violência)
+    const historyYears = [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+    const historyData  = [28.9, 30.3, 33.6, 27.9, 21.7, 22.5, 22.4, 21.7, 21.2, 20.1];
+
+    // Projeção CECOTINS (2025-2034): curva de queda inspirada no modelo salvadorenho,
+    // aplicada de forma conservadora sobre a base de 2024.
+    const projectionYears = [2025, 2026, 2027, 2028, 2029, 2030, 2031, 2032, 2033, 2034];
+    const projectionData  = [18.6, 16.8, 14.5, 12.3, 10.4, 9.1, 8.2, 7.6, 7.1, 6.8];
+
+    const allYears = historyYears.concat(projectionYears);
+
+    // Série "histórico": preenchida até 2024, depois null (não desenha além do dado real)
+    const historySeries = historyData.concat(projectionYears.map(() => null));
+    // Série "projeção": null até 2024, conecta a partir de 2024 (ponte) até 2034
+    const projectionSeries = historyYears.map((y, i) => i === historyYears.length - 1 ? historyData[i] : null)
+      .concat(projectionData);
+
+    new Chart(canvas, {
+      type: 'line',
+      data: {
+        labels: allYears,
+        datasets: [
+          {
+            label: 'Histórico real',
+            data: historySeries,
+            borderColor: '#a1a1a6',
+            backgroundColor: 'rgba(161,161,166,0.08)',
+            borderWidth: 2.5,
+            pointRadius: 3,
+            pointBackgroundColor: '#a1a1a6',
+            tension: 0.35,
+            fill: true,
+            spanGaps: false,
+          },
+          {
+            label: 'Projeção CECOTINS',
+            data: projectionSeries,
+            borderColor: '#d32f2f',
+            backgroundColor: 'rgba(211,47,47,0.10)',
+            borderWidth: 2.5,
+            borderDash: [6, 5],
+            pointRadius: 3,
+            pointBackgroundColor: '#d32f2f',
+            tension: 0.35,
+            fill: true,
+            spanGaps: false,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: { duration: 1800, easing: 'easeOutQuart' },
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: 'rgba(20,20,20,0.92)',
+            padding: 12,
+            titleFont: { family: "'JetBrains Mono', monospace", size: 12 },
+            bodyFont: { family: "'Inter', sans-serif", size: 12 },
+            callbacks: {
+              label: function(ctx) {
+                if (ctx.parsed.y === null) return null;
+                return ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) + ' por 100 mil hab.';
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(255,255,255,0.06)' },
+            ticks: { color: '#636366', font: { family: "'JetBrains Mono', monospace", size: 10 } }
+          },
+          y: {
+            grid: { color: 'rgba(255,255,255,0.06)' },
+            ticks: { color: '#636366', font: { family: "'JetBrains Mono', monospace", size: 10 }, callback: v => v },
+            title: { display: true, text: 'Homicídios / 100 mil hab.', color: '#636366', font: { family: "'Inter', sans-serif", size: 11 } }
+          }
+        }
+      }
+    });
+
+    // Ajuste de cores para o modo claro
+    function applyLightModeChartColors() {
+      const isLight = document.body.classList.contains('light-mode');
+      const gridColor = isLight ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.06)';
+      const tickColor = isLight ? '#8e8e93' : '#636366';
+      const chartInstance = Chart.getChart(canvas);
+      if (!chartInstance) return;
+      chartInstance.options.scales.x.grid.color = gridColor;
+      chartInstance.options.scales.y.grid.color = gridColor;
+      chartInstance.options.scales.x.ticks.color = tickColor;
+      chartInstance.options.scales.y.ticks.color = tickColor;
+      chartInstance.update();
+    }
+    document.addEventListener('themeChange', applyLightModeChartColors);
+    applyLightModeChartColors();
+  })();
 </script>
 </body>
 </html>

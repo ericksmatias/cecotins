@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Operações e Segurança — CECOTINS</title>
+  <title>Operações e Segurança · CECOTINS</title>
   <meta name="description" content="Protocolos operacionais, escalas de agentes, resposta a incidentes e inteligência no CECOTINS.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -45,6 +45,11 @@
     .comparison-table tr:last-child td { border-bottom: none; }
     .comparison-table td:first-child { color: var(--txt1); font-weight: 600; }
     .comparison-table tbody tr:hover td { background: var(--bg2); }
+    .table-scroll { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    @media (max-width: 600px) {
+      .comparison-table { min-width: 480px; }
+      .comparison-table th, .comparison-table td { padding: 12px 16px; }
+    }
     .daily-schedule {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 20px; overflow: hidden;
@@ -69,6 +74,9 @@
 
 <nav id="nav">
   <a href="index.html" class="nav-logo">CECOT<span>INS</span></a>
+  <button class="nav-burger" aria-label="Abrir menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
   <ul class="nav-links">
     <li><a href="estrutura.html">Estrutura</a></li>
     <li><a href="regime.html">Regime</a></li>
@@ -76,7 +84,7 @@
     <li><a href="leis.html">Legislação</a></li>
     <li><a href="agentes.html">Agentes</a></li>
     <li><a href="propostas.html">Propostas</a></li>
-    <li><a href="https://prendeumatou.com.br/" target="_blank" rel="noopener" class="external">prendeumatou.com.br</a></li>
+    <li><a href="https://missao.org.br/" target="_blank" rel="noopener" class="external">missao.org.br</a></li>
     <li>
       <div class="toggle-wrap">
         <span class="toggle-label">Modo</span>
@@ -89,9 +97,9 @@
 <section class="page-hero">
   <div class="page-hero-bg"></div>
   <div class="ph-inner">
-    <span class="section-label opacity-0 anim-el">03 — Operações & Segurança</span>
+    <span class="section-label opacity-0 anim-el">03 · Operações & Segurança</span>
     <h1 class="page-title opacity-0 anim-el">Operações de<br>máxima segurança.</h1>
-    <p class="page-lead opacity-0 anim-el">O CECOTINS opera com protocolos derivados dos sistemas militar e carcerário de El Salvador, adaptados ao contexto brasileiro. Cada procedimento é projetado para eliminar vulnerabilidades — desde a entrada de um novo detento até a resposta a uma tentativa de evasão.</p>
+    <p class="page-lead opacity-0 anim-el">O CECOTINS opera com protocolos derivados dos sistemas militar e carcerário de El Salvador, adaptados ao contexto brasileiro. Cada procedimento é projetado para eliminar vulnerabilidades, desde a entrada de um novo detento até a resposta a uma tentativa de evasão.</p>
   </div>
 </section>
 
@@ -125,7 +133,7 @@
     <div class="rdm-card fade-up">
       <span class="tag">Patrulha</span>
       <h3>Rota de patrulha aérea</h3>
-      <p>Agentes patrulham exclusivamente pelas passarelas elevadas sobre as celas — nunca no nível do solo. Cada turno inclui 2 passagens por corredor a cada hora. Qualquer anomalia comportamental é reportada ao CMO em tempo real via rádio criptografado.</p>
+      <p>Agentes patrulham exclusivamente pelas passarelas elevadas sobre as celas, nunca no nível do solo. Cada turno inclui 2 passagens por corredor a cada hora. Qualquer anomalia comportamental é reportada ao CMO em tempo real via rádio criptografado.</p>
     </div>
     <div class="rdm-card fade-up">
       <span class="tag">Armamento</span>
@@ -140,7 +148,7 @@
     <div class="rdm-card red fade-up">
       <span class="tag">Incidente</span>
       <h3>Resposta a tentativa de evasão</h3>
-      <p>Protocolo ALERTA-1: bloqueio imediato de todas as escotilhas e portões magnéticos em 8 segundos. Ativação da força de resposta rápida (FRR) — 40 agentes armados em standby 24/7. Isolamento do módulo afetado dos demais galpões. Registro automático e envio para o DEPEN em 15 minutos.</p>
+      <p>Protocolo ALERTA-1: bloqueio imediato de todas as escotilhas e portões magnéticos em 8 segundos. Ativação da força de resposta rápida (FRR): 40 agentes armados em standby 24/7. Isolamento do módulo afetado dos demais galpões. Registro automático e envio para o DEPEN em 15 minutos.</p>
     </div>
   </div>
 </div>
@@ -154,7 +162,7 @@
       <div class="rdm-card fade-up">
         <span class="tag">Análise Comportamental</span>
         <h3>IA de padrão suspeito</h3>
-        <p>Sistema de visão computacional analisa os feeds das 15.000 câmeras em busca de padrões de comunicação não verbal, mapeamento de alianças e comportamentos de organização coletiva — tudo sem contato humano.</p>
+        <p>Sistema de visão computacional analisa os feeds das 15.000 câmeras em busca de padrões de comunicação não verbal, mapeamento de alianças e comportamentos de organização coletiva, tudo sem contato humano.</p>
       </div>
       <div class="rdm-card fade-up">
         <span class="tag">Contrainteligência</span>
@@ -174,18 +182,20 @@
   <span class="section-label">Quadro de Pessoal</span>
   <h2 class="section-title fade-up">Quem opera o<br>CECOTINS.</h2>
   <p class="section-lead fade-up" style="margin-bottom:48px;">Estimativa de quadro funcional baseada na proporção do CECOT (1 agente para cada 25 detentos) e nas especificidades do modelo CECOTINS.</p>
-  <table class="comparison-table fade-up">
-    <thead><tr><th>Função</th><th>Quantitativo</th><th>Requisito</th><th>Salário Estimado</th></tr></thead>
-    <tbody>
-      <tr><td>Agente de Patrulha (passarela)</td><td>1.200</td><td>Militar / APCF formado</td><td>R$ 12.000/mês</td></tr>
-      <tr><td>Analista de Inteligência (CMO)</td><td>180</td><td>Superior em Segurança / TI</td><td>R$ 18.000/mês</td></tr>
-      <tr><td>Força de Resposta Rápida (FRR)</td><td>120</td><td>Militar com experiência em operações táticas</td><td>R$ 20.000/mês</td></tr>
-      <tr><td>Pessoal Médico / Enfermagem</td><td>80</td><td>Formação em medicina / enfermagem</td><td>R$ 15.000/mês</td></tr>
-      <tr><td>Administração e Triagem</td><td>200</td><td>Superior em Direito / Administração</td><td>R$ 10.000/mês</td></tr>
-      <tr><td>Manutenção e Infraestrutura</td><td>120</td><td>Técnico em elétrica / mecânica</td><td>R$ 8.000/mês</td></tr>
-      <tr><td><strong>Total estimado</strong></td><td><strong>1.900</strong></td><td>—</td><td><strong>Folha: ~R$ 280M/ano</strong></td></tr>
-    </tbody>
-  </table>
+  <div class="table-scroll">
+    <table class="comparison-table fade-up">
+      <thead><tr><th>Função</th><th>Quantitativo</th><th>Requisito</th><th>Salário Estimado</th></tr></thead>
+      <tbody>
+        <tr><td>Agente de Patrulha (passarela)</td><td>1.200</td><td>Militar / APCF formado</td><td>R$ 12.000/mês</td></tr>
+        <tr><td>Analista de Inteligência (CMO)</td><td>180</td><td>Superior em Segurança / TI</td><td>R$ 18.000/mês</td></tr>
+        <tr><td>Força de Resposta Rápida (FRR)</td><td>120</td><td>Militar com experiência em operações táticas</td><td>R$ 20.000/mês</td></tr>
+        <tr><td>Pessoal Médico / Enfermagem</td><td>80</td><td>Formação em medicina / enfermagem</td><td>R$ 15.000/mês</td></tr>
+        <tr><td>Administração e Triagem</td><td>200</td><td>Superior em Direito / Administração</td><td>R$ 10.000/mês</td></tr>
+        <tr><td>Manutenção e Infraestrutura</td><td>120</td><td>Técnico em elétrica / mecânica</td><td>R$ 8.000/mês</td></tr>
+        <tr><td><strong>Total estimado</strong></td><td><strong>1.900</strong></td><td>·</td><td><strong>Folha: ~R$ 280M/ano</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 
@@ -224,8 +234,8 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 CECOTINS — Proposta do <a href="https://prendeumatou.com.br/" target="_blank">Partido Missão</a>, liderado por Renan Santos. Site não governamental.</p>
-    <p style="font-family:var(--mono); font-size:0.68rem; color:var(--txt3);">v2.6.0 // BUILD MISSÃO</p>
+    <p>© 2026 CECOTINS. Proposta do <a href="https://prendeumatou.com.br/" target="_blank">Partido Missão</a>, liderado por Renan Santos. Site não governamental.</p>
+    <p style="font-family:var(--mono); font-size:0.68rem; color:var(--txt3);">v2.6.0 // BUILD MISSÃO / <a href="https://ericksmatias.github.io/erickvisuals" target="_blank" rel="noopener" style="color:var(--txt3); text-decoration:underline; text-decoration-color:var(--border2); transition:color .2s;" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--txt3)'">erick matias</a></p>
   </div>
 </footer>
 

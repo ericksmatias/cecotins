@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Estrutura Física — CECOTINS</title>
-  <meta name="description" content="Arquitetura modular, dimensões reais e infraestrutura do CECOTINS — baseada no modelo CECOT de El Salvador.">
+  <title>Estrutura Física · CECOTINS</title>
+  <meta name="description" content="Arquitetura modular, dimensões reais e infraestrutura do CECOTINS, baseada no modelo CECOT de El Salvador.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -76,6 +76,11 @@
     .comparison-table td:first-child { font-weight: 600; color: var(--txt1); }
     .comparison-table .highlight { color: var(--red); font-weight: 700; }
     .comparison-table tbody tr:hover td { background: var(--bg2); }
+    .table-scroll { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    @media (max-width: 600px) {
+      .comparison-table { min-width: 480px; }
+      .comparison-table th, .comparison-table td { padding: 12px 16px; }
+    }
 
     .cutaway-diagram {
       background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
@@ -117,6 +122,9 @@
 <!-- NAV -->
 <nav id="nav">
   <a href="index.html" class="nav-logo">CECOT<span>INS</span></a>
+  <button class="nav-burger" aria-label="Abrir menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
   <ul class="nav-links">
     <li><a href="estrutura.html" class="active">Estrutura</a></li>
     <li><a href="regime.html">Regime</a></li>
@@ -124,7 +132,7 @@
     <li><a href="leis.html">Legislação</a></li>
     <li><a href="agentes.html">Agentes</a></li>
     <li><a href="propostas.html">Propostas</a></li>
-    <li><a href="https://prendeumatou.com.br/" target="_blank" rel="noopener" class="external">prendeumatou.com.br</a></li>
+    <li><a href="https://missao.org.br/" target="_blank" rel="noopener" class="external">missao.org.br</a></li>
     <li>
       <div class="toggle-wrap">
         <span class="toggle-label">Modo</span>
@@ -138,11 +146,11 @@
 <section class="page-hero">
   <div class="page-hero-bg"></div>
   <div class="ph-inner">
-    <span class="section-label opacity-0 anim-el">01 — Estrutura Física</span>
+    <span class="section-label opacity-0 anim-el">01 · Estrutura Física</span>
     <h1 class="page-title opacity-0 anim-el">A prisão que<br>o crime não escapa.</h1>
     <p class="page-lead opacity-0 anim-el">
       Com dimensões superiores ao CECOT de El Salvador, o CECOTINS é projetado para ser
-      o maior complexo de segurança máxima das Américas — 100.000 vagas, módulos herméticos,
+      o maior complexo de segurança máxima das Américas: 100.000 vagas, módulos herméticos,
       bloqueio eletromagnético total e infraestrutura autossuficiente. Uma obra de engenharia
       de Estado contra o crime organizado.
     </p>
@@ -173,18 +181,18 @@
 <div class="section">
   <span class="section-label">Especificações Técnicas</span>
   <h2 class="section-title fade-up">Cada número é<br>uma decisão política.</h2>
-  <p class="section-lead fade-up">O design do CECOTINS parte de premissas opostas às prisões convencionais: o objetivo não é reabilitação — é neutralização permanente do poder das organizações criminosas.</p>
+  <p class="section-lead fade-up">O design do CECOTINS parte de premissas opostas às prisões convencionais: o objetivo não é reabilitação, é neutralização permanente do poder das organizações criminosas.</p>
 
   <div class="spec-grid stagger-group">
     <div class="spec-cell stagger-item">
       <h4>Capacidade por Galpão</h4>
       <span class="spec-num" data-count="12500" data-suffix="">0</span>
-      <p>Cada um dos 8 galpões principais comporta 12.500 detentos em celas individuais de 4m² — isolamento total, sem convivência entre presos.</p>
+      <p>Cada um dos 8 galpões principais comporta 12.500 detentos em celas individuais de 4m², com isolamento total, sem convivência entre presos.</p>
     </div>
     <div class="spec-cell stagger-item">
       <h4>Área por Cela (m²)</h4>
       <span class="spec-num">4<span>m²</span></span>
-      <p>Dimensão baseada no padrão CECOT: uma cama, vaso sanitário e pia. Sem janelas externas — apenas ventilação mecânica forçada.</p>
+      <p>Dimensão baseada no padrão CECOT: uma cama, vaso sanitário e pia. Sem janelas externas, apenas ventilação mecânica forçada.</p>
     </div>
     <div class="spec-cell stagger-item">
       <h4>Perímetro Externo</h4>
@@ -214,14 +222,14 @@
   <div class="section">
     <span class="section-label">Organização Modular</span>
     <h2 class="section-title fade-up">Blocos independentes.<br>Amotinamentos impossíveis.</h2>
-    <p class="section-lead fade-up">O design modular é uma decisão tática: cada galpão opera como uma unidade autônoma. Um evento em qualquer módulo não afeta os demais — elimina a possibilidade de rebeliões coordenadas.</p>
+    <p class="section-lead fade-up">O design modular é uma decisão tática: cada galpão opera como uma unidade autônoma. Um evento em qualquer módulo não afeta os demais, eliminando a possibilidade de rebeliões coordenadas.</p>
 
     <div class="module-list">
       <div class="module-item fade-up">
         <span class="module-num">01</span>
         <div>
           <div class="module-name">Galpões de Confinamento (×8)</div>
-          <p class="module-desc">Oito estruturas de aço e concreto de 400m × 200m cada. Subdivididas em blocos de 500 celas individuais com corredor central de patrulhamento aéreo. Sem refeitório coletivo — alimentação entregue por escotilha na porta de cada cela. Luz controlada centralmente: apagão às 21h, acendimento às 6h.</p>
+          <p class="module-desc">Oito estruturas de aço e concreto de 400m × 200m cada. Subdivididas em blocos de 500 celas individuais com corredor central de patrulhamento aéreo. Sem refeitório coletivo, alimentação entregue por escotilha na porta de cada cela. Luz controlada centralmente: apagão às 21h, acendimento às 6h.</p>
         </div>
         <div class="module-specs">
           <div class="spec-tag">Área: <span>80.000 m²</span></div>
@@ -235,7 +243,7 @@
         <span class="module-num">02</span>
         <div>
           <div class="module-name">Zona de Triagem e Recepção</div>
-          <p class="module-desc">Estrutura de entrada com processamento de 500 detentos/dia. Inclui raio-X de corpo inteiro, escâner biométrico completo (íris, retina, voz, DNA), descontaminação química e atribuição de número de identificação. Toda roupa pessoal é descartada — uniforme branco padrão único.</p>
+          <p class="module-desc">Estrutura de entrada com processamento de 500 detentos/dia. Inclui raio-X de corpo inteiro, escâner biométrico completo (íris, retina, voz, DNA), descontaminação química e atribuição de número de identificação. Toda roupa pessoal é descartada, uniforme branco padrão único.</p>
         </div>
         <div class="module-specs">
           <div class="spec-tag">Capacidade/dia: <span>500 ingressos</span></div>
@@ -292,7 +300,7 @@
   <h2 class="section-title fade-up">Layout de confinamento<br>baseado no CECOT.</h2>
 
   <div class="cutaway-diagram fade-up">
-    <span class="diagram-label">// Representação esquemática — escala não proporcional</span>
+    <span class="diagram-label">// Representação esquemática, escala não proporcional</span>
     <div class="floor-plan">
       <div class="fp-zone fp-z1"><div class="fp-zone-label">Triagem</div></div>
       <div class="fp-zone fp-z2"><div class="fp-zone-label">Galpão A</div></div>
@@ -325,27 +333,29 @@
     <h2 class="section-title fade-up">CECOT × CECOTINS</h2>
     <p class="section-lead fade-up">O CECOTINS é projetado para ser 2,5× maior que o CECOT salvadorenho, com tecnologia atualizada e adaptada às facções brasileiras.</p>
 
-    <table class="comparison-table fade-up">
-      <thead>
-        <tr>
-          <th>Parâmetro</th>
-          <th>CECOT — El Salvador</th>
-          <th>CECOTINS — Proposta BR</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Capacidade</td><td>40.000 detentos</td><td class="highlight">100.000 detentos</td></tr>
-        <tr><td>Área total</td><td>~166 hectares</td><td class="highlight">~200 hectares</td></tr>
-        <tr><td>Custo de construção</td><td>US$ 100 milhões</td><td class="highlight">R$ 800M – R$ 1,2Bi</td></tr>
-        <tr><td>Prazo de construção</td><td>&lt; 12 meses</td><td>18 meses</td></tr>
-        <tr><td>Bloqueio eletromagnético</td><td>Parcial (jamming)</td><td class="highlight">Total (Gaiola de Faraday)</td></tr>
-        <tr><td>Alimentação</td><td>Refeitório controlado</td><td class="highlight">Escotilha individual por cela</td></tr>
-        <tr><td>Acesso a advogados</td><td>Restrito / monitorado</td><td class="highlight">Vedado para líderes de facção</td></tr>
-        <tr><td>Localização</td><td>Tecoluca, interior</td><td class="highlight">Interior do Tocantins</td></tr>
-        <tr><td>Energia</td><td>Rede pública</td><td class="highlight">Usina própria autônoma</td></tr>
-        <tr><td>Regime aplicável</td><td>Regime de exceção</td><td class="highlight">Regime Diferenciado Máximo (RDM)</td></tr>
-      </tbody>
-    </table>
+    <div class="table-scroll">
+      <table class="comparison-table fade-up">
+        <thead>
+          <tr>
+            <th>Parâmetro</th>
+            <th>CECOT (El Salvador)</th>
+            <th>CECOTINS (Proposta BR)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Capacidade</td><td>40.000 detentos</td><td class="highlight">100.000 detentos</td></tr>
+          <tr><td>Área total</td><td>~166 hectares</td><td class="highlight">~200 hectares</td></tr>
+          <tr><td>Custo de construção</td><td>US$ 100 milhões</td><td class="highlight">R$ 800M – R$ 1,2Bi</td></tr>
+          <tr><td>Prazo de construção</td><td>&lt; 12 meses</td><td>18 meses</td></tr>
+          <tr><td>Bloqueio eletromagnético</td><td>Parcial (jamming)</td><td class="highlight">Total (Gaiola de Faraday)</td></tr>
+          <tr><td>Alimentação</td><td>Refeitório controlado</td><td class="highlight">Escotilha individual por cela</td></tr>
+          <tr><td>Acesso a advogados</td><td>Restrito / monitorado</td><td class="highlight">Vedado para líderes de facção</td></tr>
+          <tr><td>Localização</td><td>Tecoluca, interior</td><td class="highlight">Interior do Tocantins</td></tr>
+          <tr><td>Energia</td><td>Rede pública</td><td class="highlight">Usina própria autônoma</td></tr>
+          <tr><td>Regime aplicável</td><td>Regime de exceção</td><td class="highlight">Regime Diferenciado Máximo (RDM)</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 
@@ -386,8 +396,8 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 CECOTINS — Proposta do <a href="https://prendeumatou.com.br/" target="_blank">Partido Missão</a>, liderado por Renan Santos. Site não governamental.</p>
-    <p style="font-family:var(--mono); font-size:0.68rem; color:var(--txt3);">v2.6.0 // BUILD MISSÃO</p>
+    <p>© 2026 CECOTINS. Proposta do <a href="https://prendeumatou.com.br/" target="_blank">Partido Missão</a>, liderado por Renan Santos. Site não governamental.</p>
+    <p style="font-family:var(--mono); font-size:0.68rem; color:var(--txt3);">v2.6.0 // BUILD MISSÃO / <a href="https://ericksmatias.github.io/erickvisuals" target="_blank" rel="noopener" style="color:var(--txt3); text-decoration:underline; text-decoration-color:var(--border2); transition:color .2s;" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--txt3)'">erick matias</a></p>
   </div>
 </footer>
 

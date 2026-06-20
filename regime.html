@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Regime de Penas — CECOTINS</title>
-  <meta name="description" content="O Regime Diferenciado Máximo (RDM) — as regras de confinamento do CECOTINS, baseadas no Direito Penal do Inimigo e no modelo CECOT.">
+  <title>Regime de Penas · CECOTINS</title>
+  <meta name="description" content="O Regime Diferenciado Máximo (RDM): as regras de confinamento do CECOTINS, baseadas no Direito Penal do Inimigo e no modelo CECOT.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -51,6 +51,11 @@
     .rights-table .allowed { color: #2e7d32; font-weight: 600; }
     .rights-table .denied { color: var(--red); font-weight: 600; }
     .rights-table .restricted { color: #e65100; font-weight: 600; }
+    .table-scroll { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    @media (max-width: 600px) {
+      .rights-table { min-width: 480px; }
+      .rights-table th, .rights-table td { padding: 12px 16px; }
+    }
 
     .daily-schedule {
       background: var(--surface); border: 1px solid var(--border);
@@ -107,6 +112,9 @@
 
 <nav id="nav">
   <a href="index.html" class="nav-logo">CECOT<span>INS</span></a>
+  <button class="nav-burger" aria-label="Abrir menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
   <ul class="nav-links">
     <li><a href="estrutura.html">Estrutura</a></li>
     <li><a href="regime.html" class="active">Regime</a></li>
@@ -114,7 +122,7 @@
     <li><a href="leis.html">Legislação</a></li>
     <li><a href="agentes.html">Agentes</a></li>
     <li><a href="propostas.html">Propostas</a></li>
-    <li><a href="https://prendeumatou.com.br/" target="_blank" rel="noopener" class="external">prendeumatou.com.br</a></li>
+    <li><a href="https://missao.org.br/" target="_blank" rel="noopener" class="external">missao.org.br</a></li>
     <li>
       <div class="toggle-wrap">
         <span class="toggle-label">Modo</span>
@@ -127,10 +135,10 @@
 <section class="page-hero">
   <div class="page-hero-bg"></div>
   <div class="ph-inner">
-    <span class="section-label opacity-0 anim-el">02 — Regime de Penas</span>
+    <span class="section-label opacity-0 anim-el">02 · Regime de Penas</span>
     <h1 class="page-title opacity-0 anim-el">Regime Diferenciado<br>Máximo.</h1>
     <p class="page-lead opacity-0 anim-el">
-      O CECOTINS não é uma prisão comum. O Regime Diferenciado Máximo (RDM) — proposta do Partido Missão —
+      O CECOTINS não é uma prisão comum. O Regime Diferenciado Máximo (RDM), proposta do Partido Missão,
       vai além do atual RDD (Regime Disciplinar Diferenciado). É fundamentado na doutrina do
       <strong style="color:var(--txt1)">Direito Penal do Inimigo</strong>, que distingue o criminoso comum
       do inimigo declarado do Estado. Para este, não há negociação, remição ou progressão de regime.
@@ -167,7 +175,7 @@
     <div class="rdm-card stagger-item">
       <span class="tag">Conceito Central</span>
       <h3>Quem é o "inimigo"?</h3>
-      <p>O inimigo do Estado é o indivíduo que, de forma persistente e organizada, optou por romper com o contrato social. Ele não comete um crime isolado — ele <strong style="color:var(--txt1)">declara guerra</strong> ao Estado e à sociedade. Líderes do PCC, Comando Vermelho, CV e afiliadas se enquadram nessa definição.</p>
+      <p>O inimigo do Estado é o indivíduo que, de forma persistente e organizada, optou por romper com o contrato social. Ele não comete um crime isolado: ele <strong style="color:var(--txt1)">declara guerra</strong> ao Estado e à sociedade. Líderes do PCC, Comando Vermelho, CV e afiliadas se enquadram nessa definição.</p>
     </div>
     <div class="rdm-card red stagger-item">
       <span class="tag">Diferença Fundamental</span>
@@ -177,7 +185,7 @@
     <div class="rdm-card stagger-item">
       <span class="tag">Crítica & Resposta</span>
       <h3>É constitucional?</h3>
-      <p>Críticos apontam violação ao princípio da dignidade humana. O Partido Missão responde: a dignidade tem limites quando o indivíduo sistematicamente viola a dignidade de outros. A proposta inclui PEC específica para fundamentar o RDM constitucionalmente — criando categoria jurídica própria.</p>
+      <p>Críticos apontam violação ao princípio da dignidade humana. O Partido Missão responde: a dignidade tem limites quando o indivíduo sistematicamente viola a dignidade de outros. A proposta inclui PEC específica para fundamentar o RDM constitucionalmente, criando categoria jurídica própria.</p>
     </div>
     <div class="rdm-card stagger-item">
       <span class="tag">Precedentes</span>
@@ -192,13 +200,13 @@
   <div class="section">
     <span class="section-label">Níveis de Restrição</span>
     <h2 class="section-title fade-up">Três níveis.<br>Uma só direção.</h2>
-    <p class="section-lead fade-up">O RDM opera em três níveis de restrição. Todos os detentos do CECOTINS entram no Nível 1. Progressão para níveis menos restritivos exige processo judicial e aprovação da diretoria — e não se aplica a líderes de facção.</p>
+    <p class="section-lead fade-up">O RDM opera em três níveis de restrição. Todos os detentos do CECOTINS entram no Nível 1. Progressão para níveis menos restritivos exige processo judicial e aprovação da diretoria, e não se aplica a líderes de facção.</p>
 
     <div class="tier-list">
       <div class="tier-item fade-up">
         <span class="tier-level">N1</span>
         <div>
-          <div class="tier-name">Confinamento Integral — Nível 1</div>
+          <div class="tier-name">Confinamento Integral · Nível 1</div>
           <p class="tier-desc">23 horas de confinamento celular por dia. 1 hora de exercício individual em corredor fechado, sem contato com outros presos. Sem visitas, sem correspondência, sem acesso a qualquer mídia. Aplicado automaticamente a todos os ingressantes e permanentemente a líderes comprovados de organizações criminosas.</p>
         </div>
         <div class="tier-badge max">RDM Máximo</div>
@@ -206,7 +214,7 @@
       <div class="tier-item fade-up">
         <span class="tier-level">N2</span>
         <div>
-          <div class="tier-name">Confinamento Restrito — Nível 2</div>
+          <div class="tier-name">Confinamento Restrito · Nível 2</div>
           <p class="tier-desc">22 horas de confinamento celular. 2 horas de atividade em grupo mínimo (máx. 4 pessoas), sem comunicação verbal direta entre detentos. Visita de familiar de primeiro grau permitida 1x ao mês, separados por vidro duplo e monitorada integralmente. Aplicado após 2 anos de bom comportamento comprovado, exceto líderes de facção.</p>
         </div>
         <div class="tier-badge alto">RDM Alto</div>
@@ -214,7 +222,7 @@
       <div class="tier-item fade-up">
         <span class="tier-level">N3</span>
         <div>
-          <div class="tier-name">Confinamento Supervisionado — Nível 3</div>
+          <div class="tier-name">Confinamento Supervisionado · Nível 3</div>
           <p class="tier-desc">20 horas de confinamento. 4 horas de atividade com grupo de até 8 pessoas (trabalho agrícola ou industrial dentro do complexo). Visita mensal com monitoramento. Acesso a materiais de estudo em formato físico (sem dispositivos eletrônicos). Aplicado exclusivamente a presos por crimes não-terrorismo após 5 anos de Nível 2.</p>
         </div>
         <div class="tier-badge med">RDM Médio</div>
@@ -225,22 +233,22 @@
 
 <!-- ROTINA DIÁRIA -->
 <div class="section">
-  <span class="section-label">Rotina Diária — Nível 1</span>
+  <span class="section-label">Rotina Diária · Nível 1</span>
   <h2 class="section-title fade-up">24 horas no<br>CECOTINS.</h2>
   <p class="section-lead fade-up">A rotina é controlada e imutável. Sem variação de dia para dia, sem estímulos externos. O objetivo é eliminar qualquer capacidade de planejamento coletivo.</p>
 
   <div class="daily-schedule fade-up">
-    <div class="schedule-header">// Protocolo Diário — Regime Diferenciado Máximo Nível 1</div>
+    <div class="schedule-header">// Protocolo Diário · Regime Diferenciado Máximo Nível 1</div>
     <div class="schedule-row"><span class="sched-time">06:00</span><span class="sched-event">Acendimento automático de luz</span><span class="sched-desc">Centralizado pelo CMO</span></div>
-    <div class="schedule-row"><span class="sched-time">06:15</span><span class="sched-event">Entrega de alimentação (Refeição 1)</span><span class="sched-desc">Via escotilha — 800 kcal</span></div>
+    <div class="schedule-row"><span class="sched-time">06:15</span><span class="sched-event">Entrega de alimentação (Refeição 1)</span><span class="sched-desc">Via escotilha: 800 kcal</span></div>
     <div class="schedule-row"><span class="sched-time">07:00</span><span class="sched-event">Contagem e verificação biométrica</span><span class="sched-desc">Scanner sem abrir cela</span></div>
     <div class="schedule-row"><span class="sched-time">08:00–09:00</span><span class="sched-event">Hora de exercício individual</span><span class="sched-desc">Corredor fechado, sem contato</span></div>
-    <div class="schedule-row"><span class="sched-time">12:00</span><span class="sched-event">Entrega de alimentação (Refeição 2)</span><span class="sched-desc">Via escotilha — 900 kcal</span></div>
+    <div class="schedule-row"><span class="sched-time">12:00</span><span class="sched-event">Entrega de alimentação (Refeição 2)</span><span class="sched-desc">Via escotilha: 900 kcal</span></div>
     <div class="schedule-row"><span class="sched-time">13:00</span><span class="sched-event">Contagem e verificação biométrica</span><span class="sched-desc">Scanner sem abrir cela</span></div>
-    <div class="schedule-row"><span class="sched-time">18:00</span><span class="sched-event">Entrega de alimentação (Refeição 3)</span><span class="sched-desc">Via escotilha — 700 kcal</span></div>
+    <div class="schedule-row"><span class="sched-time">18:00</span><span class="sched-event">Entrega de alimentação (Refeição 3)</span><span class="sched-desc">Via escotilha: 700 kcal</span></div>
     <div class="schedule-row"><span class="sched-time">19:00</span><span class="sched-event">Contagem e verificação biométrica</span><span class="sched-desc">Scanner sem abrir cela</span></div>
-    <div class="schedule-row"><span class="sched-time">21:00</span><span class="sched-event">Apagão centralizado</span><span class="sched-desc">Luz reduzida a 5% — sem apagão total</span></div>
-    <div class="schedule-row"><span class="sched-time">00:00</span><span class="sched-event">Ronda noturna silenciosa</span><span class="sched-desc">Passarela aérea — sem perturbação</span></div>
+    <div class="schedule-row"><span class="sched-time">21:00</span><span class="sched-event">Apagão centralizado</span><span class="sched-desc">Luz reduzida a 5%, sem apagão total</span></div>
+    <div class="schedule-row"><span class="sched-time">00:00</span><span class="sched-event">Ronda noturna silenciosa</span><span class="sched-desc">Passarela aérea, sem perturbação</span></div>
     <div class="schedule-row"><span class="sched-time">03:00</span><span class="sched-event">Verificação biométrica noturna</span><span class="sched-desc">Câmera térmica sem entrada na cela</span></div>
   </div>
 </div>
@@ -251,29 +259,31 @@
     <span class="section-label">Direitos e Restrições</span>
     <h2 class="section-title fade-up">O que é permitido.<br>O que é vedado.</h2>
 
-    <table class="rights-table fade-up">
-      <thead>
-        <tr>
-          <th>Item</th>
-          <th>Nível 1 (Máximo)</th>
-          <th>Nível 2</th>
-          <th>Nível 3</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Visita familiar</td><td class="denied">Vedado</td><td class="restricted">1x/mês (vidro)</td><td class="restricted">2x/mês (vidro)</td></tr>
-        <tr><td>Advogado</td><td class="restricted">Somente defesa judicial (doc.)</td><td class="restricted">1x/trim (monitorado)</td><td class="restricted">1x/mês (monitorado)</td></tr>
-        <tr><td>Televisão</td><td class="denied">Vedado</td><td class="denied">Vedado</td><td class="denied">Vedado</td></tr>
-        <tr><td>Rádio/áudio</td><td class="denied">Vedado</td><td class="denied">Vedado</td><td class="denied">Vedado</td></tr>
-        <tr><td>Livros / material impresso</td><td class="denied">Vedado</td><td class="denied">Vedado</td><td class="allowed">Permitido (triagem)</td></tr>
-        <tr><td>Correspondência</td><td class="denied">Vedado</td><td class="restricted">Monitorada (1/mês)</td><td class="restricted">Monitorada (2/mês)</td></tr>
-        <tr><td>Trabalho interno</td><td class="denied">Vedado</td><td class="denied">Vedado</td><td class="allowed">Trabalho agrícola</td></tr>
-        <tr><td>Exercício físico</td><td class="restricted">1h/dia (individual)</td><td class="restricted">2h/dia (isolado)</td><td class="allowed">4h/dia (grupo pequeno)</td></tr>
-        <tr><td>Acesso à justiça</td><td class="allowed">Garantido (HC, mandados)</td><td class="allowed">Garantido</td><td class="allowed">Garantido</td></tr>
-        <tr><td>Assistência médica</td><td class="allowed">Garantida</td><td class="allowed">Garantida</td><td class="allowed">Garantida</td></tr>
-        <tr><td>Assistência religiosa</td><td class="restricted">Autoridade religiosa via vídeo</td><td class="restricted">Presencial (protocolado)</td><td class="allowed">Presencial</td></tr>
-      </tbody>
-    </table>
+    <div class="table-scroll">
+      <table class="rights-table fade-up">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Nível 1 (Máximo)</th>
+            <th>Nível 2</th>
+            <th>Nível 3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Visita familiar</td><td class="denied">Vedado</td><td class="restricted">1x/mês (vidro)</td><td class="restricted">2x/mês (vidro)</td></tr>
+          <tr><td>Advogado</td><td class="restricted">Somente defesa judicial (doc.)</td><td class="restricted">1x/trim (monitorado)</td><td class="restricted">1x/mês (monitorado)</td></tr>
+          <tr><td>Televisão</td><td class="denied">Vedado</td><td class="denied">Vedado</td><td class="denied">Vedado</td></tr>
+          <tr><td>Rádio/áudio</td><td class="denied">Vedado</td><td class="denied">Vedado</td><td class="denied">Vedado</td></tr>
+          <tr><td>Livros / material impresso</td><td class="denied">Vedado</td><td class="denied">Vedado</td><td class="allowed">Permitido (triagem)</td></tr>
+          <tr><td>Correspondência</td><td class="denied">Vedado</td><td class="restricted">Monitorada (1/mês)</td><td class="restricted">Monitorada (2/mês)</td></tr>
+          <tr><td>Trabalho interno</td><td class="denied">Vedado</td><td class="denied">Vedado</td><td class="allowed">Trabalho agrícola</td></tr>
+          <tr><td>Exercício físico</td><td class="restricted">1h/dia (individual)</td><td class="restricted">2h/dia (isolado)</td><td class="allowed">4h/dia (grupo pequeno)</td></tr>
+          <tr><td>Acesso à justiça</td><td class="allowed">Garantido (HC, mandados)</td><td class="allowed">Garantido</td><td class="allowed">Garantido</td></tr>
+          <tr><td>Assistência médica</td><td class="allowed">Garantida</td><td class="allowed">Garantida</td><td class="allowed">Garantida</td></tr>
+          <tr><td>Assistência religiosa</td><td class="restricted">Autoridade religiosa via vídeo</td><td class="restricted">Presencial (protocolado)</td><td class="allowed">Presencial</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 
@@ -286,7 +296,7 @@
   <div>
     <div class="accordion-item fade-up">
       <button class="accordion-header">
-        <h3>Art. 1 — Definição e Âmbito de Aplicação do RDM</h3>
+        <h3>Art. 1: Definição e Âmbito de Aplicação do RDM</h3>
         <span class="accordion-icon">+</span>
       </button>
       <div class="accordion-body">
@@ -298,7 +308,7 @@
     </div>
     <div class="accordion-item fade-up">
       <button class="accordion-header">
-        <h3>Art. 7 — Vedação de Comunicação e Isolamento Eletromagnético</h3>
+        <h3>Art. 7: Vedação de Comunicação e Isolamento Eletromagnético</h3>
         <span class="accordion-icon">+</span>
       </button>
       <div class="accordion-body">
@@ -310,19 +320,19 @@
     </div>
     <div class="accordion-item fade-up">
       <button class="accordion-header">
-        <h3>Art. 12 — Dieta Alimentar e Fornecimento</h3>
+        <h3>Art. 12: Dieta Alimentar e Fornecimento</h3>
         <span class="accordion-icon">+</span>
       </button>
       <div class="accordion-body">
         <div class="accordion-content">
           <p>A alimentação será fornecida três vezes ao dia, com valor calórico mínimo de 2.400 kcal e composição nutricional definida por médico responsável do estabelecimento. A entrega será feita por sistema automatizado de escotilhas nas portas das celas, sem necessidade de contato físico entre agentes e detentos.</p>
-          <p>É vedado o estabelecimento de refeitório coletivo nos módulos de Nível 1 e Nível 2. A proibição de refeitórios coletivos visa eliminar a possibilidade de reuniões e planejamento entre lideranças criminosas — prática que o modelo salvadorenho demonstrou ser determinante para a ruptura das hierarquias das facções.</p>
+          <p>É vedado o estabelecimento de refeitório coletivo nos módulos de Nível 1 e Nível 2. A proibição de refeitórios coletivos visa eliminar a possibilidade de reuniões e planejamento entre lideranças criminosas, prática que o modelo salvadorenho demonstrou ser determinante para a ruptura das hierarquias das facções.</p>
         </div>
       </div>
     </div>
     <div class="accordion-item fade-up">
       <button class="accordion-header">
-        <h3>Art. 19 — Ingresso de Advogados e Defesa Técnica</h3>
+        <h3>Art. 19: Ingresso de Advogados e Defesa Técnica</h3>
         <span class="accordion-icon">+</span>
       </button>
       <div class="accordion-body">
@@ -368,8 +378,8 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 CECOTINS — Proposta do <a href="https://prendeumatou.com.br/" target="_blank">Partido Missão</a>, liderado por Renan Santos. Site não governamental.</p>
-    <p style="font-family:var(--mono); font-size:0.68rem; color:var(--txt3);">v2.6.0 // BUILD MISSÃO</p>
+    <p>© 2026 CECOTINS. Proposta do <a href="https://prendeumatou.com.br/" target="_blank">Partido Missão</a>, liderado por Renan Santos. Site não governamental.</p>
+    <p style="font-family:var(--mono); font-size:0.68rem; color:var(--txt3);">v2.6.0 // BUILD MISSÃO / <a href="https://ericksmatias.github.io/erickvisuals" target="_blank" rel="noopener" style="color:var(--txt3); text-decoration:underline; text-decoration-color:var(--border2); transition:color .2s;" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--txt3)'">erick matias</a></p>
   </div>
 </footer>
 

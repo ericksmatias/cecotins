@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Base Legislativa — CECOTINS</title>
+  <title>Base Legislativa · CECOTINS</title>
   <meta name="description" content="Fundamento legal, proposta de PEC, alterações ao Código Penal e tratados internacionais relevantes ao CECOTINS.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -45,6 +45,11 @@
     .comparison-table tr:last-child td { border-bottom: none; }
     .comparison-table td:first-child { color: var(--txt1); font-weight: 600; }
     .comparison-table tbody tr:hover td { background: var(--bg2); }
+    .table-scroll { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    @media (max-width: 600px) {
+      .comparison-table { min-width: 480px; }
+      .comparison-table th, .comparison-table td { padding: 12px 16px; }
+    }
     .daily-schedule {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 20px; overflow: hidden;
@@ -69,6 +74,9 @@
 
 <nav id="nav">
   <a href="index.html" class="nav-logo">CECOT<span>INS</span></a>
+  <button class="nav-burger" aria-label="Abrir menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
   <ul class="nav-links">
     <li><a href="estrutura.html">Estrutura</a></li>
     <li><a href="regime.html">Regime</a></li>
@@ -76,7 +84,7 @@
     <li><a href="leis.html" class="active">Legislação</a></li>
     <li><a href="agentes.html">Agentes</a></li>
     <li><a href="propostas.html">Propostas</a></li>
-    <li><a href="https://prendeumatou.com.br/" target="_blank" rel="noopener" class="external">prendeumatou.com.br</a></li>
+    <li><a href="https://missao.org.br/" target="_blank" rel="noopener" class="external">missao.org.br</a></li>
     <li>
       <div class="toggle-wrap">
         <span class="toggle-label">Modo</span>
@@ -89,7 +97,7 @@
 <section class="page-hero">
   <div class="page-hero-bg"></div>
   <div class="ph-inner">
-    <span class="section-label opacity-0 anim-el">04 — Legislação</span>
+    <span class="section-label opacity-0 anim-el">04 · Legislação</span>
     <h1 class="page-title opacity-0 anim-el">A lei que<br>falta ser escrita.</h1>
     <p class="page-lead opacity-0 anim-el">O CECOTINS não pode ser criado sem um arcabouço legal dedicado. O Partido Missão propõe um pacote legislativo completo: PEC para o RDM, alteração da Lei de Execução Penal, tipificação específica de terrorismo organizado e criação de jurisdição penal federal exclusiva para membros de facções nacionais.</p>
   </div>
@@ -123,31 +131,31 @@
 
   <div style="margin-top:56px;">
     <div class="accordion-item fade-up">
-      <button class="accordion-header"><h3>PEC 01/2027 — Regime Diferenciado Máximo (RDM)</h3><span class="accordion-icon">+</span></button>
+      <button class="accordion-header"><h3>PEC 01/2027: Regime Diferenciado Máximo (RDM)</h3><span class="accordion-icon">+</span></button>
       <div class="accordion-body"><div class="accordion-content">
-        <p>Acrescenta parágrafo ao art. 5º da Constituição Federal criando a categoria jurídica do Regime Diferenciado Máximo para condenados por crimes de terrorismo, liderança de organização criminosa e tráfico em escala nacional. A PEC estabelece que, nestes casos, as garantias de progressão de regime do art. 112 da LEP não se aplicam — criando a possibilidade de pena perpétua efetiva para crimes de terrorismo.</p>
-        <p>O texto também inclui a autorização constitucional para implantação de dispositivos de identificação biométrica em presos de alta periculosidade — necessário para a proposta de RFID subcutâneo do CECOTINS.</p>
+        <p>Acrescenta parágrafo ao art. 5º da Constituição Federal criando a categoria jurídica do Regime Diferenciado Máximo para condenados por crimes de terrorismo, liderança de organização criminosa e tráfico em escala nacional. A PEC estabelece que, nestes casos, as garantias de progressão de regime do art. 112 da LEP não se aplicam, criando a possibilidade de pena perpétua efetiva para crimes de terrorismo.</p>
+        <p>O texto também inclui a autorização constitucional para implantação de dispositivos de identificação biométrica em presos de alta periculosidade, necessário para a proposta de RFID subcutâneo do CECOTINS.</p>
       </div></div>
     </div>
     <div class="accordion-item fade-up">
-      <button class="accordion-header"><h3>PL 001/2027 — Lei do CECOTINS (Criação e Funcionamento)</h3><span class="accordion-icon">+</span></button>
+      <button class="accordion-header"><h3>PL 001/2027: Lei do CECOTINS (Criação e Funcionamento)</h3><span class="accordion-icon">+</span></button>
       <div class="accordion-body"><div class="accordion-content">
         <p>Cria o Centro de Confinamento do Terrorismo no Tocantins como autarquia federal vinculada ao Ministério da Justiça, com personalidade jurídica própria e orçamento autônomo. Estabelece a estrutura administrativa, o quadro de pessoal, as competências da Diretoria-Geral e os protocolos de supervisão pelo CNJ.</p>
-        <p>Define os critérios de ingresso (condenação transitada em julgado por crime enquadrado no RDM), os protocolos de transferência e os mecanismos de controle externo — incluindo inspeções anuais do CNJ, Ministério Público Federal e uma comissão parlamentar mista.</p>
+        <p>Define os critérios de ingresso (condenação transitada em julgado por crime enquadrado no RDM), os protocolos de transferência e os mecanismos de controle externo, incluindo inspeções anuais do CNJ, Ministério Público Federal e uma comissão parlamentar mista.</p>
       </div></div>
     </div>
     <div class="accordion-item fade-up">
-      <button class="accordion-header"><h3>PL 002/2027 — Alteração da Lei de Execução Penal (7.210/84)</h3><span class="accordion-icon">+</span></button>
+      <button class="accordion-header"><h3>PL 002/2027: Alteração da Lei de Execução Penal (7.210/84)</h3><span class="accordion-icon">+</span></button>
       <div class="accordion-body"><div class="accordion-content">
         <p>Modifica a LEP para criar o Capítulo VIII-A dedicado ao RDM, com artigos específicos sobre rotina diária (23h de confinamento), restrições de comunicação, protocolo de alimentação por escotilha, vedação de visitas para Nível 1, e definição dos critérios para transição entre níveis.</p>
-        <p>Também modifica o art. 41 (direitos do preso) para estabelecer que os direitos ali listados podem ser restringidos por decisão judicial fundamentada no caso de detentos em RDM — com exceção dos direitos mínimos humanitários (alimentação adequada, assistência médica e acesso ao Poder Judiciário).</p>
+        <p>Também modifica o art. 41 (direitos do preso) para estabelecer que os direitos ali listados podem ser restringidos por decisão judicial fundamentada no caso de detentos em RDM, com exceção dos direitos mínimos humanitários (alimentação adequada, assistência médica e acesso ao Poder Judiciário).</p>
       </div></div>
     </div>
     <div class="accordion-item fade-up">
-      <button class="accordion-header"><h3>PL 003/2027 — Tipificação de Terrorismo Organizado</h3><span class="accordion-icon">+</span></button>
+      <button class="accordion-header"><h3>PL 003/2027: Tipificação de Terrorismo Organizado</h3><span class="accordion-icon">+</span></button>
       <div class="accordion-body"><div class="accordion-content">
-        <p>Altera a Lei Antiterrorismo (13.260/2016) para incluir expressamente as condutas de organizações criminosas como PCC e CV na definição legal de terrorismo — suprindo lacuna que hoje permite que facções argumentem que suas ações são "apenas" crime organizado, não terrorismo.</p>
-        <p>Define pena mínima de 20 anos para liderança de organização terrorista, sem possibilidade de progressão de regime — aplicável automaticamente ao RDM e ao CECOTINS. A proposta é alinhada ao modelo salvadorenho, onde a Lei Antiterrorismo embasou o Estado de Exceção que viabilizou o CECOT.</p>
+        <p>Altera a Lei Antiterrorismo (13.260/2016) para incluir expressamente as condutas de organizações criminosas como PCC e CV na definição legal de terrorismo, suprindo lacuna que hoje permite que facções argumentem que suas ações são "apenas" crime organizado, não terrorismo.</p>
+        <p>Define pena mínima de 20 anos para liderança de organização terrorista, sem possibilidade de progressão de regime, aplicável automaticamente ao RDM e ao CECOTINS. A proposta é alinhada ao modelo salvadorenho, onde a Lei Antiterrorismo embasou o Estado de Exceção que viabilizou o CECOT.</p>
       </div></div>
     </div>
   </div>
@@ -158,15 +166,17 @@
     <span class="section-label">Tratados e Direito Internacional</span>
     <h2 class="section-title fade-up">O CECOTINS e<br>o direito internacional.</h2>
     <p class="section-lead fade-up">Críticos apontam que o RDM viola convenções da ONU. O Partido Missão responde com precedentes concretos de países democráticos que aplicam medidas similares.</p>
-    <table class="comparison-table fade-up" style="margin-top:40px;">
-      <thead><tr><th>Instrumento</th><th>Potencial Conflito</th><th>Resposta do Partido Missão</th></tr></thead>
-      <tbody>
-        <tr><td>Regras de Mandela (ONU, 2015)</td><td>Isolamento acima de 22h é considerado "confinamento solitário prolongado"</td><td>O RDM propõe 23h — 1h a mais. O Brasil pode fazer reserva específica neste artigo, como fizeram EUA e Israel.</td></tr>
-        <tr><td>Convenção contra Tortura (CAT)</td><td>Condições de isolamento podem ser enquadradas como tratamento desumano</td><td>O CECOTINS garante alimentação adequada, assistência médica e temperatura controlada — critérios mínimos estabelecidos pelo Comitê CAT.</td></tr>
-        <tr><td>Pacto de San José (OEA)</td><td>Direito à integridade pessoal pode ser invocado</td><td>El Salvador aplicou medidas similares sem ser expulso da OEA. A jurisprudência interamericana reconhece o direito estatal de restringir liberdades em situações de ameaça à ordem pública.</td></tr>
-        <tr><td>Constituição Federal, art. 5º</td><td>Dignidade da pessoa humana, vedação de penas perpétuas</td><td>A PEC proposta cria exceção constitucional específica para terrorismo — idêntica à que 18 países democráticos possuem em suas constituições.</td></tr>
-      </tbody>
-    </table>
+    <div class="table-scroll">
+      <table class="comparison-table fade-up" style="margin-top:40px;">
+        <thead><tr><th>Instrumento</th><th>Potencial Conflito</th><th>Resposta do Partido Missão</th></tr></thead>
+        <tbody>
+          <tr><td>Regras de Mandela (ONU, 2015)</td><td>Isolamento acima de 22h é considerado "confinamento solitário prolongado"</td><td>O RDM propõe 23h, 1h a mais. O Brasil pode fazer reserva específica neste artigo, como fizeram EUA e Israel.</td></tr>
+          <tr><td>Convenção contra Tortura (CAT)</td><td>Condições de isolamento podem ser enquadradas como tratamento desumano</td><td>O CECOTINS garante alimentação adequada, assistência médica e temperatura controlada, critérios mínimos estabelecidos pelo Comitê CAT.</td></tr>
+          <tr><td>Pacto de San José (OEA)</td><td>Direito à integridade pessoal pode ser invocado</td><td>El Salvador aplicou medidas similares sem ser expulso da OEA. A jurisprudência interamericana reconhece o direito estatal de restringir liberdades em situações de ameaça à ordem pública.</td></tr>
+          <tr><td>Constituição Federal, art. 5º</td><td>Dignidade da pessoa humana, vedação de penas perpétuas</td><td>A PEC proposta cria exceção constitucional específica para terrorismo, idêntica à que 18 países democráticos possuem em suas constituições.</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 
@@ -206,8 +216,8 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 CECOTINS — Proposta do <a href="https://prendeumatou.com.br/" target="_blank">Partido Missão</a>, liderado por Renan Santos. Site não governamental.</p>
-    <p style="font-family:var(--mono); font-size:0.68rem; color:var(--txt3);">v2.6.0 // BUILD MISSÃO</p>
+    <p>© 2026 CECOTINS. Proposta do <a href="https://prendeumatou.com.br/" target="_blank">Partido Missão</a>, liderado por Renan Santos. Site não governamental.</p>
+    <p style="font-family:var(--mono); font-size:0.68rem; color:var(--txt3);">v2.6.0 // BUILD MISSÃO / <a href="https://ericksmatias.github.io/erickvisuals" target="_blank" rel="noopener" style="color:var(--txt3); text-decoration:underline; text-decoration-color:var(--border2); transition:color .2s;" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--txt3)'">erick matias</a></p>
   </div>
 </footer>
 
