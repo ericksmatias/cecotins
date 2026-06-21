@@ -314,25 +314,6 @@
     }
     .btn-ghost:hover { background: var(--surface); transform: translateY(-1px); }
 
-    .hero-scroll-indicator {
-      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 6px;
-      font-size: 0.65rem; color: var(--txt3); letter-spacing: .1em;
-      text-transform: uppercase;
-      z-index: 10;
-    }
-    .hero-scroll-line {
-      width: 1px; height: 36px; background: var(--border2);
-      animation: scroll-line 2s ease-in-out infinite;
-    }
-
-    @keyframes scroll-line {
-      0% { transform: scaleY(0); transform-origin: top; }
-      50% { transform: scaleY(1); transform-origin: top; }
-      51% { transform: scaleY(1); transform-origin: bottom; }
-      100% { transform: scaleY(0); transform-origin: bottom; }
-    }
-
     /* ── RESTO DA PÁGINA (Stats, Sections, etc...) mantido idêntico ── */
     .stats-bar {
       display: grid; grid-template-columns: repeat(4, 1fr);
