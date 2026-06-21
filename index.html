@@ -7,11 +7,9 @@
   <title>CECOTINS: Centro de Confinamento do Terrorismo no Tocantins</title>
   <meta name="description" content="Proposta do Partido Missão para criação do CECOTINS, uma prisão de segurança máxima inspirada no CECOT de El Salvador, destinada ao confinamento do crime organizado no Brasil.">
 
-  <!-- Fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- Fonte custom CECOTINS, exclusiva para a logo no nav -->
   <style>
     @font-face {
       font-family: 'CECOTINSLogo';
@@ -22,11 +20,9 @@
     }
   </style>
 
-  <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-  <!-- Tema: aplicar ANTES do render para evitar flash -->
   <script>
     (function(){
       var t=localStorage.getItem('cecotins-theme');
@@ -82,9 +78,24 @@
       overflow-x: hidden;
       transition: background .35s, color .35s;
     }
+    
+    /* Trava o scroll enquanto o vídeo inicial rola */
+    body.no-scroll { overflow: hidden; height: 100vh; }
+
     a { text-decoration: none; color: inherit; }
     img { display: block; max-width: 100%; }
     ::selection { background: var(--red-dim); color: var(--red); }
+
+    /* ── INTRO VÍDEO ───────────────────────────────────────── */
+    #intro-wrapper {
+      position: fixed; inset: 0; z-index: 9999;
+      background: #000;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    #intro-wrapper video {
+      width: 100%; height: 100%; object-fit: cover;
+    }
 
     /* ── NAVBAR ─────────────────────────────────────────────── */
     #nav {
@@ -168,87 +179,36 @@
     input:checked + .slider { background: var(--red); }
     input:checked + .slider::before { transform: translateX(18px); }
 
-    /* ── HERO ───────────────────────────────────────────────── */
+    /* ── HERO FULLSCREEN ────────────────────────────────────── */
     #hero {
       min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      padding: 0 8%;
-      padding-top: var(--nav-h);
-      position: relative; overflow: hidden;
-      gap: 64px;
-    }
-
-    .hero-bg {
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 60% 70% at 20% 50%, rgba(211,47,47,0.07) 0%, transparent 65%),
-        var(--bg);
-    }
-    [data-theme="light"] .hero-bg {
-      background:
-        radial-gradient(ellipse 60% 70% at 20% 50%, rgba(211,47,47,0.04) 0%, transparent 65%),
-        var(--bg);
-    }
-
-    .hero-grid-overlay {
-      position: absolute; inset: 0; pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
-      background-size: 60px 60px;
-    }
-    [data-theme="light"] .hero-grid-overlay {
-      background-image:
-        linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
-    }
-
-    /* Coluna de texto */
-    .hero-text-col {
-      position: relative; z-index: 1;
-      display: flex; flex-direction: column;
       justify-content: center;
-      padding: 60px 0;
-    }
-
-    /* Coluna da imagem */
-    .hero-image-col {
-      position: relative; z-index: 1;
-      display: flex; align-items: center; justify-content: center;
-      padding: 60px 0;
-    }
-
-    .hero-img-frame {
-      position: relative;
-      width: 100%; max-width: 580px;
-      aspect-ratio: 4/3;
-      border-radius: 20px;
+      padding: var(--nav-h) 8% 0;
+      position: relative; 
       overflow: hidden;
-      border: 1px solid var(--border);
-      box-shadow: 0 40px 80px rgba(0,0,0,0.5);
-    }
-    [data-theme="light"] .hero-img-frame {
-      box-shadow: 0 40px 80px rgba(0,0,0,0.15);
+      text-align: center;
     }
 
-    /* Placeholder visível quando não há imagem, substituir por <img> */
-    .hero-img-placeholder {
+    /* Wrapper de imagens de fundo em tela cheia */
+    .hero-img-wrapper {
+      position: absolute; inset: 0; z-index: 1;
+      width: 100%; height: 100%;
+    }
+    /* Máscara escura/clara para o texto ter leitura sobre a foto */
+    .hero-img-wrapper::after {
+      content: '';
       position: absolute; inset: 0;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 12px;
-      background: var(--surface);
-      z-index: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, var(--bg) 100%);
+      pointer-events: none;
+      z-index: 2;
     }
-    .hero-img-placeholder svg { opacity: 0.25; }
-    .hero-img-placeholder span {
-      font-family: var(--mono); font-size: 0.68rem;
-      color: var(--txt3); letter-spacing: .1em; text-transform: uppercase;
+    [data-theme="light"] .hero-img-wrapper::after {
+      background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, var(--bg) 100%);
     }
 
-    /* As duas imagens (dia e noite), trocadas pelo tema */
     .hero-img-night,
     .hero-img-day {
       position: absolute; inset: 0;
@@ -257,36 +217,34 @@
       transition: opacity .5s ease;
       z-index: 1;
     }
-    /* Padrão: tema escuro → imagem noturna visível */
     .hero-img-night { opacity: 1; }
     .hero-img-day   { opacity: 0; }
-    /* Tema claro → imagem diurna visível */
     [data-theme="light"] .hero-img-night { opacity: 0; }
     [data-theme="light"] .hero-img-day   { opacity: 1; }
 
-    /* Overlay gradiente na imagem */
-    .hero-img-frame::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(
-        135deg,
-        rgba(0,0,0,0.15) 0%,
-        transparent 50%,
-        rgba(211,47,47,0.08) 100%
-      );
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    /* Legenda da imagem */
-    .hero-img-caption {
-      position: absolute; bottom: 16px; left: 16px; right: 16px;
-      font-family: var(--mono); font-size: 0.66rem;
-      color: rgba(255,255,255,0.5); letter-spacing: .08em;
-      text-transform: uppercase;
+    /* Grade visual sobreposta */
+    .hero-grid-overlay {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 60px 60px;
       z-index: 3;
     }
-    [data-theme="light"] .hero-img-caption { color: rgba(0,0,0,0.4); }
+    [data-theme="light"] .hero-grid-overlay {
+      background-image:
+        linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+    }
+
+    /* Coluna de texto centralizada */
+    .hero-text-col {
+      position: relative; z-index: 10;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      max-width: 900px;
+      width: 100%;
+    }
 
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
@@ -295,7 +253,7 @@
       border: 1px solid rgba(211,47,47,.3);
       padding: 6px 14px; border-radius: 100px;
       background: var(--red-dim);
-      margin-bottom: 32px;
+      margin: 0 auto 32px auto;
     }
     .hero-badge::before {
       content: ''; width: 6px; height: 6px; border-radius: 50%;
@@ -308,12 +266,11 @@
     }
 
     .hero-title {
-      font-size: clamp(3rem, 7vw, 7rem);
+      font-size: clamp(3rem, 8vw, 7rem);
       font-weight: 900;
       line-height: 1.0;
       letter-spacing: -0.03em;
-      max-width: 14ch;
-      margin-bottom: 28px;
+      margin: 0 auto 28px auto;
     }
     .hero-title em {
       font-style: normal;
@@ -322,15 +279,19 @@
 
     .hero-subtitle {
       font-size: clamp(1.05rem, 1.6vw, 1.35rem);
-      color: var(--txt2);
+      color: var(--txt1); /* Mais claro para contraste */
       font-weight: 400;
       line-height: 1.7;
-      max-width: 52ch;
-      margin-bottom: 48px;
+      max-width: 60ch;
+      margin: 0 auto 48px auto;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5); /* Sombra para leitura no mobile */
+    }
+    [data-theme="light"] .hero-subtitle {
+      text-shadow: 0 2px 10px rgba(255,255,255,0.7);
     }
 
     .hero-ctas {
-      display: flex; gap: 14px; flex-wrap: wrap;
+      display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
     }
     .btn-primary {
       display: inline-flex; align-items: center; gap: 8px;
@@ -345,6 +306,8 @@
     .btn-ghost {
       display: inline-flex; align-items: center; gap: 8px;
       border: 1px solid var(--border2); color: var(--txt1);
+      background: rgba(0,0,0,0.2); /* Fundo sutil */
+      backdrop-filter: blur(5px);
       padding: 14px 28px; border-radius: 100px;
       font-size: 0.85rem; font-weight: 600;
       transition: background .2s, transform .2s;
@@ -352,29 +315,17 @@
     .btn-ghost:hover { background: var(--surface); transform: translateY(-1px); }
 
     .hero-scroll-indicator {
-      position: absolute; bottom: 28px; left: 8%;
+      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
       display: flex; flex-direction: column; align-items: center; gap: 6px;
       font-size: 0.65rem; color: var(--txt3); letter-spacing: .1em;
       text-transform: uppercase;
+      z-index: 10;
     }
     .hero-scroll-line {
       width: 1px; height: 36px; background: var(--border2);
       animation: scroll-line 2s ease-in-out infinite;
     }
 
-    /* ── HERO RESPONSIVE ─────────────────────────────────────── */
-    @media (max-width: 1024px) {
-      #hero {
-        grid-template-columns: 1fr;
-        min-height: auto;
-        padding-top: calc(var(--nav-h) + 60px);
-        padding-bottom: 80px;
-        gap: 40px;
-      }
-      .hero-image-col { order: -1; }
-      .hero-img-frame { max-width: 100%; aspect-ratio: 16/9; }
-      .hero-text-col { padding: 0; }
-    }
     @keyframes scroll-line {
       0% { transform: scaleY(0); transform-origin: top; }
       50% { transform: scaleY(1); transform-origin: top; }
@@ -382,7 +333,7 @@
       100% { transform: scaleY(0); transform-origin: bottom; }
     }
 
-    /* ── STATS BAR ─────────────────────────────────────────── */
+    /* ── RESTO DA PÁGINA (Stats, Sections, etc...) mantido idêntico ── */
     .stats-bar {
       display: grid; grid-template-columns: repeat(4, 1fr);
       border-top: 1px solid var(--border);
@@ -406,12 +357,7 @@
       text-transform: uppercase; line-height: 1.5;
     }
 
-    /* ── SEÇÃO GENÉRICA ─────────────────────────────────────── */
-    .section {
-      padding: 120px 8%;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
+    .section { padding: 120px 8%; max-width: 1400px; margin: 0 auto; }
     .section-sm { padding: 80px 8%; max-width: 1400px; margin: 0 auto; }
 
     .section-label {
@@ -430,247 +376,103 @@
       color: var(--txt2); line-height: 1.75; max-width: 60ch;
     }
 
-    /* ── DIVIDER ─────────────────────────────────────────────── */
     .divider { border: none; border-top: 1px solid var(--border); }
 
-    /* ── WHAT IS CECOT ─────────────────────────────────────── */
     .what-grid {
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 80px; align-items: start;
     }
-    .what-body {
-      font-size: 1.1rem; line-height: 1.85;
-      color: var(--txt2);
-    }
+    .what-body { font-size: 1.1rem; line-height: 1.85; color: var(--txt2); }
     .what-body p { margin-bottom: 24px; }
     .what-body strong { color: var(--txt1); font-weight: 600; }
     .what-body a { color: var(--red); border-bottom: 1px solid transparent; transition: border-color .2s; }
     .what-body a:hover { border-color: var(--red); }
 
     .fact-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px;
-      margin-bottom: 16px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 32px; margin-bottom: 16px;
     }
     .fact-card h4 {
-      font-size: 0.78rem; font-weight: 700;
-      color: var(--txt3); letter-spacing: .08em;
-      text-transform: uppercase; margin-bottom: 10px;
+      font-size: 0.78rem; font-weight: 700; color: var(--txt3);
+      letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px;
     }
-    .fact-card p {
-      font-size: 1.05rem; color: var(--txt1); line-height: 1.6;
-    }
+    .fact-card p { font-size: 1.05rem; color: var(--txt1); line-height: 1.6; }
     .fact-card .fact-num {
-      font-size: 2.2rem; font-weight: 900;
-      letter-spacing: -0.04em; color: var(--red);
-      display: block; margin-bottom: 6px;
+      font-size: 2.2rem; font-weight: 900; letter-spacing: -0.04em;
+      color: var(--red); display: block; margin-bottom: 6px;
     }
 
-    /* ── FEATURES GRID (BLOCOS APPLE STYLE) ───────────────── */
     .features-bento {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: auto auto;
-      gap: 16px;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto; gap: 16px;
     }
     .bento-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 40px;
-      position: relative; overflow: hidden;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 40px; position: relative; overflow: hidden;
       transition: border-color .3s, transform .3s;
     }
     .bento-card:hover { border-color: var(--border2); transform: translateY(-2px); }
     .bento-card.large { grid-column: span 2; }
     .bento-card.tall { min-height: 420px; display: flex; flex-direction: column; justify-content: space-between; }
-
-    .bento-icon {
-      display: block; margin-bottom: 20px;
-      color: var(--txt2);
-    }
+    .bento-icon { display: block; margin-bottom: 20px; color: var(--txt2); }
     .bento-card.red-card .bento-icon { color: rgba(255,255,255,0.8); }
-    .bento-card h3 {
-      font-size: 1.4rem; font-weight: 700;
-      letter-spacing: -0.02em; margin-bottom: 12px;
-    }
-    .bento-card p {
-      font-size: 1rem; color: var(--txt2); line-height: 1.7;
-    }
-
-    .bento-card.red-card {
-      background: var(--red);
-      border-color: transparent;
-      color: #fff;
-    }
+    .bento-card h3 { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
+    .bento-card p { font-size: 1rem; color: var(--txt2); line-height: 1.7; }
+    .bento-card.red-card { background: var(--red); border-color: transparent; color: #fff; }
     .bento-card.red-card p { color: rgba(255,255,255,.75); }
-
     .bento-bg-number {
       position: absolute; right: 24px; bottom: -20px;
       font-size: 8rem; font-weight: 900; letter-spacing: -0.05em;
       color: rgba(255,255,255,0.05); line-height: 1; pointer-events: none;
     }
 
-    /* ── BAR CHART ─────────────────────────────────────────── */
-    .chart-section {
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 100px 8%;
-    }
+    .chart-section { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 100px 8%; }
     .chart-wrap { max-width: 900px; margin: 60px auto 0; }
-    .chart-row {
-      display: flex; align-items: center; gap: 20px;
-      padding: 16px 0; border-bottom: 1px solid var(--border);
-    }
+    .chart-row { display: flex; align-items: center; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--border); }
     .chart-row:last-child { border-bottom: none; }
     .chart-name { font-size: 0.82rem; font-weight: 600; width: 200px; flex-shrink: 0; color: var(--txt2); }
     .chart-bar-bg { flex: 1; height: 8px; background: var(--bg3); border-radius: 4px; overflow: hidden; }
-    .chart-bar-fill {
-      height: 100%; border-radius: 4px;
-      background: var(--red);
-      width: 0; /* animado via JS */
-      transition: width 1.2s cubic-bezier(.4,0,.2,1);
-    }
+    .chart-bar-fill { height: 100%; border-radius: 4px; background: var(--red); width: 0; transition: width 1.2s cubic-bezier(.4,0,.2,1); }
     .chart-bar-fill.alt { background: var(--txt3); }
     .chart-val { font-size: 0.82rem; font-weight: 700; width: 52px; text-align: right; color: var(--txt1); }
 
-    /* ── TIMELINE ──────────────────────────────────────────── */
-    .timeline {
-      position: relative;
-      padding-left: 40px;
-      max-width: 720px;
-    }
-    .timeline::before {
-      content: '';
-      position: absolute; left: 0; top: 8px; bottom: 8px;
-      width: 1px; background: var(--border2);
-    }
-    .timeline-item {
-      position: relative;
-      padding-bottom: 52px;
-    }
+    .timeline { position: relative; padding-left: 40px; max-width: 720px; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 1px; background: var(--border2); }
+    .timeline-item { position: relative; padding-bottom: 52px; }
     .timeline-item:last-child { padding-bottom: 0; }
-    .timeline-dot {
-      position: absolute; left: -45px; top: 6px;
-      width: 10px; height: 10px; border-radius: 50%;
-      background: var(--red);
-      box-shadow: 0 0 0 4px var(--red-dim);
-    }
-    .timeline-date {
-      font-family: var(--mono); font-size: 0.68rem;
-      color: var(--red); letter-spacing: .1em;
-      text-transform: uppercase; margin-bottom: 8px;
-    }
-    .timeline-title {
-      font-size: 1.15rem; font-weight: 700;
-      margin-bottom: 10px; letter-spacing: -0.01em;
-    }
-    .timeline-text {
-      font-size: 1rem; color: var(--txt2); line-height: 1.7;
-    }
+    .timeline-dot { position: absolute; left: -45px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 4px var(--red-dim); }
+    .timeline-date { font-family: var(--mono); font-size: 0.68rem; color: var(--red); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px; }
+    .timeline-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.01em; }
+    .timeline-text { font-size: 1rem; color: var(--txt2); line-height: 1.7; }
 
-    /* ── MANIFESTO QUOTE ────────────────────────────────────── */
-    .quote-section {
-      text-align: center;
-      padding: 120px 8%;
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .quote-mark {
-      font-size: 6rem; line-height: 0; color: var(--red-dim);
-      font-family: Georgia, serif; vertical-align: -0.4em;
-    }
-    blockquote {
-      font-size: clamp(1.3rem, 2.5vw, 2rem);
-      font-weight: 300; line-height: 1.65;
-      max-width: 820px; margin: 0 auto 24px;
-      color: var(--txt1);
-    }
+    .quote-section { text-align: center; padding: 120px 8%; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .quote-mark { font-size: 6rem; line-height: 0; color: var(--red-dim); font-family: Georgia, serif; vertical-align: -0.4em; }
+    blockquote { font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 300; line-height: 1.65; max-width: 820px; margin: 0 auto 24px; color: var(--txt1); }
     blockquote strong { font-weight: 700; color: var(--red); }
-    .quote-source {
-      font-family: var(--mono); font-size: 0.72rem;
-      color: var(--txt3); letter-spacing: .1em; text-transform: uppercase;
-    }
+    .quote-source { font-family: var(--mono); font-size: 0.72rem; color: var(--txt3); letter-spacing: .1em; text-transform: uppercase; }
 
-    /* ── PROJECTIONS ────────────────────────────────────────── */
-    .projection-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;
-      border: 1px solid var(--border); border-radius: 20px; overflow: hidden;
-    }
-    .proj-cell {
-      background: var(--surface);
-      padding: 48px 40px;
-      border-right: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
+    .projection-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+    .proj-cell { background: var(--surface); padding: 48px 40px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .proj-cell:nth-child(even) { border-right: none; }
     .proj-cell:nth-child(3), .proj-cell:nth-child(4) { border-bottom: none; }
-    .proj-cell h4 {
-      font-size: 0.74rem; font-weight: 700;
-      color: var(--txt3); letter-spacing: .08em;
-      text-transform: uppercase; margin-bottom: 16px;
-    }
-    .proj-num {
-      font-size: clamp(2.5rem, 4vw, 4rem);
-      font-weight: 900; letter-spacing: -0.04em;
-      color: var(--txt1); display: block; margin-bottom: 8px;
-    }
+    .proj-cell h4 { font-size: 0.74rem; font-weight: 700; color: var(--txt3); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 16px; }
+    .proj-num { font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 900; letter-spacing: -0.04em; color: var(--txt1); display: block; margin-bottom: 8px; }
     .proj-num span { color: var(--red); }
     .proj-desc { font-size: 0.95rem; color: var(--txt2); line-height: 1.6; }
 
-    /* ── DISCLAIMER BANNER ─────────────────────────────────── */
-    .disclaimer {
-      background: var(--red-dim);
-      border: 1px solid rgba(211,47,47,.2);
-      border-radius: 12px;
-      padding: 24px 32px;
-      display: flex; gap: 20px; align-items: flex-start;
-      margin-bottom: 60px;
-    }
+    .disclaimer { background: var(--red-dim); border: 1px solid rgba(211,47,47,.2); border-radius: 12px; padding: 24px 32px; display: flex; gap: 20px; align-items: flex-start; margin-bottom: 60px; }
     .disclaimer-icon { font-size: 1.4rem; flex-shrink: 0; }
-    .disclaimer p {
-      font-size: 0.9rem; line-height: 1.65; color: var(--txt2);
-    }
+    .disclaimer p { font-size: 0.9rem; line-height: 1.65; color: var(--txt2); }
     .disclaimer strong { color: var(--txt1); }
 
-    /* ── CTA SECTION ────────────────────────────────────────── */
-    .cta-section {
-      background: var(--red);
-      padding: 100px 8%;
-      text-align: center;
-    }
-    .cta-section h2 {
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      font-weight: 900; color: #fff;
-      letter-spacing: -0.03em; margin-bottom: 20px;
-    }
-    .cta-section p {
-      font-size: 1.15rem; color: rgba(255,255,255,.75);
-      max-width: 52ch; margin: 0 auto 40px; line-height: 1.7;
-    }
-    .btn-white {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: #fff; color: var(--red);
-      padding: 16px 36px; border-radius: 100px;
-      font-size: 0.9rem; font-weight: 800; letter-spacing: 0.02em;
-      transition: opacity .2s, transform .2s;
-    }
+    .cta-section { background: var(--red); padding: 100px 8%; text-align: center; }
+    .cta-section h2 { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 900; color: #fff; letter-spacing: -0.03em; margin-bottom: 20px; }
+    .cta-section p { font-size: 1.15rem; color: rgba(255,255,255,.75); max-width: 52ch; margin: 0 auto 40px; line-height: 1.7; }
+    .btn-white { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: var(--red); padding: 16px 36px; border-radius: 100px; font-size: 0.9rem; font-weight: 800; letter-spacing: 0.02em; transition: opacity .2s, transform .2s; }
     .btn-white:hover { opacity: .9; transform: translateY(-2px); }
 
-    /* ── FOOTER ─────────────────────────────────────────────── */
-    footer {
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-      padding: 72px 8% 40px;
-    }
-    .footer-grid {
-      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 48px; margin-bottom: 56px;
-    }
+    footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 72px 8% 40px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
     .footer-brand { max-width: 280px; }
     .footer-brand .logo { font-size: 0.82rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px; }
     .footer-brand .logo span { color: var(--red); }
@@ -678,16 +480,10 @@
     .footer-col h5 { font-size: 0.75rem; font-weight: 700; color: var(--txt3); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 20px; }
     .footer-col a { display: block; font-size: 0.85rem; color: var(--txt2); margin-bottom: 12px; transition: color .2s; }
     .footer-col a:hover { color: var(--txt1); }
-    .footer-bottom {
-      border-top: 1px solid var(--border);
-      padding-top: 28px;
-      display: flex; justify-content: space-between; align-items: center; gap: 20px;
-      flex-wrap: wrap;
-    }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
     .footer-bottom p { font-size: 0.76rem; color: var(--txt3); line-height: 1.6; }
     .footer-bottom a { color: var(--red); }
 
-    /* ── UTILITIES ──────────────────────────────────────────── */
     .text-red { color: var(--red); }
     .mono { font-family: var(--mono); }
     .opacity-0 { opacity: 0; }
@@ -722,6 +518,8 @@
       .bento-card.large { grid-column: span 1; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .projection-grid { grid-template-columns: 1fr; }
+      
+      #hero { padding: var(--nav-h) 5% 0; } /* Ajuste no mobile */
     }
     @media (max-width: 600px) {
       .stats-bar { grid-template-columns: 1fr; }
@@ -737,9 +535,12 @@
     }
   </style>
 </head>
-<body>
+<body class="no-scroll">
 
-<!-- ── NAVBAR ─────────────────────────────────────────────── -->
+<div id="intro-wrapper">
+  <video id="intro-video" src="introcinha.mp4" autoplay muted playsinline></video>
+</div>
+
 <nav id="nav">
   <div class="nav-logo">CECOT<span>INS</span></div>
   <button class="nav-burger" aria-label="Abrir menu" aria-expanded="false">
@@ -765,52 +566,28 @@
   </ul>
 </nav>
 
-<!-- ── HERO ───────────────────────────────────────────────── -->
 <section id="hero">
-  <div class="hero-bg"></div>
+  <div class="hero-img-wrapper" id="hero-bg-anim">
+    <img src="assets/cecotins-noite.png" alt="CECOTINS de noite, renderização" class="hero-img-night">
+    <img src="assets/cecotins-dia.png"   alt="CECOTINS de dia, renderização"   class="hero-img-day">
+  </div>
+  
   <div class="hero-grid-overlay"></div>
 
-  <!-- COLUNA TEXTO -->
   <div class="hero-text-col">
-    <!-- Removido opacity-0 para o conteúdo aparecer -->
-    <span class="hero-badge" id="hero-badge">Proposta do Partido Missão · 2026</span>
+    <span class="hero-badge" id="hero-badge" style="opacity:0">Proposta do Partido Missão · 2026</span>
 
-    <h1 class="hero-title" id="hero-title">
+    <h1 class="hero-title" id="hero-title" style="opacity:0">
       Erradicar o Crime.<br><em>Impor a Ordem.</em>
     </h1>
 
-    <p class="hero-subtitle" id="hero-sub">
+    <p class="hero-subtitle" id="hero-sub" style="opacity:0">
       O <strong>CECOTINS</strong> é a proposta do <a href="https://prendeumatou.com.br/" target="_blank" style="color:var(--red)">Partido Missão</a> para criação de uma prisão de segurança máxima no Tocantins, inspirada no <strong>CECOT de El Salvador</strong>, a maior e mais eficaz prisão anti-crime organizado do mundo. Um projeto sem precedentes no Brasil, com capacidade para <strong>100.000 detentos</strong>.
     </p>
 
-    <div class="hero-ctas" id="hero-ctas">
+    <div class="hero-ctas" id="hero-ctas" style="opacity:0">
       <a href="estrutura.html" class="btn-primary">Conhecer o Projeto ↓</a>
       <a href="propostas.html" class="btn-ghost">Base Legislativa</a>
-    </div>
-  </div>
-
-  <!-- COLUNA IMAGEM -->
-  <!-- Removido opacity-0 aqui também -->
-  <div class="hero-image-col" id="hero-img-col">
-    <div class="hero-img-frame">
-
-      <!-- Imagens da Renderização -->
-      <img src="assets/cecotins-noite.png" alt="CECOTINS de noite, renderização" class="hero-img-night" onload="this.closest('.hero-img-frame').querySelector('.hero-img-placeholder').style.display='none'">
-      <img src="assets/cecotins-dia.png"   alt="CECOTINS de dia, renderização"   class="hero-img-day">
-
-      <!-- Placeholder (Exibido apenas quando as imagens ainda não estão em assets/) -->
-      <div class="hero-img-placeholder" id="hero-placeholder">
-        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="color:var(--txt3)">
-          <rect x="3" y="3" width="18" height="18" rx="2"/>
-          <circle cx="8.5" cy="8.5" r="1.5"/>
-          <polyline points="21 15 16 10 5 21"/>
-        </svg>
-        <span>assets/cecotins-noite.png</span>
-        <span style="font-size:0.6rem; opacity:.5">+ assets/cecotins-dia.png para tema claro</span>
-      </div>
-
-      <!-- Legenda da Imagem -->
-      <div class="hero-img-caption">CECOTINS: Renderização do Complexo / Tocantins, Brasil</div>
     </div>
   </div>
 
@@ -820,7 +597,6 @@
   </div>
 </section>
 
-<!-- ── AVISO IMPORTANTE ────────────────────────────────────── -->
 <div style="padding: 0 8%; background: var(--bg);">
   <div class="section" style="padding-top: 60px; padding-bottom: 0;">
     <div class="disclaimer">
@@ -838,7 +614,6 @@
   </div>
 </div>
 
-<!-- ── STATS ───────────────────────────────────────────────── -->
 <div class="stats-bar stagger-group">
   <div class="stat-item stagger-item">
     <span class="stat-number" data-count="100000" data-suffix="">0</span>
@@ -858,7 +633,6 @@
   </div>
 </div>
 
-<!-- ── O QUE É O CECOT ─────────────────────────────────────── -->
 <div class="section fade-up">
   <span class="section-label">A Referência Internacional</span>
   <div class="what-grid">
@@ -911,17 +685,14 @@
   </div>
 </div>
 
-<!-- ── FEATURES BENTO ──────────────────────────────────────── -->
 <div class="section" style="padding-top: 0;">
   <span class="section-label">Pilares do Projeto</span>
   <h2 class="section-title fade-up">Uma infraestrutura<br>desenhada para o confinamento.</h2>
 
   <div class="features-bento stagger-group" style="margin-top: 48px;">
-
     <div class="bento-card large tall stagger-item">
       <div>
         <span class="bento-icon">
-          <!-- Antenna / Signal block -->
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4.9 4.9a10 10 0 0 1 14.2 0M7.7 7.7a6 6 0 0 1 8.5 0M12 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
             <line x1="12" y1="12" x2="12" y2="21"/>
@@ -937,7 +708,6 @@
     <div class="bento-card red-card tall stagger-item">
       <div>
         <span class="bento-icon">
-          <!-- Bolt / Energy -->
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
           </svg>
@@ -950,7 +720,6 @@
 
     <div class="bento-card stagger-item">
       <span class="bento-icon">
-        <!-- Grid / Modules -->
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
           <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
@@ -963,7 +732,6 @@
 
     <div class="bento-card stagger-item">
       <span class="bento-icon">
-        <!-- Hatch / Automated delivery -->
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <rect x="2" y="7" width="20" height="14" rx="2"/>
           <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
@@ -977,7 +745,6 @@
 
     <div class="bento-card stagger-item">
       <span class="bento-icon">
-        <!-- Camera / Monitoring -->
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M23 7l-7 5 7 5V7z"/>
           <rect x="1" y="5" width="15" height="14" rx="2"/>
@@ -990,7 +757,6 @@
 
     <div class="bento-card stagger-item">
       <span class="bento-icon">
-        <!-- Map pin / Location -->
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/>
           <circle cx="12" cy="10" r="3"/>
@@ -1000,11 +766,9 @@
       <p>O interior do Tocantins oferece isolamento geográfico natural, clima árido e distância logística de centros urbanos: barreiras naturais que complementam as físicas.</p>
       <div class="bento-bg-number">06</div>
     </div>
-
   </div>
 </div>
 
-<!-- ── GRÁFICO COMPARATIVO ─────────────────────────────────── -->
 <div class="chart-section">
   <div style="max-width: 1400px; margin: 0 auto;">
     <span class="section-label">Comparativo Internacional</span>
@@ -1051,7 +815,6 @@
   </div>
 </div>
 
-<!-- ── TIMELINE ──────────────────────────────────────────────── -->
 <div class="section">
   <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;">
     <div>
@@ -1069,28 +832,24 @@
         <div class="timeline-title">El Salvador decreta Estado de Exceção</div>
         <p class="timeline-text">Após massacres do MS-13 e Barrio 18, Bukele suspende garantias constitucionais e inicia operação de prisões em massa. Mais de 55.000 suspeitos de facções são presos nos primeiros 7 meses.</p>
       </div>
-
       <div class="timeline-item fade-up">
         <div class="timeline-dot"></div>
         <div class="timeline-date">Janeiro 2023</div>
         <div class="timeline-title">CECOT inaugurado em El Salvador</div>
         <p class="timeline-text">A prisão de 40.000 vagas abre as portas em Tecoluca. Construída em menos de 1 ano por US$ 100 milhões. Bloqueadores eletromagnéticos, passarelas aéreas, alimentação automatizada.</p>
       </div>
-
       <div class="timeline-item fade-up">
         <div class="timeline-dot"></div>
         <div class="timeline-date">2024</div>
         <div class="timeline-title">El Salvador torna-se referência global</div>
         <p class="timeline-text">Taxa de homicídios cai para menos de 2 por 100k. Bukele é reeleito com mais de 82% dos votos. O modelo CECOT passa a ser estudado e debatido em toda a América Latina.</p>
       </div>
-
       <div class="timeline-item fade-up">
         <div class="timeline-dot"></div>
         <div class="timeline-date">2025</div>
         <div class="timeline-title">Partido Missão é registrado no TSE</div>
         <p class="timeline-text">O TSE aprova por unanimidade o registro do Partido Missão, fundado por Renan Santos (cofundador do MBL). A plataforma inclui o CECOTINS como proposta central de segurança pública.</p>
       </div>
-
       <div class="timeline-item fade-up">
         <div class="timeline-dot"></div>
         <div class="timeline-date">2026 →</div>
@@ -1101,7 +860,6 @@
   </div>
 </div>
 
-<!-- ── QUOTE ───────────────────────────────────────────────── -->
 <div class="quote-section">
   <blockquote class="fade-up">
     <span class="quote-mark">"</span>
@@ -1113,7 +871,6 @@
   <p class="quote-source fade-up">Plataforma de Segurança · Partido Missão / Renan Santos, 2026</p>
 </div>
 
-<!-- ── PROJEÇÕES ──────────────────────────────────────────── -->
 <div class="section">
   <span class="section-label">Projeções do Projeto</span>
   <h2 class="section-title fade-up">O que o CECOTINS<br>representaria para o Brasil.</h2>
@@ -1145,7 +902,6 @@
   </div>
 </div>
 
-<!-- ── DOCUMENTÁRIO BRASIL PARALELO ─────────────────────── -->
 <div style="background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
   <div class="section">
     <span class="section-label">Documentário</span>
@@ -1157,9 +913,7 @@
     </p>
 
     <div class="fade-up" style="position: relative; width: 100%; max-width: 900px; margin: 0 auto;">
-      <!-- Container 16:9 responsivo -->
       <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 32px 64px rgba(0,0,0,0.4);">
-        <!-- AQUI FOI CORRIGIDO O LINK DO YOUTUBE (O start=196 faz com que inicie nos exatos 196s pedidos!) -->
         <iframe
           src="https://www.youtube.com/embed/mcWaypzFzps?start=0&rel=0&modestbranding=1&color=white"
           title="El Salvador: O Dia em que o Medo Mudou de Lado · Brasil Paralelo"
@@ -1169,8 +923,6 @@
           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;">
         </iframe>
       </div>
-
-      <!-- Crédito -->
       <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 20px; flex-wrap: wrap; gap: 12px;">
         <div>
           <p style="font-size: 0.78rem; color: var(--txt3); font-family: var(--mono); letter-spacing: .06em; text-transform: uppercase;">
@@ -1191,14 +943,12 @@
   </div>
 </div>
 
-<!-- ── CTA FINAL ──────────────────────────────────────────── -->
 <div class="cta-section">
   <h2 class="fade-up">Chegamos ao poder.<br>O CECOTINS acontece.</h2>
   <p class="fade-up">Apoie a candidatura de Renan Santos à Presidência da República pelo Partido Missão. Esta é a proposta. Falta só a oportunidade.</p>
   <a href="https://prendeumatou.com.br/" target="_blank" rel="noopener" class="btn-white">Acessar prendeumatou.com.br →</a>
 </div>
 
-<!-- ── FOOTER ─────────────────────────────────────────────── -->
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
@@ -1234,20 +984,57 @@
   </div>
 </footer>
 
-<!-- ── SCRIPTS ─────────────────────────────────────────────── -->
 <script src="assets/cecotins-core.js"></script>
 <script>
   gsap.registerPlugin(ScrollTrigger);
 
-  // Hero entrance
-  gsap.timeline({ delay: 0.1 })
-    .fromTo('#hero-badge', { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' })
-    .fromTo('#hero-title',  { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' }, '-=0.2')
-    .fromTo('#hero-sub',   { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=0.4')
-    .fromTo('#hero-ctas',  { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.3')
-    .fromTo('#hero-img-col', { x: 40, opacity: 0 }, { x: 0, opacity: 1, duration: 1.0, ease: 'power3.out' }, '-=0.8');
+  // 1. Lógica do Vídeo de Introdução
+  const introVideo = document.getElementById('intro-video');
+  const introWrapper = document.getElementById('intro-wrapper');
 
-  // Bar chart animation
+  // Função que dispara a animação dos textos do Hero
+  function playHeroAnimation() {
+    gsap.timeline()
+      .fromTo('#hero-badge', { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' })
+      .fromTo('#hero-title',  { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' }, '-=0.2')
+      .fromTo('#hero-sub',   { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=0.4')
+      .fromTo('#hero-ctas',  { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.3');
+  }
+
+  // Quando o vídeo acabar: fade out no wrapper, destrava o scroll do body e chama animação do hero
+  introVideo.addEventListener('ended', () => {
+    introWrapper.style.opacity = '0';
+    introWrapper.style.visibility = 'hidden';
+    document.body.classList.remove('no-scroll');
+    playHeroAnimation();
+  });
+
+  // Fallback: se por acaso o navegador barrar o autoplay do vídeo, nós removemos a tela de loading em 2s
+  let videoStarted = false;
+  introVideo.addEventListener('playing', () => { videoStarted = true; });
+  setTimeout(() => {
+    if (!videoStarted) {
+      introWrapper.style.opacity = '0';
+      introWrapper.style.visibility = 'hidden';
+      document.body.classList.remove('no-scroll');
+      playHeroAnimation();
+    }
+  }, 2000);
+
+
+  // 2. Lógica do Fade Out da imagem principal conforme você rola (ScrollTrigger)
+  gsap.to('#hero-bg-anim', {
+    scrollTrigger: {
+      trigger: '#hero',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: true // vincula a opacidade diretamente à rolagem
+    },
+    opacity: 0,
+    y: 50 // Efeito leve de parallax para a imagem ir descendo enquanto some
+  });
+
+  // 3. Efeito da Nav, barras e etc (mantido o seu original)
   document.querySelectorAll('.chart-bar-fill').forEach(function(bar) {
     var target = bar.getAttribute('data-target');
     ScrollTrigger.create({
@@ -1260,7 +1047,6 @@
     });
   });
 
-  // Nav scroll effect
   ScrollTrigger.create({
     start: 80,
     onUpdate: function(self) {
