@@ -43,7 +43,10 @@
       --txt1:      #f5f5f7;
       --txt2:      #a1a1a6;
       --txt3:      #636366;
-      --red:       #fdbd28;
+      --accent:    #fdbd28;
+      --accent-dim:  rgba(253,189,40,0.15);
+      --accent-glow: rgba(253,189,40,0.25);
+      --red:       #d32f2f;
       --red-dim:   rgba(211,47,47,0.15);
       --red-glow:  rgba(211,47,47,0.25);
       --glass:     rgba(0,0,0,0.72);
@@ -62,14 +65,17 @@
       --txt1:      #1d1d1f;
       --txt2:      #515154;
       --txt3:      #8e8e93;
-      --red:       #9c7417;
+      --accent:    #9c7417;
+      --accent-dim:  rgba(156,116,23,0.08);
+      --accent-glow: rgba(156,116,23,0.18);
+      --red:       #c62828;
       --red-dim:   rgba(198,40,40,0.08);
       --glass:     rgba(245,245,247,0.88);
     }
 
     /* ── RESET ─────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
+    html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
     body {
       font-family: var(--sans);
       background: var(--bg);
@@ -84,7 +90,7 @@
 
     a { text-decoration: none; color: inherit; }
     img { display: block; max-width: 100%; }
-    ::selection { background: var(--red-dim); color: var(--red); }
+    ::selection { background: var(--accent-dim); color: var(--accent); }
 
     /* ── INTRO VÍDEO ───────────────────────────────────────── */
     #intro-wrapper {
@@ -115,7 +121,7 @@
       font-size: 1rem; font-weight: 700; letter-spacing: 0.08em;
       text-transform: uppercase; color: var(--txt1);
     }
-    .nav-logo span { color: var(--red); }
+    .nav-logo span { color: var(--accent); }
 
     .nav-links {
       display: flex; gap: 28px; align-items: center;
@@ -126,7 +132,7 @@
       letter-spacing: 0.02em; transition: color .2s;
     }
     .nav-links a:hover { color: var(--txt1); }
-    .nav-links a.external { color: var(--red); }
+    .nav-links a.external { color: var(--accent); }
     .nav-links a.external:hover { opacity: .8; }
 
     /* Botão hambúrguer (mobile) */
@@ -176,7 +182,7 @@
       box-shadow: 0 1px 3px rgba(0,0,0,.3);
       transition: transform .3s, box-shadow .3s;
     }
-    input:checked + .slider { background: var(--red); }
+    input:checked + .slider { background: var(--accent); }
     input:checked + .slider::before { transform: translateX(18px); }
 
     /* ── HERO FULLSCREEN ────────────────────────────────────── */
@@ -249,15 +255,15 @@
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
       font-family: var(--mono); font-size: 0.7rem; letter-spacing: .1em;
-      color: var(--red); text-transform: uppercase;
-      border: 1px solid rgba(211,47,47,.3);
+      color: var(--accent); text-transform: uppercase;
+      border: 1px solid rgba(253,189,40,.3);
       padding: 6px 14px; border-radius: 100px;
-      background: var(--red-dim);
+      background: var(--accent-dim);
       margin: 0 auto 32px auto;
     }
     .hero-badge::before {
       content: ''; width: 6px; height: 6px; border-radius: 50%;
-      background: var(--red);
+      background: var(--accent);
       animation: pulse-dot 1.8s infinite;
     }
     @keyframes pulse-dot {
@@ -274,7 +280,7 @@
     }
     .hero-title em {
       font-style: normal;
-      color: var(--red);
+      color: var(--accent);
     }
 
     .hero-subtitle {
@@ -343,7 +349,7 @@
 
     .section-label {
       font-family: var(--mono); font-size: 0.7rem;
-      color: var(--red); letter-spacing: .14em;
+      color: var(--accent); letter-spacing: .14em;
       text-transform: uppercase; margin-bottom: 20px;
       display: block;
     }
@@ -366,8 +372,8 @@
     .what-body { font-size: 1.1rem; line-height: 1.85; color: var(--txt2); }
     .what-body p { margin-bottom: 24px; }
     .what-body strong { color: var(--txt1); font-weight: 600; }
-    .what-body a { color: var(--red); border-bottom: 1px solid transparent; transition: border-color .2s; }
-    .what-body a:hover { border-color: var(--red); }
+    .what-body a { color: var(--accent); border-bottom: 1px solid transparent; transition: border-color .2s; }
+    .what-body a:hover { border-color: var(--accent); }
 
     .fact-card {
       background: var(--surface); border: 1px solid var(--border);
@@ -380,7 +386,7 @@
     .fact-card p { font-size: 1.05rem; color: var(--txt1); line-height: 1.6; }
     .fact-card .fact-num {
       font-size: 2.2rem; font-weight: 900; letter-spacing: -0.04em;
-      color: var(--red); display: block; margin-bottom: 6px;
+      color: var(--accent); display: block; margin-bottom: 6px;
     }
 
     .features-bento {
@@ -396,11 +402,11 @@
     .bento-card.large { grid-column: span 2; }
     .bento-card.tall { min-height: 420px; display: flex; flex-direction: column; justify-content: space-between; }
     .bento-icon { display: block; margin-bottom: 20px; color: var(--txt2); }
-    .bento-card.red-card .bento-icon { color: rgba(255,255,255,0.8); }
     .bento-card h3 { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
     .bento-card p { font-size: 1rem; color: var(--txt2); line-height: 1.7; }
-    .bento-card.red-card { background: var(--red); border-color: transparent; color: #fff; }
-    .bento-card.red-card p { color: rgba(255,255,255,.75); }
+    .bento-card.red-card { background: var(--accent); border-color: transparent; color: #1d1d1f; }
+    .bento-card.red-card p { color: rgba(0,0,0,.6); }
+    .bento-card.red-card .bento-icon { color: rgba(0,0,0,.7); }
     .bento-bg-number {
       position: absolute; right: 24px; bottom: -20px;
       font-size: 8rem; font-weight: 900; letter-spacing: -0.05em;
@@ -413,7 +419,7 @@
     .chart-row:last-child { border-bottom: none; }
     .chart-name { font-size: 0.82rem; font-weight: 600; width: 200px; flex-shrink: 0; color: var(--txt2); }
     .chart-bar-bg { flex: 1; height: 8px; background: var(--bg3); border-radius: 4px; overflow: hidden; }
-    .chart-bar-fill { height: 100%; border-radius: 4px; background: var(--red); width: 0; transition: width 1.2s cubic-bezier(.4,0,.2,1); }
+    .chart-bar-fill { height: 100%; border-radius: 4px; background: var(--accent); width: 0; transition: width 1.2s cubic-bezier(.4,0,.2,1); }
     .chart-bar-fill.alt { background: var(--txt3); }
     .chart-val { font-size: 0.82rem; font-weight: 700; width: 52px; text-align: right; color: var(--txt1); }
 
@@ -421,15 +427,15 @@
     .timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 1px; background: var(--border2); }
     .timeline-item { position: relative; padding-bottom: 52px; }
     .timeline-item:last-child { padding-bottom: 0; }
-    .timeline-dot { position: absolute; left: -45px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 4px var(--red-dim); }
-    .timeline-date { font-family: var(--mono); font-size: 0.68rem; color: var(--red); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px; }
+    .timeline-dot { position: absolute; left: -45px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-dim); }
+    .timeline-date { font-family: var(--mono); font-size: 0.68rem; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px; }
     .timeline-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.01em; }
     .timeline-text { font-size: 1rem; color: var(--txt2); line-height: 1.7; }
 
     .quote-section { text-align: center; padding: 120px 8%; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .quote-mark { font-size: 6rem; line-height: 0; color: var(--red-dim); font-family: Georgia, serif; vertical-align: -0.4em; }
+    .quote-mark { font-size: 6rem; line-height: 0; color: var(--accent-dim); font-family: Georgia, serif; vertical-align: -0.4em; }
     blockquote { font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 300; line-height: 1.65; max-width: 820px; margin: 0 auto 24px; color: var(--txt1); }
-    blockquote strong { font-weight: 700; color: var(--red); }
+    blockquote strong { font-weight: 700; color: var(--accent); }
     .quote-source { font-family: var(--mono); font-size: 0.72rem; color: var(--txt3); letter-spacing: .1em; text-transform: uppercase; }
 
     .projection-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
@@ -438,10 +444,10 @@
     .proj-cell:nth-child(3), .proj-cell:nth-child(4) { border-bottom: none; }
     .proj-cell h4 { font-size: 0.74rem; font-weight: 700; color: var(--txt3); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 16px; }
     .proj-num { font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 900; letter-spacing: -0.04em; color: var(--txt1); display: block; margin-bottom: 8px; }
-    .proj-num span { color: var(--red); }
+    .proj-num span { color: var(--accent); }
     .proj-desc { font-size: 0.95rem; color: var(--txt2); line-height: 1.6; }
 
-    .disclaimer { background: var(--red-dim); border: 1px solid rgba(211,47,47,.2); border-radius: 12px; padding: 24px 32px; display: flex; gap: 20px; align-items: flex-start; margin-bottom: 60px; }
+    .disclaimer { background: var(--accent-dim); border: 1px solid rgba(253,189,40,.25); border-radius: 12px; padding: 24px 32px; display: flex; gap: 20px; align-items: flex-start; margin-bottom: 60px; }
     .disclaimer-icon { font-size: 1.4rem; flex-shrink: 0; }
     .disclaimer p { font-size: 0.9rem; line-height: 1.65; color: var(--txt2); }
     .disclaimer strong { color: var(--txt1); }
@@ -456,14 +462,14 @@
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
     .footer-brand { max-width: 280px; }
     .footer-brand .logo { font-size: 0.82rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px; }
-    .footer-brand .logo span { color: var(--red); }
+    .footer-brand .logo span { color: var(--accent); }
     .footer-brand p { font-size: 0.85rem; color: var(--txt3); line-height: 1.7; }
     .footer-col h5 { font-size: 0.75rem; font-weight: 700; color: var(--txt3); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 20px; }
     .footer-col a { display: block; font-size: 0.85rem; color: var(--txt2); margin-bottom: 12px; transition: color .2s; }
     .footer-col a:hover { color: var(--txt1); }
     .footer-bottom { border-top: 1px solid var(--border); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
     .footer-bottom p { font-size: 0.76rem; color: var(--txt3); line-height: 1.6; }
-    .footer-bottom a { color: var(--red); }
+    .footer-bottom a { color: var(--accent); }
 
     .text-red { color: var(--red); }
     .mono { font-family: var(--mono); }
@@ -563,7 +569,7 @@
     </h1>
 
     <p class="hero-subtitle" id="hero-sub" style="opacity:0">
-      O <strong>CECOTCE</strong>, oficialmente <strong>Presídio Antônia Ione Rodrigues da Silva</strong>, é a proposta do <a href="https://prendeumatou.com.br/" target="_blank" style="color:var(--red)">Partido Missão</a> para criação de uma prisão de segurança máxima no Ceará, inspirada no <strong>CECOT de El Salvador</strong>, a maior e mais eficaz prisão anti-crime organizado do mundo. Um projeto sem precedentes no Brasil, com capacidade inicial para <strong>50.000, e possibilidade de expansão</strong>.
+      O <strong>CECOTCE</strong>, oficialmente <strong>Presídio Antônia Ione Rodrigues da Silva</strong>, é a proposta do <a href="https://prendeumatou.com.br/" target="_blank" style="color:var(--accent)">Partido Missão</a> para criação de uma prisão de segurança máxima no Ceará, inspirada no <strong>CECOT de El Salvador</strong>, a maior e mais eficaz prisão anti-crime organizado do mundo. Um projeto sem precedentes no Brasil, com capacidade inicial para <strong>50.000, e possibilidade de expansão</strong>.
     </p>
 
     <div class="hero-ctas" id="hero-ctas" style="opacity:0">
@@ -582,12 +588,12 @@
   <div class="section" style="padding-top: 60px; padding-bottom: 0;">
     <div class="disclaimer">
       <span class="disclaimer-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
       </span>
       <p>
         <strong>Este é um site propositivo, não governamental.</strong>
         O CECOTCE ainda não existe: é uma proposta formal do
-        <a href="https://prendeumatou.com.br/" target="_blank" style="color:var(--red)">Partido Missão</a>,
+        <a href="https://prendeumatou.com.br/" target="_blank" style="color:var(--accent)">Partido Missão</a>,
         liderado por Renan Santos (fundador do MBL) na esfera federal e pelo delegado Hugo, pré-candidato ao governo do Ceará, para ser implantado caso cheguemos ao poder nas eleições de 2026.
         Todo o conteúdo aqui apresentado é parte da plataforma eleitoral pública do partido.
       </p>
@@ -704,7 +710,7 @@
         <h3>Autossuficiência Energética</h3>
         <p>O complexo opera fora da rede civil com usina própria e bancos de baterias de 8,5 milhões de mAh por módulo. Apagões externos não afetam portas magnéticas, câmeras ou bloqueadores.</p>
       </div>
-      <div class="bento-bg-number" style="color:rgba(255,255,255,0.07)">02</div>
+      <div class="bento-bg-number" style="color:rgba(0,0,0,0.07)">02</div>
     </div>
 
     <div class="bento-card stagger-item">
@@ -922,8 +928,8 @@
           </p>
         </div>
         <a href="https://www.youtube.com/watch?v=mcWaypzFzps&t=196s&pp=ygUbZWwgc2FsdmFkb3IgYnJhc2lsIHBhcmFsZWxv" target="_blank" rel="noopener"
-           style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 600; color: var(--red); border: 1px solid rgba(211,47,47,.3); padding: 8px 18px; border-radius: 100px; white-space: nowrap; transition: background .2s;"
-           onmouseover="this.style.background='var(--red-dim)'" onmouseout="this.style.background='transparent'">
+           style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 600; color: var(--accent); border: 1px solid rgba(253,189,40,.3); padding: 8px 18px; border-radius: 100px; white-space: nowrap; transition: background .2s;"
+           onmouseover="this.style.background='var(--accent-dim)'" onmouseout="this.style.background='transparent'">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
           Assistir no YouTube
         </a>
@@ -969,7 +975,7 @@
   <div class="footer-bottom">
     <p>© 2026 CECOTCE. Proposta do <a href="https://prendeumatou.com.br/" target="_blank">Partido Missão</a>, liderado por Renan Santos, e do delegado Hugo, pré-candidato ao governo do Ceará. Candidatura 2026.<br>
     Inspirado no CECOT de El Salvador. Site não governamental. Todos os direitos reservados.</p>
-    <p style="text-align:right; font-family:var(--mono); font-size:0.68rem; color:var(--txt3);">v2.6.0 // BUILD MISSÃO / <a href="https://ericksmatias.github.io/erickvisuals" target="_blank" rel="noopener" style="color:var(--txt3); text-decoration:underline; text-decoration-color:var(--border2); transition:color .2s;" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--txt3)'">ERICK MATIAS</a></p>
+    <p style="text-align:right; font-family:var(--mono); font-size:0.68rem; color:var(--txt3);">v2.6.0 // BUILD MISSÃO / <a href="https://ericksmatias.github.io/erickvisuals" target="_blank" rel="noopener" style="color:var(--txt3); text-decoration:underline; text-decoration-color:var(--border2); transition:color .2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--txt3)'">ERICK MATIAS</a></p>
   </div>
 </footer>
 
